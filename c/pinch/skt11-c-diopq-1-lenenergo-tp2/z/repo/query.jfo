@@ -1,0 +1,136 @@
+// query.jfo
+
+// ?import: project/skt/z/common.jfo
+
+?import: z/desc/clazz.jfo
+?import: z/desc/ref.jfo
+?import: z/desc/model.jfo
+?import: z/repo/meta.jfo
+
+// ds - joms
+: repoSelectTmtype
+    RefTmtypeClazz swap "select * from " TableRefTmtype + dboselect
+;
+
+// ds - joms
+: repoSelectXstatus
+    SrcStatusClazz swap "select xstatus,xname from " TableSrcStatus + dboselect
+;
+
+// ds - joms
+: repoSelectStatusV0
+    RefStatusV0Clazz swap "select xmode,xcode,xdesc from " TableStatusV0 + dboselect
+;
+
+// ds, table - joms
+: repoSelectTmdis
+     >r
+    SrcTmdisClazz swap "select distinct tmcode1,tmcode2 from " r> + dboselect
+;
+
+// tmdis, table - sql
+: repoSqlSrcBlock
+    "select * from " swap + " where tmcode1 = '" + over @tmcode1 + "' and tmcode2 = '" + swap @tmcode2 + "'" +
+;
+
+// ( jomclass|classname, ds, sql - list ) 
+
+// ds, table - anchors
+: repoSelectSrcAnchors
+    "select * from " swap + " where mod(status_v0, 41) = 0" + SrcCommonClazz -rot dboselect 
+;
+
+// ds, tmdis, table - joms
+: repoSelectSrcBlock repoSqlSrcBlock >r SrcCommonClazz swap r> dboselect ;
+
+// srcjom, table - sql
+: repoSqlSubSrcBlock
+    "select * from " swap + " where xparent ='" + swap @srcid + "'" +  
+;
+
+// tmojom, table - rujomsql
+: repoSqlTmoRU
+   "select * from " swap + " where srcparentid = '" swap @srcparentid + "' and tmcode3 in ('12', '13', '14' , '15', '16', '17', '18')" +
+;
+
+// ds, tmojom, table  - (xvoltage)
+: repoTmoRUVoltages
+   repoSqlTmoRU swap SrcTmoClazz -rot dboselect 
+   () swap [ @xvoltage + ] apply sort
+;
+
+
+// srcjom, table - sql
+: repoSqlSubSrcBlock_Postgres
+dup 
+"WITH RECURSIVE nodes AS (
+    SELECT s1.*
+    FROM " swap + " s1 WHERE xparent = '" + rot @srcid + "'
+        UNION
+    SELECT s2.*
+    FROM " + swap + "  s2, nodes s1 WHERE s2.xparent = s1.srcid
+)
+SELECT * FROM nodes" +
+;
+
+// srcjom, table - sql
+: repoSqlSubTmoBlock_Postgres
+dup 
+"WITH RECURSIVE nodes AS (
+    SELECT s1.*
+    FROM " swap + " s1 WHERE srcparentid = '" + rot @srcid + "'
+        UNION
+    SELECT s2.*
+    FROM " + swap + "  s2, nodes s1 WHERE s2.srcparentid = s1.srcid
+)
+SELECT * FROM nodes" +
+;
+
+
+
+// ds, srcjom, table - joms
+: repoSelectSubSrcBlock repoSqlSubSrcBlock >r SrcCommonClazz swap r> dboselect ;
+// ds, srcjom, table - joms
+: repoSelectSubSrcBlock_Postgres repoSqlSubSrcBlock_Postgres  >r SrcCommonClazz swap r> dboselect ;
+// ds, srcjom, table - joms
+: repoSelectSubTmoBlock_Postgres repoSqlSubTmoBlock_Postgres  >r SrcTmoClazz swap r> dboselect ;
+
+
+// ds,  jom, table -
+: repoUpdateSrcRecord
+     "update " swap +  " set xstatus=" + over @xstatus + ", status_v0=" + over @status_v0 +
+over @xowner empty? ? [ ", xowner=null"  + ] [
+     ", xowner='" + over @xowner + "'" +
+]
+over @xparent empty? ? [ ", xparent=null"  + ] [
+     ", xparent='" + over @xparent + "'" +
+]
+     ", xlevel=" + over @xlevel +
+     " where srcid='" + swap @srcid + "'" + dbexec 
+;
+
+
+// ds - 
+: repoFillTmtypes repoSelectTmtype
+    scope Tmtypes!
+    [  dup @typecode Tmtypes@ !  ] apply
+    noop
+;
+
+// 
+// ds - 
+: repoFillXstatuses repoSelectXstatus
+    scope Xstatuses!
+    [  dup @xname Xstatuses@ !  ] apply
+    noop
+;
+
+// ds - 
+: repoFillStatusesV0 repoSelectStatusV0
+    scope StatusesV0!
+    [  dup @xmode "" swap +  StatusesV0@ !  ] apply
+    noop
+;
+
+noop
+

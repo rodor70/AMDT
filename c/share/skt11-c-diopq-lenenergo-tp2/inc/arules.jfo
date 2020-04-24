@@ -1,0 +1,14 @@
+// arules.jfo
+
+// - s
+: ruleGenThumbSid  "h"  uuid + "-" "" rot replace ;
+
+// - s
+: ruleGenRelSid  "R"  "" uuid +  "-" "" rot replace 16 0 substr + ;
+
+// xn - xnlab
+: ruleXnlab 10 + ;
+// yn - ynlab
+: ruleYnlab 10 + ;
+
+noop

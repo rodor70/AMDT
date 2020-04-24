@@ -1,0 +1,50 @@
+// inc/ref.jfo
+
+*jfo.sktransit.ref.StatusV0
+{ name:xmode } *field +
+{ name:xcode  } *field +
+{ name:xdesc  } *field +
+const: RefStatusV0Clazz
+
+// - jom
+: zmodelRefStatusV0
+   RefStatusV0Clazz new 
+;
+
+*jfo.sktransit.ref.Tmtype
+{ name:id } *field +
+{ name:typecode } *field +
+{ name:typename  } *field +
+{ name:equipmenttypeid } *field +
+{ name:typeproperties  } *field +
+{ name:xvoltage  } *field +
+{ name:xsign  value:${1}  } *field +
+{ name:xsymbol  } *field +
+{ name:pqdata  } *field +
+{ name:pqbody  } *field +
+{ name:subcode  } *field +
+{ name:subsid  } *field +
+{ name:namespace  } *field +
+const: RefTmtypeClazz
+
+// - jom
+: zmodelRefTmtype
+   RefTmtypeClazz new 
+;
+
+
+*jfo.sktransit.ref.Param
+{ name:param } *field +
+{ name:cls  } *field +
+{ name:fromvalue } *field +
+{ name:tovalue } *field +
+{ name:stringval } *field +
+{ name:srcid } *field +
+{ name:indexid } *field +
+const: RefParamClazz
+
+// - jom
+: zmodelRefParam
+   RefParamClazz new 
+;
+

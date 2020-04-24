@@ -1,0 +1,29 @@
+// z/clazz.jfo
+
+*jfo.sktransit.clazz.Node
+{ name:xcode } *field +
+{ name:uname } *field +
+{ name:name } *field +
+{ name:endpoint } *field +
+{ name:url } *field +
+{ name:port } *field +
+{ name:serviceUrl } *field +
+{ name:login } *field +
+{ name:password } *field +
+{ name:role } *field +
+{ name:phonode } *field +
+const: NodeClazz
+
+// - jom
+: zmodelNode
+   NodeClazz  new 
+;
+
+noop
+
+
+
+
+
+
+

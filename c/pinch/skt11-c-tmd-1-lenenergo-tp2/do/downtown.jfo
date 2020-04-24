@@ -1,0 +1,167 @@
+// downtown.jfo
+
+() ChannelUpdate!
+
+// - 
+: dwInitRefs
+    WasVinitAll@ not ? [ vinitAll true WasVinitAll! ] [ noop ] noop
+;
+
+dwInitRefs
+
+// Tmtypes@ .
+// Xstatuses@ .
+// StatusesV0@ .
+
+
+// ----------------------
+
+//  anchorjom, tmojom - anchorjom, tmojom
+: dwSetTmoRuUx
+    dup zverGetTmtype dup null != ? [ 
+           // tmtypejom
+           @xvoltage
+           // anchorjom, tmojom, xvoltage
+           dup null != ? [
+               dup over2 !xvoltage
+               // anchorjom, tmojom, xvoltage
+               "u" swap +
+               // anchor, tmojom, fieldname
+               over2    // anchor, tmojom, fieldname, anchor
+              2dup @ 100_000 +      // anchor, tmojom, fieldname, anchor, n
+              -rot !	// anchor, tmojom
+           ]
+           [ drop ]
+           // anchorjom, tmojom
+    ] 
+    [ drop ] noop
+;
+
+//  anchorjom, tmojom - 
+: dwSetTmoTransform
+    // "XXX - " stack size + info.
+    dup @tmtypecode dup null = ? [   // anchorjom, tmojom, tmtypecode, ?
+           drop	// anchorjom, tmojom
+           "VTM_NIL" swap !tmtypecode
+           SV0_TMTYPE_U swap @status_v1*!
+           // "XXX2 - " stack size + info.
+    ]
+    [
+            nip
+            "VTM_119" = ? [   
+            1 swap @w2+!
+          ] 
+          [ drop ] noop
+    ]
+    noop
+;
+
+//  anchorjom, tmojom - 
+: dwSetTmoSignW1
+    dup zverGetTmtype dup null != ? [      //  anchorjom, tmojom, tmtype, ?
+           @xsign dup
+           // anchorjom, tmojom, xsign, xsign
+           rot !xsign	//  anchorjom, xsign
+           0 != ? [ 1 swap @w1+! ] [ drop ] noop
+    ] 
+    [ 2drop drop ] noop
+;
+
+
+// srcjom - records
+: dwGetSubRecords
+    // dup sys.
+    MeDS@  swap TABLE_U_RECORDS  repoSelectSubSrcBlock_Postgres   // ???
+    injBlockBegin
+;
+
+// tmojom - tmojom
+: dwPrepareTmoId dup @tmcode2 toi 
+    FenceShiftSub@ * zmodelTmoPsId + over !id
+;
+
+// tmojom - tmojom
+: dwPrepareTmoTmtypeId 
+    dup zverGetTmtype dup null != ? [ 
+           dup @id over2 !tmtypeid 
+           @equipmenttypeid over !equipmenttypeid 
+    ] 
+    [ drop ] noop
+;
+
+// srcjom - tmojom
+: dwPrepareTmo
+    zmodelSrc2Tmo
+    dwPrepareTmoId
+    dwPrepareTmoTmtypeId
+;
+
+// tmoanchor, srcjom - tmoanchor, tmorecords
+: dwGetTmoSubRecords
+    () swap
+    dwGetSubRecords    // tmoanchor, (), srcrecords
+    [
+         dwPrepareTmo	// tmoanchor, (), tmojom
+         // "PS: srcid=" over @srcid + info.
+         // "PS: stack: " stack size + info. 
+         over2 over dwSetTmoSignW1 
+         // "PS: after vsetTmoSignW1" info.
+         over2 over dwSetTmoTransform 
+         // "PS: after vsetTmoTransform" info.
+         // "PS: stack2: " stack size + info.         
+          over2 over dwSetTmoRuUx 2drop
+         // "PS: after vsetTmoRuUx - " stack size + info.
+
+         over2 @srcid over !anchorid +
+    ] apply
+    dup size over2 !w0
+    noop
+;
+
+time const: Time
+
+// tmojoms -
+: dwInsertTmo  MeDS@ TABLE_TMD_RECORDS dbjinsert drop ;
+
+// - tmojoms
+: dwApplyRecords
+
+    // ds, filter, table  -
+    MeDS@ pinchfcurget TABLE_TMD_RECORDS uqeDeleteTmoRecordsByFilter
+
+   // MeDS@ TableSrcPs repoSelectSrcAnchors  [ @tmcode1 "PS"  contains  ] filter // 10 0 filter 
+   // ds, filter table - anchors
+   MeDS@ pinchfcurget TABLE_U_RECORDS uqeSelectSrcAnchors_Filter  
+        filterNumRecords       
+        injBlocks
+        // srcanchors
+        [     // srcanchor
+              0 FenceCount!
+              injBlockInfo
+              dup dwPrepareTmo     // srcanchor, tmoanchor
+              // "PS: after vprepareTmo - " stack size + info.
+              swap 
+              dwGetTmoSubRecords		// tmoanchor, tmorecords
+              swap +   // to insert
+              dwInsertTmo
+               // "PS: after vinsertTmo - " stack size + info.
+              injBlockEnd
+        ] apply
+   
+        noop
+;
+
+
+// ----------------------
+
+
+
+: doMain
+   pinchdo ? [ dwApplyRecords injDone ] 
+   [ injFail ]
+;
+
+doMain
+
+
+noop

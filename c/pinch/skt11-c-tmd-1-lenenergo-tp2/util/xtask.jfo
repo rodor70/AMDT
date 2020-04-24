@@ -1,0 +1,62 @@
+// xtask.jfo
+
+"xxx-log.txt" XtaskLogFile!
+
+// logpath -
+: xtaskSetLogPath this 
+    @taskThread dup null != ? [
+        @xname + "(" + 1000 9000 nrand + ")-log.txt" + 
+    ]
+    [ drop ] dup XtaskLogFile! log 
+;
+
+
+// tag -
+: xtaskStart
+    xthread dup null != ? [
+        swap over !tag
+        "started" over !info
+        XtaskLogFile@ over !logFile
+        drop
+    ]
+    [ 2drop ] noop
+;
+// blocknumbers, tag -
+: xtaskBlocks
+    xthread dup null != ? [
+        swap over !tag
+        "blocks" over !info
+        0 over !currentBlock
+        swap over !blockNumbers
+        drop
+    ]
+    [ 2drop drop ] noop
+;
+
+// recnumbers, tag -
+: xtaskNextBlock
+    xthread  dup null != ? [
+        swap over !tag
+       "block-start" over !info
+       dup @currentBlock 1 + over !currentBlock
+       swap over !recNumbers
+       drop
+    ]
+    [ 2drop drop ] noop
+;
+
+// tag -
+: xtaskEndBlock
+    xthread   dup null != ? [
+    swap over !tag
+    "block-end" over !info
+    dup @currentBlock tod over @blockNumbers tod / 100 * over !percent  
+    drop
+    ]
+    [ 2drop ] noop
+;
+
+noop
+
+
+

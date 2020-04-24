@@ -1,0 +1,136 @@
+// rules.jfo
+
+50 const: CW
+50 const: CH
+
+600 const: HDeltaBus
+50 const: WDeltaBus
+
+// - s
+: ruleGenThumbSid  "h"  uuid + "-" "" rot replace ;
+
+// - s
+: ruleGenRelSid  "R"  "" uuid +  "-" "" rot replace 16 0 substr + ;
+
+// - xn
+: ruleTransXn CW 5 * QTransCount@ CW 6 * * + ;
+// - yn
+: ruleTransYn CH 8 *  ;
+
+// xn - xnlab
+: ruleXnlab 10 + ;
+// yn - ynlab
+: ruleYnlab 10 + ;
+
+// nclepct - buswidth
+: ruleBusWidth 2 * 1 + CW * ;
+
+// - n
+: ruleBusHeight 6 ;
+
+// - xn
+: ruleBusXn 
+   WDeltaBus
+   QLastBusWidth@ +
+   dup QCurrentBusWidth@ + QLastBusWidth!
+;
+// - yn
+: ruleBusYn 
+    CH 2 *  
+    QRuCount@ HDeltaBus * +
+;
+
+// trans - trans
+: ruleNextTrans
+   CurTrans@ dup null = ? [ 
+       drop 		// trans
+       CW 6 * over gotSetXn	// trans
+       CH 10 *  over gotSetYn	// trans
+   ] 
+   [ 
+         // trans, curtrans
+        dup gotGetXn 	// trans, curtrans, xn
+        CW 6 * + 	// trans, curtrans, xn2
+        over2 gotSetXn		// trans, curtrans
+        gotGetYn over gotSetYn
+   ] 
+   dup CurTrans!
+   noop
+;
+
+// ru - ru
+: ruleNextRu
+   CurRu@ dup null = ? [ 
+       drop 			// ru
+       CW over gotSetXn	// ru
+       CH over gotSetYn	// ru
+   ] 
+   [ 
+         // ru, curru
+        dup gotGetXn over2 gotSetXn
+         // ru, curru
+        gotGetYn CH 18 * + over gotSetYn
+
+   ] 
+   dup CurRu!
+   noop
+;
+
+// bus - bus
+: ruleNextBus
+   CurBus@ dup null = ? [ 
+       drop 				// bus
+       CW over gotSetXn		// bus
+       CurRu@ gotGetYn over gotSetYn	// bus
+   ] 
+   [ 
+         // bus, curbus
+        dup gotGetWidth over gotGetXn CW 3 * + + over2 gotSetXn
+         // bus, curbus
+        drop
+        CurRu@ gotGetYn over gotSetYn
+
+   ] 
+   dup CurBus!
+   noop
+;
+
+// con - con
+: ruleNextConnect
+   CurCon@ dup null = ? [ 
+       drop 					// con
+       CurBus@ gotGetXn CW + over gotSetXn		// con
+       CurBus@ gotGetYn CH + over gotSetYn	// con
+   ] 
+   [ 
+         // con, curcon
+        
+        dup gotGetXn CW 2 * + over2 gotSetXn
+         // con, curcon
+        drop
+        CurBus@ gotGetYn CH + over gotSetYn
+
+   ] 
+   dup CurCon!
+   noop
+;
+
+// le - le
+: ruleNextLe
+   CurLe@ dup null = ? [ 
+       drop 					// le
+       CurCon@ gotGetXn over gotSetXn		// le
+       CurCon@ gotGetYn over gotSetYn		// le
+   ] 
+   [ 
+         // le, curle      
+        CurCon@ gotGetXn over2 gotSetXn
+        gotGetYn CH + over gotSetYn
+
+   ] 
+   dup CurLe!
+   noop
+;
+
+
+noop

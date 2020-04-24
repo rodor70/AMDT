@@ -1,0 +1,242 @@
+// z/repo/ver.jfo
+
+?import: z/repo/meta.jfo
+
+"-" PathDelimiter!
+() ChannelUpdate!
+
+// jom, newstatus - jom
+: zverUp over @status_v0*! ;
+// jom - jom
+: zverInit 
+   1 over !status_v0 
+    null over !xparent
+    null over !xowner
+    -1 over !xlevel
+;
+// jom - jomstatus
+: zverGetXstatus @status Xstatuses@ @?  ;
+// jom - jomtmtype
+: zverGetTmtype @tmtypecode dup empty? ? [ noop ] [ "VTM_" "" rot replace Tmtypes@  @?  ] noop ;
+// n - s
+: zverGetStatusV0Desc 
+     "" swap + StatusesV0@ @? dup null = ? [ drop "?" ] [ @xdesc ] noop  
+     noop
+;
+// - names
+: zverGetStatusV0Names   ()  StatusesV0@ .getNames
+   "0" over .remove drop
+ ;
+
+// jom - s
+: zverPrintStatusV0
+  @status_v0 ()  	// status, list
+  zverGetStatusV0Names [
+     toi 
+     over2 over mod ? [  zverGetStatusV0Desc + ] [ drop ]  
+     noop
+  ] apply
+  nip
+;
+
+
+// --- set xstatus 
+// jom - jom
+: zverSetXstatus
+   dup  zverGetXstatus  dup null != ? [  @xstatus over !xstatus ] [  drop 0 over !xstatus ]  noop
+;
+// --- check xstatus and set IGNORE
+// jom - jom
+: zverSetXstatusIgnore
+    SX_GOOD over @xstatus contains ? [ noop ] [  SV0_IGNORE over !status_v0 ] noop
+;
+// --- FICT doesn't need
+// jom - jom
+: zverFict
+    dup @tmcode1 'FICT' = ? [ SV0_FICT over !status_v0 ] [ noop ] noop 
+;
+
+// --- bad structure - holes
+// jom - jom
+: zverHolesAndInitXlist
+
+    dup "tmcode" 3 8 .. * tuple  dup // jom, list3_8, list3_8
+    holes? // jom, list3_8, ?
+    over null- size 0 != and
+     ? [ drop SV0_BADSTRU over @status_v0*! ] 
+        [ null- dup size over2 !xlevel  over !xlist ] 
+     noop
+;
+// --- is good status ?
+// jom - ?
+: zverIsGood
+     @status_v0 dup SV0_IGNORE != 
+     over SV0_FICT != and 
+     swap SV0_BADSTRU != and 
+;
+
+// --- End common check
+
+// jom - jom
+: zverTmcodeNull
+    dup @tmcode empty? ? [ SV0_TMCODE_NULL zverUp ] [ noop ] noop 
+;
+// jom - jom
+: zverTmtypeUndef
+    dup @tmtypecode empty? ? [ SV0_TMTYPE_U zverUp ] [ noop ] noop 
+;
+// jom - jom
+: zverTmtypeUnknown
+  dup zverGetTmtype dup null = ? [ drop SV0_TMTYPE_UNK zverUp  ] [ drop ] noop
+;
+// jom - jom
+: zverVoltageUndef
+    dup @voltage empty? ? [ SV0_VOLT_U zverUp ] [ noop ] noop 
+;
+// jom - jom
+: zverPcodeNull
+    dup @paramcode empty? ? [ SV0_PCODE_NULL zverUp ] [ noop ] noop 
+;
+// jom - jom
+: zverPvalNull
+    dup @paramvalue empty? ? [ SV0_PVAL_NULL zverUp ] [ noop ] noop 
+;
+// jom - jom
+: zverPre
+    dup @tmcode3 empty?
+    over @tmcode4 empty? and
+    over @tmcode5 empty? and
+    over @tmcode6 empty? and
+    over @tmcode7 empty? and
+    over @tmcode8 empty? and   // jom, ?
+    ? [  SV0_PRE zverUp ] [ noop ]
+;
+
+// jom - jom
+: zverSrcRecord
+   // "zverCutRecord" sys. stack size sys.
+    zverInit
+    zverSetXstatus
+    // "zverSetXstatus" sys.
+    zverSetXstatusIgnore
+    // "zverSetXstatusIgnore" sys.
+    zverFict
+    // "zverFict" sys. stack size sys.
+    // dup .
+    zverHolesAndInitXlist   
+    // "zverHolesAndInitXlist" sys. stack size sys.
+    dup zverIsGood ? [
+        // "zverIsGood" sys. 
+        zverTmcodeNull
+        // "zverTmcodeNull" sys. 
+        zverTmtypeUndef
+        // "zverTmtypeUndef" sys. 
+        zverTmtypeUnknown
+        // "zverTmtypeUnknown" sys. stack size sys. 
+        zverVoltageUndef
+        // "zverVoltageUndef" sys. stack size sys. 
+        zverPcodeNull
+        // "zverPcodeNull" sys. stack size sys. 
+        zverPvalNull
+        // "zverPvalNull" sys. stack size sys. 
+        zverPre
+        // "zverPre" sys.  stack size sys.
+    ]
+    [ noop ]
+    // "zverCutRecord End" sys. 
+    noop
+;
+
+// --- test print
+// jom - s
+: zverPrintSrcRecord
+     dup zverPrintStatusV0 "," list2str " : " +
+     swap
+    "tmtypecode,tmname,paramcode,xlist,status_v0,xstatus,xparent,xowner" tuple ";" list2str +
+;
+// joms - 
+: zverPrintSrcRecords
+    [  zverPrintSrcRecord . ] apply noop
+;
+
+
+// joms - joms
+: zverSrcRecords dup [ zverSrcRecord drop ] apply noop ;
+// joms - ( goodjoms, badjoms)
+: zverCutRecords
+    // "zverCutRecords" sys. stack size sys.
+    zverSrcRecords 	// joms
+    ( ^zverIsGood ) filtergroup 
+;
+// ( goodjoms, badjoms) - goodjoms
+: zverCutRecordsSeparate
+    1 over @	//  ( goodjoms, badjoms) , badjoms
+    ChannelUpdate+
+    0 swap @
+;
+
+// goodjoms - goodjoms_sub
+: zverPrepareAnchor
+   Anchor\
+   (  [ @status_v0 2 mod ] ) filtergroup  // ((pretendents), (other))
+   0 over @	// ((pretendents), (other)) , (pretendents)
+   dup
+   [ 
+        Anchor@ null = ? [   dup Anchor! SV0_ANCHOR zverUp  drop ]
+       [	// jom
+              Anchor@ @srcid over !xowner drop
+       ]
+
+   ] apply
+
+   ChannelUpdate+
+   1 swap @
+   noop
+;
+
+
+// goodjoms_sub - goodjoms_sub_sorted
+: zverFilterLevelSort
+    [ @xlevel -1 * ] filtercat sort mapflat
+;
+
+
+{  
+    xlist:xlist 
+    xowner:xowner
+    xparent:xparent
+    id:srcid 
+    status:status_v0 
+    lost:${SV0_LOSTSTRU}
+    sub:${SV0_TMO}
+} const: zverSelectorXstru
+
+//  joms -  xstrujoms
+: zverBuildXstru zverSelectorXstru Anchor@ jomsxstru ;
+
+
+// joms - goodjoms_sub_sorted
+// joms - 
+: zverPrepareGoodRecords 
+     zverCutRecords 
+     zverCutRecordsSeparate 
+     zverPrepareAnchor
+     zverFilterLevelSort
+     zverBuildXstru
+    ChannelUpdate+
+; 
+
+
+// ----------------------------------
+
+
+
+noop
+
+
+
+
+
+
+
+

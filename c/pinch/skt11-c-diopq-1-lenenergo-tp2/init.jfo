@@ -1,0 +1,89 @@
+// init.jfo
+
+
+pinchshare "/log" + const: ShareLog
+ShareLog mkdir
+pinchshare "/meta" + const: ShareMeta
+ShareMeta mkdir
+
+ShareLog "/skt11-c-pq-1-lenenergo-tp2-" + time "yyyyMMdd_HH_mm" date2str + ".txt" + log
+
+?import: set/filter.jfo
+
+// init
+pinchdir "/template/tp0.pq" + const: TemplateFile
+TemplateFile sys.
+pinchdir "/inc/suparef-tp.pq" + const: SuparefFile
+pinchdir "/inc/dp.jfo" + const: DpFile
+pinchdir "/inc/xvars.jfo" + const: DiogenXvarsFile
+pinchdir "/inc/plex.jfo" + const: PlexFile
+pinchdir "/inc/got.jfo" + const: DiogenGotFile
+
+pinchdir "/inc/atypes.jfo" + const: DiogenAtypesFile
+pinchdir "/inc/adiogen.jfo" + const: ADiogenFile
+pinchdir "/inc/autil.jfo" + const: DiogenAUtilFile
+pinchdir "/inc/arules.jfo" + const: DiogenARulesFile
+pinchdir "/inc/card.jfo" + const: DiogenCardFile
+
+pinchdir "/inc/chains/chain_cdgr.jfo" + const: DiogenCdgrFile
+pinchdir "/inc/chains/chain_clep.jfo" + const: DiogenClepFile
+pinchdir "/inc/chains/chain_csv.jfo" + const: DiogenCsvFile
+pinchdir "/inc/chains/chain_ct.jfo" + const: DiogenCtFile
+pinchdir "/inc/chains/chain_ctn.jfo" + const: DiogenCtnFile
+pinchdir "/inc/chains/chain_crz.jfo" + const: DiogenCrzFile
+pinchdir "/inc/chains/plexdirect2.jfo" + const: DiogenPlexdirect2File
+pinchdir "/inc/chains/bus_chain.jfo" + const: DiogenBusChainFile
+
+pinchdo ? [
+"pq" pinchfstream dup mkdir "/*.*" + rmfile
+"xml" pinchfstream dup mkdir "/*.*" + rmfile
+"log" pinchfstream dup mkdir "/*.*" + rmfile
+"zip" pinchfstream dup mkdir "/*.*" + rmfile
+"base64" pinchfstream dup mkdir "/*.*" + rmfile
+"card" pinchfstream dup mkdir "/*.*" + rmfile
+] [ noop ]
+
+pinchshare "/inc" + const: ShareInc
+ShareInc mkdir
+pinchshare "/inc/chains" + const: ShareIncChains
+ShareIncChains mkdir
+
+SuparefFile ShareInc fcopy
+DpFile ShareInc fcopy
+PlexFile ShareInc fcopy
+// DiogenFile ShareInc fcopy
+// DiogenTypesFile ShareInc fcopy
+// DiogenUtilFile ShareInc fcopy
+// DiogenRulesFile ShareInc fcopy
+DiogenXvarsFile ShareInc fcopy
+DiogenGotFile ShareInc fcopy
+DiogenCardFile ShareInc fcopy
+
+DiogenAtypesFile ShareInc fcopy
+ADiogenFile ShareInc fcopy
+DiogenAUtilFile ShareInc fcopy
+DiogenARulesFile ShareInc fcopy
+
+DiogenCdgrFile ShareIncChains fcopy
+DiogenClepFile ShareIncChains fcopy
+DiogenCsvFile ShareIncChains fcopy
+DiogenCtFile ShareIncChains fcopy
+DiogenCtnFile ShareIncChains fcopy
+DiogenCrzFile ShareIncChains fcopy
+DiogenPlexdirect2File ShareIncChains fcopy
+DiogenBusChainFile ShareIncChains fcopy
+
+// Set
+?import: set/ds.jfo
+
+// JOM-classes
+?import: z/desc/clazz.jfo
+?import: z/desc/model.jfo
+?import: z/desc/ref.jfo
+
+?import: z/repo/meta.jfo
+?import: z/repo/query.jfo
+?import: z/repo/uquery.jfo
+// ?import: z/repo/ver.jfo
+
+noop

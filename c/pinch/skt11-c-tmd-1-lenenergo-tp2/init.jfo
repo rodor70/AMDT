@@ -1,0 +1,24 @@
+// init.jfo
+
+
+pinchshare "/log" + const: ShareLog
+ShareLog mkdir
+
+ShareLog "/skt11-c-tmd-1-lenenergo-tp2-" + time "yyyyMMdd_HH_mm" date2str + ".txt" + log
+
+?import: set/filter.jfo
+
+// Set
+?import: set/ds.jfo
+
+// JOM-classes
+?import: z/desc/clazz.jfo
+?import: z/desc/model.jfo
+?import: z/desc/ref.jfo
+
+?import: z/repo/meta.jfo
+?import: z/repo/query.jfo
+?import: z/repo/uquery.jfo
+?import: z/repo/ver.jfo
+
+noop

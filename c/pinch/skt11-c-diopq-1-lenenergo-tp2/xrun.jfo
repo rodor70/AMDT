@@ -1,0 +1,28 @@
+// xrun.jfo
+
+true IRemote!
+
+pinch: skt11-c-diopq-1-lenenergo-tp2
+
+pinchshare "/log" + const: ShareLog
+ShareLog mkdir
+
+ShareLog "/skt11-c-diopq-1-lenenergo-tp2-" + time "yyyyMMdd_HH_mm" date2str + ".txt" + log
+
+// Set
+?import: set/ws.jfo
+?ifimport: set.jfo
+
+?import: words.jfo
+
+Me pinchnodeset
+
+pinchget info.
+
+wsStart
+
+"Started." info.
+
+noop
+
+

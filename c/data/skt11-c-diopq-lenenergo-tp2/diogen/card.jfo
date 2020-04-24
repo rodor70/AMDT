@@ -1,0 +1,161 @@
+// card.jfo
+
+( "VTM_119" ) const: TMCAT_TRANS	
+	
+( 
+    "VTM_110" ,  "VTM_113" ,  "VTM_109"  ,
+    "VTM_218" , "VTM_269" , "VTM_108" , "VTM_219" , "VTM_300" ,
+    "VTM_327" , "VTM_263"  , "VTM_111" , "VTM_112" , "VTM_262" ,
+    "VTM_261" ,  "VTM_114" ,  "VTM_305" 
+) const: TMCAT_RU
+
+( "VTM_078" , "VTM_081" , "VTM_076" , "VTM_074" , 
+"VTM_083" , "VTM_085" ,  "VTM_087" ,  "VTM_091" , "VTM_092" , "VTM_096" , "VTM_097" ,
+"VTM_098" ,  "VTM_101" ,  "VTM_102" ,  "VTM_103" ,  "VTM_217"  ,  "VTM_241" ,  "VTM_246" ,
+"VTM_258"  ,  "VTM_266" ,  "VTM_272" ,  "VTM_306"	 
+) const: TMCAT_CT
+
+( "VTM_019" , "VTM_018" , "VTM_052" , "VTM_077" ) const: TMCAT_VCH
+
+( "VTM_078" ) const: TMCAT_CON_CT
+
+( "VTM_081" , "VTM_076" , "VTM_074" ,
+"VTM_083" , "VTM_085" ,  "VTM_087" ,  "VTM_091" , "VTM_092" , "VTM_096" , "VTM_097" ,
+"VTM_098" ,  "VTM_101" ,  "VTM_102" ,  "VTM_103" ,  "VTM_217"  , "VTM_241" ,  "VTM_246" ,
+"VTM_258"  ,  "VTM_266" ,  "VTM_272" ,  "VTM_306" 
+) const: TMCAT_CON_CLEP
+
+( "VTM_205" , "VTM_204" , "VTM_041" , "VTM_207" , "VTM_209" ,
+   "VTM_210" , "VTM_211" , "VTM_203"  , "VTM_206" ) const: TMCAT_UCH
+
+( "VTM_117" ,  "VTM_125" ,  "VTM_237" ,  "VTM_001" ) const: TMCAT_BUS
+
+(  "VTM_091" , "VTM_092" ,  "VTM_093" ,  "VTM_098" ) const: TMCAT_BUSLINK 
+
+( 
+      "VTM_027" ,  "VTM_242" , "VTM_062" , "VTM_057" ,  
+      "VTM_045"  , "VTM_080"  
+) const: TMCAT_GROUND
+
+// tmcat for zones
+( 
+   "VTM_022" , "VTM_023" , "VTM_024" , "VTM_245" , "VTM_308" ,
+   "VTM_020" , "VTM_028" ,  "VTM_227" , "VTM_029" ,  "VTM_226" 
+) const: TMCAT_BREAKER
+
+(
+   "VTM_044"
+) const: TMCAT_SEPARATOR
+
+(
+    "VTM_026" , "VTM_299" ,  "VTM_290" ,  "VTM_295" ,  "VTM_298" ,  "VTM_296" ,
+    "VTM_294" ,  "VTM_021" ,  "VTM_238"  ,  "VTM_297" ,  "VTM_289" ,
+    "VTM_291" ,  "VTM_293" ,  "VTM_100"
+) const: TMCAT_DISCONNECTOR
+
+(
+    "VTM_014" , "VTM_283" , "VTM_287" , "VTM_279" , "VTM_278" , "VTM_285" , "VTM_286" ,
+    "VTM_025" ,  "VTM_281" ,  "VTM_277" , "VTM_276" , "VTM_288" , "VTM_280" , "VTM_284" , "VTM_282"
+) const: TMCAT_TT
+
+( 
+    "VTM_106" , "VTM_172" , "VTM_070" , "VTM_034" , "VTM_175" 
+) const: TMCAT_SURGE_ARRESTER
+
+( 
+    "VTM_019" , "VTM_208" 
+) const: TMCAT_VCHO
+
+cards 
+
+{ 
+   CONNECTOR:VTM_CONNECTOR
+   CONNECTION:VTM_CONNECTION
+   D:${TMCAT_DISCONNECTOR} 
+   G:${TMCAT_GROUND} 
+   TT:${TMCAT_TT} 
+   SA:${TMCAT_SURGE_ARRESTER} 
+   F:VTM_055 
+   L:VTM_ARROW 
+   VZ:VTM_018
+   B:${TMCAT_BREAKER} 
+   R:VTM_107 	
+   VO:${TMCAT_VCHO} 
+   BUS:${TMCAT_BUS}
+   T:VTM_119	
+   CA:VTM_046
+   TN:VTM_050 
+   CF:VTM_077 
+   OD:${TMCAT_SEPARATOR}
+   KZ:VTM_045	
+   RS:VTM_292
+}  over !groups
+
+{
+   CONNECTOR:1
+   CONNECTION:2
+   D:3
+   G:4
+   TT:5
+    SA:7
+    F:8
+    L:9
+    VZ:10
+    B:11
+    R:12
+    VO:13
+    BUS:16
+    T:17
+    CA:18
+    TN:19
+    CF:20
+    OD:21
+    KZ:22
+    RS:23
+} over !filter
+
+{ 
+  0:-1 
+  1:${'BBBBBB' hex2int}
+  2:${'CCCCCC' hex2int} 
+  3:${'AAAAFF' hex2int} 
+  4:${'8888FF' hex2int}  
+  5:${'00AA00' hex2int} 
+  6:${'E6E6FA' hex2int} 
+  7:${'008080' hex2int}  
+  8:${'009090' hex2int}  
+  9:${'DD8080' hex2int}  
+  10:${'FF8080' hex2int}  
+  11:${'0000FF' hex2int}  
+  12:${'FF0000' hex2int} 
+  13:${'FF8080' hex2int} 
+  14:${'FF0000' hex2int} 
+  15:${'000000' hex2int} 
+  16:${'999999' hex2int} 
+  17:${'E5C100' hex2int} 
+  18:${'957042' hex2int} 
+  19:${'DBB9C8' hex2int} 
+  20:${'0000FF' hex2int} 
+  21:${'0000FF' hex2int} 
+  22:${'0000FF' hex2int} 
+  23:${'0000FF' hex2int} 
+} 
+over !colors
+
+"
+$$$$$" 
+card +
+
+cardp 
+
+12 over !cw 12 over !ch
+
+cardview
+
+noop
+
+
+
+
+
+

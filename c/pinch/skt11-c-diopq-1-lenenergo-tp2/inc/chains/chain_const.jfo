@@ -1,0 +1,39 @@
+// chain_const.jfo
+
+( 
+      "VTM_027" ,  "VTM_242" , "VTM_062" , "VTM_057" ,  
+      "VTM_045"  , "VTM_080"  
+) const: TMCAT_GROUND
+
+( 
+   "VTM_022" , "VTM_023" , "VTM_024" , "VTM_245" , "VTM_308" ,
+   "VTM_020" , "VTM_028" ,  "VTM_227" , "VTM_029" ,  "VTM_226" 
+) const: TMCAT_BREAKER
+
+(
+   "VTM_044"
+) const: TMCAT_SEPARATOR
+
+(
+    "VTM_026" , "VTM_299" ,  "VTM_290" ,  "VTM_295" ,  "VTM_298" ,  "VTM_296" ,
+    "VTM_294" ,  "VTM_021" ,  "VTM_238"  ,  "VTM_297" ,  "VTM_289" ,
+    "VTM_291" ,  "VTM_293" ,  "VTM_100"
+) const: TMCAT_DISCONNECTOR
+
+(
+    "VTM_014" , "VTM_283" , "VTM_287" , "VTM_279" , "VTM_278" , "VTM_285" , "VTM_286" ,
+    "VTM_025" ,  "VTM_281" ,  "VTM_277" , "VTM_276" , "VTM_288" , "VTM_280" , "VTM_284" , "VTM_282"
+) const: TMCAT_TT
+
+( 
+    "VTM_106" , "VTM_172" , "VTM_070" , "VTM_034" , "VTM_175" 
+) const: TMCAT_SURGE_ARRESTER
+
+( 
+    "VTM_019" , "VTM_208" 
+) const: TMCAT_VCHO
+
+
+
+noop
+

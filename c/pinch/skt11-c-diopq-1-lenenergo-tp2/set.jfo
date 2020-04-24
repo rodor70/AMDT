@@ -1,0 +1,4 @@
+// set.jfo
+'JphoWebService' Me !name
+9901 Me !port
+'http://127.0.0.1' Me !url

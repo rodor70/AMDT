@@ -1,0 +1,102 @@
+// vars.jfo
+
+"T-" const: UnameTrans
+"Т-" const: UnameTransRu
+"T -" const: UnameTransB
+"Т -" const: UnameTransBRu
+
+"ранс"  const: UnameRans
+
+1000 const: TRANS_ZONE
+10 const: BUS_ZONE
+100 const: BREAKER_ZONE
+200 const: SEPARATOR_ZONE
+300 const: DISCONNECTOR_ZONE
+800 const: VCH_ZONE
+
+-1 const: NUMCON_TRANS
+( "VTM_119" ) const: TMCAT_TRANS	
+	
+( 
+    "VTM_110" ,  "VTM_113" ,  "VTM_109"  ,
+    "VTM_218" , "VTM_269" , "VTM_108" , "VTM_219" , "VTM_300" ,
+    "VTM_327" , "VTM_263"  , "VTM_111" , "VTM_112" , "VTM_262" ,
+    "VTM_261" ,  "VTM_114" ,  "VTM_305" 
+) const: TMCAT_RU
+
+( "VTM_078" , "VTM_081" , "VTM_076" , "VTM_074" , 
+"VTM_083" , "VTM_085" ,  "VTM_087" ,  "VTM_091" , "VTM_092" , "VTM_096" , "VTM_097" ,
+"VTM_098" ,  "VTM_101" ,  "VTM_102" ,  "VTM_103" ,  "VTM_217"  ,  "VTM_241" ,  "VTM_246" ,
+"VTM_258"  ,  "VTM_266" ,  "VTM_272" ,  "VTM_306"	 
+) const: TMCAT_CT
+
+// deleted
+// , "VTM_013"
+
+( "VTM_019" , "VTM_018" , "VTM_052" , "VTM_077" ) const: TMCAT_VCH
+
+( "VTM_078" ) const: TMCAT_CON_CT
+
+(  "VTM_076" , "VTM_074" ,
+"VTM_083" , "VTM_085" ,  "VTM_087" ,   "VTM_096" , "VTM_097" ,
+ "VTM_101" ,  "VTM_102" ,  "VTM_103" ,   "VTM_241" ,  "VTM_246" ,
+"VTM_258"  ,  "VTM_266" ,  "VTM_272" ,  "VTM_306" 
+) const: TMCAT_CON_CLEP
+
+(  "VTM_217" ) const: TMCAT_CON_CRZ
+(  "VTM_081" ) const: TMCAT_CON_CTN
+(  "VTM_117" ,  "VTM_125" ,  "VTM_237" ,  "VTM_001" ) const: TMCAT_CON_BUS
+(  "VTM_091" , "VTM_092" ,  "VTM_093" ,  "VTM_098" ) const: TMCAT_CON_CSV
+
+( "VTM_205" , "VTM_204" , "VTM_041" , "VTM_207" , "VTM_209" ,
+   "VTM_210" , "VTM_211" , "VTM_203"  , "VTM_206" ) const: TMCAT_UCH
+
+{
+    VTM_110:${1100}    VTM_113:${350}   VTM_109:${100}
+    VTM_218:${60}  VTM_269:${200}  VTM_108:${4}  VTM_219:${30}  VTM_300:${150}
+    VTM_327:${1500}  VTM_263:${2200}  VTM_111:${275}  VTM_112:${30}  VTM_262:${3300}
+    VTM_261:${5000}  VTM_114:${60}  VTM_305:${660}  VTM_254:${10001}  VTM_253:${9999}
+} const: RU2Voltage
+
+{
+    VTM_110:A    VTM_113:B  VTM_109:C
+    VTM_218:D  VTM_269:E  VTM_108:F  VTM_219:G  VTM_300:H
+    VTM_327:I  VTM_263:J  VTM_111:K  VTM_112:L  VTM_262:M
+    VTM_261:N  VTM_114:O  VTM_305:P  VTM_254:Q  VTM_253:R
+} const: RU2Xsymbol
+
+{
+    1100:A    350:B  100:C
+    60:D  200:E  4:F  30:G  150:H
+    1500:I  2200:J  275:K  3300:M
+    5000:N  660:P  10001:Q  9999:R
+} const: Voltage2Xsymbol
+
+
+( "VTM_117" ,  "VTM_125" ,  "VTM_237" ,  "VTM_001" ) const: TMCAT_BUS
+
+(  "VTM_091" , "VTM_092" ,  "VTM_093" ,  "VTM_098" ) const: TMCAT_BUSLINK
+
+( 
+      "VTM_027" ,  "VTM_242" , "VTM_062" , "VTM_057" ,  
+      "VTM_045"  , "VTM_080"  ,  "VTM_106" , "VTM_172" , "VTM_070" , "VTM_034" , "VTM_175" 
+) const: TMCAT_GROUND
+
+// tmcat for zones
+( 
+   "VTM_022" , "VTM_023" , "VTM_024" , "VTM_245" , "VTM_308" ,
+   "VTM_020" , "VTM_028" ,  "VTM_227" , "VTM_029" ,  "VTM_226"
+) const: TMCAT_BREAKER
+
+(
+   "VTM_044"
+) const: TMCAT_SEPARATOR
+
+(
+    "VTM_026" , "VTM_299" ,  "VTM_290" ,  "VTM_295" ,  "VTM_298" ,  "VTM_296" ,
+    "VTM_294" ,  "VTM_021" ,  "VTM_238" , "VTM_292" ,  "VTM_297" ,  "VTM_289" ,
+    "VTM_291" ,  "VTM_293" ,  "VTM_100"
+) const: TMCAT_DISCONNECTOR
+
+
+noop

@@ -1,0 +1,19 @@
+// xthread.jfo
+
+true IRemote!
+
+pinch: skt11-c-tmd-1-lenenergo-tp2
+
+// SET FILTER !!!
+
+// Get filter from thread
+XTask_Filter pinchfcurset
+
+?import: init.jfo
+
+?import: do/xmain.jfo
+
+pinchdone
+
+noop
+

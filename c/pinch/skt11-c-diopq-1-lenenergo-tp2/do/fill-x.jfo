@@ -1,0 +1,376 @@
+// fill.jfo
+
+?import: do/filter.jfo
+
+"t : superUtypes(Set.V0.vtmRuListStr) ! ruParent,hidden;" const: BodyGetRu
+"def(ruParent) : get(ruParent,'qvoltage') ! qvoltage;" const: BodySetQvoltage
+
+"def(qvoltage) : voltageToXsymbol(qvoltage)+'/-1/'+qvoltage ! simplex;" const: BodySetBusSimplex
+
+'t : superUtype("VTM_119") ! transformList,hidden;' const: BodySetCT0
+"t : filterBy(transformList,this,checkStr) ! myTransList,hidden;" const: BodySetCT1
+"size(myTransList)>0 : get(myTransList,0) ! myTrans;" const: BodySetCT2
+"def(myTrans) : getSimplex(myTrans) ! mySimplex;" const: BodySetCT3
+"def(myTrans) : superUtypes(Set.V0.vtmBusListStr) ! myBus;" const: BodySetCT4
+"def(myTrans)&def(myBus)&def(qvoltage) : connect(myBus,myTrans,qvoltage) ! xconnected;" const: BodySetCT5
+
+'t : $nextUCounter ! perform;
+t : $MsgBadParentStru+pathname+" "+#utype ! errMsg;
+not(use) : errMsg+rn ! buffer;
+not(use) : errMsg ! ln,err;
+not(use) : 0 ! use,stop;' const: XlibUCounter
+
+"set(item,'use',f)" quote2 const: PreCheckPlace
+
+'t : $checkPlace+"checked"+"parentUtype"+.parent.#utype+"myUtype"+#utype ! invoke;
+t : $MsgBadStru+pathname+" "+#utype ! errMsg;'
+\n + 
+'checked<1 : map(rchilds,' PreCheckPlace + ') ! tmp;' +
+\n + +
+'checked<1 : errMsg ! ln,err;
+too : errMsg+rn ! buffer;
+checked<1 : 0 ! use,stop;' + const: XrefCheckPlace
+
+'t : $getSimplexDesc+"mySimplexDesc"+"myUtype"+#utype+"qvoltage"+qvoltage ! invoke;
+not(mySimplexDesc="") : mySimplexDesc ! simplex;' const: XrefTailSimplex
+
+
+'t : $setQvoltage ! perform;' const: XlibSetQvoltage
+
+'t : $topoBus_Trans ! perform;' const: XlibTopoBusTrans
+
+'t : $buildBusSimplex ! perform;' const: XlibBuildBusSimplex
+
+// coName
+'t : $buildCoName+"coName"+"myUtype"+#utype+"myUname"+#uname ! invoke;' const: XrefTransCoName
+
+'def(.parent.coName) : .parent.coName : "unk" ! pcoName;
+undef(connectType) : "unk" ! connectType;
+def(.parent.connectType) : .parent.connectType ! connectType;
+def(.parent.soName) : .parent.soName ! soName;
+def(soName)&(connectType="clep") : soName ! pcoName;
+connectType="trans" : nfrom(cutTail(#uname,connectName)) : list(f,0) ! qvoltageBlist;
+head(qvoltageBlist) : int(get(qvoltageBlist,1)*10) ! qvoltage;
+undef(qvoltage) : 0 ! qvoltage;
+undef(connectName) : "" ! connectName;
+t : $buildCoName+"coName"
+    +"myUtype"+#utype
+    +"myUname"+#uname
+    +"pcoName"+pcoName
+    +"qvoltage"+qvoltage 
+    +"connectName"+connectName 
+! invoke;
+def(coName) : replace(coName,"~","-") : "unk" ! coName;
+t : replace(coName,"+","_") ! coName;
+t : replace(coName,"*"," ") ! coName;' const: XrefTailCoName
+
+'def(.parent.coName) : .parent.coName : "unk" ! pcoName;
+def(.parent.soName) : .parent.soName ! soName;
+undef(qvoltage) : 0 ! qvoltage;
+t : $buildCoName+"coName"
+    +"myUtype"+#utype
+    +"myUname"+#uname
+    +"pcoName"+pcoName
+    +"qvoltage"+qvoltage 
+! invoke;' const: XrefCtCoName
+
+
+'t : map(rchilds,".item.#uname") ! myRchilds;
+size(myRchilds)<2 : "" ! soName;
+undef(soName) : $buildSoName+"soName"+"myUtype"+#utype+"myRchilds"+myRchilds ! invoke;
+def(soName) : trim(replace(soName,"-","~")) : "unk" ! soName;
+t : replace(soName,"_","+") ! soName;
+t : replace(soName," ","*") ! soName;
+soName="" : rhead(split(#uname," "))  ! soName;
+t : soName ! coName;' const: XrefClepSoName
+
+'def(coName) : in(coName,"?") : f ! isBadName;
+isBadName : $MsgBadCoName+pathname+" "+#utype ! errCoNameMsg;
+isBadName : errCoNameMsg+rn ! buffer;
+isBadName : errCoNameMsg ! ln,err;' const: ThisCheckCoName
+
+
+'def(coName) : coName : "" ! connectName;' const: XrefDefineConnectNameCt
+'def(.parent.connectName) : .parent.connectName : "" ! connectName;' const: XrefDefineConnectNameTail
+'def(coName) : coName : "" ! connectName;' const: XrefDefineConnectNameTrans
+
+'t : $preparePcoName ! perform;' const: XlibPreparePcoName
+'t : 0 ! fence;' const: ThisSetFence
+'t : list() ! topoChain;' const: ThisTopoChain
+
+// draw
+'t : $pickShape+"shapeDesc"+"myUtype"+#utype ! invoke;' const: XrefDrawShape0
+'t : evals(shapeDesc) ! tmp;' const: XrefDrawShape1
+'t : drawSimplex(0,0) ! tmp;' const: XrefTransDraw
+'t : drawSimplex(0,-4) ! tmp;' const: XrefBusDraw
+
+// connectType
+'t : "ct" ! connectType;' const: XrefConnectTypeCt
+'t : "ctn" ! connectType;' const: XrefConnectTypeCtn
+'t : "clep" ! connectType;' const: XrefConnectTypeClep
+'t : "ossh" ! connectType;' const: XrefConnectTypeOssh
+'t : "unk" ! connectType;' const: XrefConnectTypeUnk
+'t : "trans" ! connectType;' const: XrefConnectTypeTrans
+'t : "bus" ! connectType;' const: XrefConnectTypeBus
+'def(.parent.connectType) : .parent.connectType : "unk" ! connectType;' const: XrefConnectTypeTail
+
+
+'t : 0 ! use;' const: BodySetUse0
+'t : 0 ! #zone;' const: BodySetZone0
+'t : 1 ! #zone;' const: BodySetZone1
+'t : 2 ! #zone;' const: BodySetZone2
+
+// n - s
+: xsetNzone  "t : " swap + " ! #zone;" +  ; 
+
+
+'t : next($Z1Counter,"zone"+#zone) ! #number;' const: BodySetZoneCounter
+
+'
+.parent.#utype="VTM_069" : $PostList+this ! hidden,tmp;
+too : 0 ! use,stop;' const: BodyFor107
+
+'t : $makeTopoCt ! perform;
+t : $getTopoJfo+"myTopoJfo"+"myUtype"+#utype ! invoke;
+def(myTopoJfo) : seq(push(topoList),push(myTopoJfo),jfo("interpret")) ! topoList;
+t : "<p>"+#name+"/"+#uname+":&nbsp;&nbsp;"+topoList ! buffer;' const: BodyTopoCt
+
+'t : $makeTopoClep ! perform;
+t : $getTopoJfo+"myTopoJfo"+"myUtype"+#utype ! invoke;
+def(myTopoJfo) : seq(push(topoList),push(myTopoJfo),jfo("interpret")) ! topoList;
+t : "<p>"+#name+"/"+#uname+":&nbsp;&nbsp;"+topoList ! buffer;' const: BodyTopoClep
+
+
+// pqjom, s -
+: fillAddPqbody over @pqbody "" ?null swap + \n + swap !pqbody ;
+
+// pqjom,n,list - 
+: xsetCatZone
+    over2 @tmtypecode contains ? [ xsetNzone fillAddPqbody ] [ 2drop ] noop
+;
+
+// jom - jom
+: xsetCtConnectType
+    dup @tmtypecode "VTM_076" = ? [
+         dup XrefConnectTypeClep fillAddPqbody 
+    ] [ noop ]
+    dup @tmtypecode "VTM_078" = ? [
+         dup XrefConnectTypeCt fillAddPqbody 
+    ] [ noop ]
+    dup @tmtypecode "VTM_081" = ? [
+         dup XrefConnectTypeCtn fillAddPqbody 
+    ] [ noop ]
+    dup @tmtypecode "VTM_092" = ? [
+         dup XrefConnectTypeOssh fillAddPqbody 
+    ] [ noop ]
+
+    noop
+;
+
+// ru_jom - 
+: fillRu  
+    true over !mutual
+   dup @xvoltage over !qvoltage 
+   dup 't : invariant($INV,"vlevel+",1) ! tmp;' fillAddPqbody
+   dup 't : invariant($INV,"vlevel."+qvoltage+"+",1) ! tmp;' fillAddPqbody
+dup 't : getComplex(parent) ! vcomplex;' fillAddPqbody
+dup 't : invariant($INV,"vlevel","") ! vlevelsNum;
+vlevelsNum=1 : buildArena($NorthArena,complex,"",1,"horflowc") ! myArena;
+vlevelsNum>1 : buildArena($SouthArena,complex,"",1,"horflowc") ! myArena;
+t : pushArena(myArena) ! tmp;' fillAddPqbody
+dup 't : fillQname(complex,toList("qvoltage")) ! tmp;' fillAddPqbody
+dup   ThisSetFence fillAddPqbody
+dup 't : filter(xsimplexes,"in($VCATBus,getq(item,' "utype" quote + '))") ! myBusList;' + \n +
+'t : filter(xcomplexes,"in($VCATBusLink,getq(item,' "utype" quote + '))") ! myBusLinkList;' + \n + +
+'t : connectSimplexesByComplexes(complex,myBusList,myBusLinkList,$ObjectArena) ! myBusLinkedList;' + fillAddPqbody
+dup 'size(myBusLinkedList)=1 : getFirstSolidSimplex(head(myBusLinkedList)) ! myBusFirstSimplex;' fillAddPqbody
+dup 'def(myBusFirstSimplex) : moveArenaAfter($ObjectArena,myBusFirstSimplex) ! sysout;' fillAddPqbody
+dup 't : dropComplex() ! tmp;' fillAddPqbody
+'t : postArenaItems(myArena) ! tmp;
+t : dropArena() ! tmp;' fillAddPqbody
+; 
+
+// trans_jom, trans_simplex - 
+: fillTrans 
+     true over2 !mutual
+
+// t : list(getComplex(parent),'A/-1/1100,B/-1/350,C/-1/100,W/-1/0') ! simplex;
+     quote "t : list(getComplex(parent)," swap + ") ! usimplex;" + \n + over !pqbody 
+
+     dup XlibUCounter fillAddPqbody
+     dup 't : invariant($INV,"trans+",1) ! tmp;' fillAddPqbody
+
+     dup TRANS_ZONE xsetNzone fillAddPqbody     
+     dup XrefConnectTypeTrans fillAddPqbody
+     dup XrefTransCoName fillAddPqbody
+     dup XrefDefineConnectNameTrans fillAddPqbody
+     dup ThisTopoChain fillAddPqbody
+dup ThisCheckCoName fillAddPqbody
+dup
+'t : fillQname(simplex,toList("coName,connectType")) ! tmp;'  fillAddPqbody
+
+     dup ThisSetFence fillAddPqbody
+     drop
+;
+
+// tail_jom - 
+: fillTail 
+      // "---" over @tmtypecode + .
+      true over !mutual      
+     dup XlibUCounter fillAddPqbody 
+     dup @xsign 1 = ? [
+          dup @tmtypecode "VTM_107" = ? [
+              dup BodyFor107 fillAddPqbody
+          ]
+          [ noop ]
+
+          dup BREAKER_ZONE 		TMCAT_BREAKER xsetCatZone 
+          dup SEPARATOR_ZONE 	TMCAT_SEPARATOR xsetCatZone           
+          dup DISCONNECTOR_ZONE 	TMCAT_DISCONNECTOR xsetCatZone 
+          dup VCH_ZONE 		TMCAT_VCH xsetCatZone 
+
+          dup XrefConnectTypeTail fillAddPqbody
+          dup XrefCheckPlace fillAddPqbody
+          dup XlibSetQvoltage fillAddPqbody
+          dup XrefTailSimplex fillAddPqbody
+          dup XrefDefineConnectNameTail fillAddPqbody
+          dup XrefTailCoName fillAddPqbody
+dup ThisCheckCoName fillAddPqbody
+dup 'not(isnull(simplex)) : fillQname(simplex,toList("coName,connectType,soName,qvoltage")) ! tmp;' fillAddPqbody
+          dup ThisSetFence fillAddPqbody
+          drop
+
+     ]
+     [  
+          BodySetUse0 fillAddPqbody
+     ]
+    noop
+;
+
+// bus_jom - 
+: fillBus 
+    //  "---" over @tmtypecode + .
+    true over !mutual
+    dup XlibUCounter fillAddPqbody 
+
+    dup BUS_ZONE xsetNzone fillAddPqbody
+    dup XrefConnectTypeBus fillAddPqbody
+
+    dup XrefCheckPlace fillAddPqbody
+    dup XlibSetQvoltage fillAddPqbody
+    dup XlibBuildBusSimplex fillAddPqbody
+    dup XrefTailCoName fillAddPqbody
+    dup ThisTopoChain fillAddPqbody
+    dup ThisCheckCoName fillAddPqbody
+    dup 't : invariant($INV,"bus+",1) ! tmp;' fillAddPqbody
+    dup 't : invariant($INV,"bus."+qvoltage+"+",1) ! tmp;' fillAddPqbody
+//    dup 't : invariant($INV,"bus."+#utype+"+",1) ! tmp;' fillAddPqbody
+dup 't : invariant($INV,"vlevel","") ! vlevelsNum;
+t : buildArena(peekArena(),"Xbus","",0,"verflowc") ! myArena;
+t : buildArena(myArena,simplex,"",0,"horflowc") ! busArena;
+t : addArenaElement(busArena,simplex,"") ! tmp;
+t : buildArena(myArena,"Con","",1,"horflowc") ! conArena;
+t : buildArena(myArena,"Lin","",1,"horflowc") ! ctArena;
+t : pushArena(ctArena) ! tmp;' fillAddPqbody
+dup
+'t : fillQname(simplex,toList("coName,connectType,qvoltage")) ! tmp;' fillAddPqbody
+    dup ThisSetFence fillAddPqbody
+dup 't : dropArena() ! tmp;' fillAddPqbody
+dup 't : performArenaDeferreds(ctArena,"coIndexObject") ! tmp;' fillAddPqbody
+dup 't : buildFanConnections(myArena,busArena,simplex,conArena,ctArena) ! tmp;' fillAddPqbody
+dup 'not(isnull(simplex)) : connect(simplex,getComplex(parent),xchilds) ! tmp;' fillAddPqbody
+    drop
+    noop
+;
+
+// ct_jom - 
+: fillCT 
+    // "---" over @tmtypecode + .
+    true over !mutual
+    // dup fillTail 
+
+    dup XlibUCounter fillAddPqbody 
+
+          xsetCtConnectType
+
+          dup XrefCheckPlace fillAddPqbody
+          dup XlibSetQvoltage fillAddPqbody
+
+         dup @tmtypecode "VTM_096" = ? [
+                 dup 't : getComplex("Neutral") ! lcomplex;' fillAddPqbody
+          ]
+          [ 
+              dup 't : superUtypes($VCATRu) ! lcomplex;' fillAddPqbody
+          ]
+
+         dup @tmtypecode "VTM_076" = ? [
+             dup  XrefClepSoName fillAddPqbody 
+         ]
+         [   dup XrefCtCoName fillAddPqbody  ]
+
+          dup XrefDefineConnectNameCt fillAddPqbody
+          dup ThisTopoChain fillAddPqbody
+dup 't : coindex(#uname,list("яч.","яч")) ! coIndexObject;' fillAddPqbody
+dup ThisCheckCoName fillAddPqbody
+    dup 't : invariant($INV,"bus."+qvoltage+"."+.parent.#name+"+",1) ! tmp;' fillAddPqbody
+          dup 't : fillQname(complex,toList("coName,connectType,soName,coIndexObject")) ! tmp;' fillAddPqbody
+
+
+          dup ThisSetFence fillAddPqbody
+
+
+dup 
+'t : $getTopoJfo+"myTopoJfo"+"myUtype"+#utype ! invoke;
+def(myTopoJfo) : seq(push(rsimplexes),push(myTopoJfo),jfo("interpret")) ! topoList;' fillAddPqbody
+dup 'not(isnull(complex)) : connect(complex) ! tmp;' fillAddPqbody
+
+
+dup @tmtypecode "VTM_078" = ? [
+dup
+'not(isnull(complex)) : superUtype("VTM_119") ! myTransList;
+def(myTransList) : filter(myTransList,".item.coName=coName") ! myTransSuitList;
+def(myTransSuitList)&not(isnull(complex)) : connectByLevel(complex,myTransSuitList,$ObjectArena) : int(-300) ! nconnectTransResult;' fillAddPqbody 
+    ] [ noop ]
+
+dup @tmtypecode TMCAT_BUSLINK swap contains ? [
+dup 'not(isnull(complex)) : size(getSimplexes(complex)) : 0 ! myComplexSize; 
+not(isnull(complex))&(myComplexSize>0) : buildArena(peekArena(),complex,"",0,"horflowc", getSimplexes(complex),f) ! myArena;' fillAddPqbody
+]
+[ 
+dup 'not(isnull(complex)) : size(getSimplexes(complex)) : 0 ! myComplexSize; 
+not(isnull(complex))&(myComplexSize>0) : buildArena(peekArena(),complex,"",0,"verflowc", getSimplexes(complex),t) ! myArena;' fillAddPqbody
+]
+
+noop
+
+dup
+'def(myArena) : buildArenaConnections(myArena) ! tmp;
+t : postArenaItems(peekArena()) ! tmp;' fillAddPqbody
+
+dup 't : dropComplex() ! tmp;' fillAddPqbody
+// dup 't : dropArena() ! tmp;' fillAddPqbody
+    drop
+    noop
+;
+
+
+// joms - 
+: fillPQJoms
+  filterRu_Tail			// (ru_joms,tail_joms)
+  dup first [ fillRu ] apply 		// (ru_joms2,tail_joms)
+  first- buildTransSimplex		// (tail_joms), trans_simplex
+  swap mapflat filterTrans 		// trans_simplex, (trans_joms,tail_joms)
+  first- swap1 			// (tail_joms), trans_simplex, (trans_joms)
+  [ over fillTrans ] apply drop		// (tail_joms)
+  mapflat filterBus			// (bus_joms,tail_joms)
+  first- [ fillBus ] apply		// (tail_joms)
+  mapflat filterCT			// (ct_joms,tail_joms)
+  first- [ fillCT ] apply		
+  mapflat [ fillTail ] apply		// -
+  noop
+;
+
+
+
+noop
+

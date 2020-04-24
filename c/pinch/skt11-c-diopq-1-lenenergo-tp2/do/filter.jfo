@@ -1,0 +1,49 @@
+// filter.jfo
+
+?import: do/vars.jfo
+
+// tmo_joms - tmo_joms2
+: filterSigned [ @xsign 0 > ] filter ;
+// tmo_joms - (ru_joms,tail_joms)
+: filterRu  (  [ @tmtypecode TMCAT_RU swap contains ]  )  filtergroup ;
+// tmo_joms - (trans_joms,tail_joms)
+: filterTrans  (  [ @tmtypecode TMCAT_TRANS swap contains ]  )  filtergroup ;
+// tmo_joms - (bus_joms,tail_joms)
+: filterBus  (  [ @tmtypecode TMCAT_BUS swap contains ]  )  filtergroup ;
+// tmo_joms - (ru_joms,tail_joms)
+: filterRu_Tail filterSigned filterRu ;
+// tmo_joms - (ct_joms,tail_joms)
+: filterCT  (  [ @tmtypecode TMCAT_CT swap contains ]  )  filtergroup ;
+// tmo_joms - (uch_joms,tail_joms)
+: filterUch  (  [ @tmtypecode TMCAT_UCH swap contains ]  )  filtergroup ;
+
+
+
+// ncounter, tmtypecode - xsymbol	-- A | A1 | A2 ...
+: buildXsymbol 
+    RU2Xsymbol @ 	// ncounter, xsymbol
+    dup rot next	// xsymbol, n
+    dup 0 = ? [ drop ] [ + ] 
+;
+
+
+// ru_joms - trans_simplex		-- A/3/1100,B1/3/350,C/3/100
+: buildTransSimplex
+  () 0 ncounter rot			// (), ncounter, ru_joms
+  [   // .., ru_jom
+      @tmtypecode 			// (), ncounter, tmtypecode
+      2dup buildXsymbol		// (), ncounter, tmtypecode, xsymbol
+      "/" + NUMCON_TRANS + "/" + 
+       swap RU2Voltage @ + 		// (), ncounter, stri
+       1_+ 				// (), ncounter
+  ]  apply
+  drop "," list2str
+  trim dup "" = ? [ drop "C/-1/100,F/-1/4" ] [ noop ]
+  
+  ",W/" NUMCON_TRANS + "/0" + +
+;
+
+
+
+noop
+

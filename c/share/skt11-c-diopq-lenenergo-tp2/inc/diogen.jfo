@@ -1,0 +1,136 @@
+// diogen.jfo
+
+sysimport: got
+
+?import: inc/types.jfo
+
+"diogen" pinchdatapath DiogenDataPath!
+"diogen/res" pinchdatapath DiogenResPath!
+"diogen/template" pinchdatapath DiogenTemplatePath!
+
+"R" RelSid!
+"h2" XmlRelSid!
+
+"{719C8CD5-965C-4BD9-9120-E95B0CD177A1}" DiogenId!
+"0.8" DiogenScale!
+"XTP" DiogenConame!
+"h" DiogenThumbkey!
+
+// -- VARS --
+
+// not declared
+// ! null CurTrans!
+// ! null CurRu!
+// ! null CurBus!
+// ! null CurCon!  -- linear complex
+// ! null CurLe!  -- linear element
+// 
+
+0 QBusCount!
+() GroupLeNums!
+0 QGroupCount!
+scope QNodes!
+
+
+
+// --
+0 QCount!
+0 QPrecount!
+"" QNodesText!
+0 QTransCount!
+0 QRuCount!
+
+
+0 QRuNumber!
+0 QBusNumber!
+0 QLastBusWidth!
+0 QCurrentBusWidth!
+
+0 QXn!
+0 QYn!
+"" QLastCoName!
+0 QRuXn!
+0 QRuYn!
+
+?import: inc/util.jfo
+
+// -
+: dioCopyFiles
+    DiogenResPath@ "/_rels" + mkdir
+    DiogenResPath@ "/diogen" + mkdir
+    DiogenResPath@ "/diogen/_rels" + mkdir
+    DiogenResPath@ "/diogen/media" + mkdir
+    DiogenTemplatePath@ "/" + "[Content_Types].xml" + DiogenResPath@ fcopy
+    DiogenTemplatePath@ "/diogen/media/Image1.png" + 
+        DiogenResPath@ "/diogen/media" + fcopy
+;
+
+// -
+: dioPrepareDotRels
+    DiogenTemplatePath@  "/_rels/.rels" + "UTF-8" file2str 
+    // do prepare
+    "?relsid" RelSid@ rot replace
+    DiogenResPath@ "/_rels/.rels" + "UTF-8" str2file
+    noop
+;
+
+// -
+: dioPrepareDioRels
+    DiogenTemplatePath@  "/diogen/_rels/diagram.xml.rels" + "UTF-8" file2str 
+    // do prepare
+    "?xmlrelsid" XmlRelSid@ rot replace
+    DiogenResPath@ "/diogen/_rels/diagram.xml.rels" + "UTF-8" str2file
+    noop
+;
+
+// complex, sucomplex, invariant -
+: dioPrepareDiagram
+    INV!
+    "" uuid + dup rot @register !SLDsid
+
+    over @qname !SLDsid
+    
+    >r
+
+    0 QCount!
+    0 QPrecount!
+    "" QNodesText!
+    0 QTransCount!
+    0 QRuCount!
+    0 QBusCount!
+    0 QXn!
+    0 QYn!
+    "" QLastCoName!
+
+    DiogenTemplatePath@  "/diogen/diagram.xml" + "UTF-8" file2str 
+    // do prepare
+    "?diogenid" DiogenId@ rot replace
+    "?scale" DiogenScale@ rot replace
+    "?coname" rpeek @qname @uname rot replace
+    "?thumbkey" DiogenThumbkey@ rot replace
+    r> duComplex
+    "</Nodes>" QNodesText@ \n + "</Nodes>" + rot replace
+    DiogenResPath@ "/diogen/diagram.xml" + "UTF-8" str2file
+    noop
+;
+
+
+// complex - ?
+: doDio
+
+    ruleGenThumbSid dup DiogenThumbkey! XmlRelSid!
+    ruleGenRelSid RelSid!
+
+   dioCopyFiles
+   dioPrepareDotRels
+   dioPrepareDioRels
+   
+   dioPrepareDiagram
+
+   // INV@ sys.
+   true
+;
+
+
+
+noop

@@ -1,0 +1,7 @@
+// filter.jfo
+
+"privse" "privse" pinchfput	
+
+: filterNumRecords noop ;  // 10 0 filter ;
+
+noop

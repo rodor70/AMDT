@@ -1,0 +1,396 @@
+// util.jfo
+
+?import: inc/got.jfo
+?import: inc/rules.jfo
+
+
+// simplex - simplex
+: duFillSimplex
+    dup @qname 0 0 got2n swap !got
+;
+// complex - complex
+: duFillComplex duFillSimplex ;
+
+// simplex - simplex
+: duFillBusSimplex
+    duFillSimplex
+    "bus." over @qname @qvoltage toi + // bus.100
+    "." + over @qname @name "." splits rhead 
+    + // bus.100...SYSBUS1
+    INV@ invperform toi
+    ruleBusWidth over @qname !width
+;
+
+
+// -
+: duShiftCount QCount@ QPrecount! 1 QCount+ ;
+
+// qname, template - qname, template
+: duNode
+    "?count" "" QCount@ + rot replace
+    "?precount" "" QPrecount@ + rot replace
+    "?sid" over2 @sid rot replace
+    "?coName" over2 @coName dup QLastCoName! rot replace
+    GroupLeNums@ QCount@ + drop
+    duShiftCount
+    noop
+;
+//  simplex, qname, content - simplex, qname, content, content2
+: duLabNode
+    over2 >r
+    DeLabel@
+    "?count" "" QCount@ + rot replace
+    "?precount" "" QPrecount@ + rot replace
+    "?xnlab" "" rpeek gotGetXn ruleXnlab + rot replace    
+    "?ynlab" "" r> gotGetYn ruleYnlab + rot replace 
+    "?coName" QLastCoName@ rot replace
+    duShiftCount
+    noop
+;
+
+//  simplex, qname, content - simplex, qname, content, content2
+: duLabNodeEq2
+    over2 >r
+    DeLabelEq2@
+    "?count" "" QCount@ + rot replace
+    "?precount" "" QPrecount@ + rot replace
+    "?xnlab" "" rpeek gotGetXn ruleXnlab + rot replace    
+    "?ynlab" "" r> gotGetYn ruleYnlab + rot replace 
+    "?coName" QLastCoName@ rot replace
+    duShiftCount
+    noop
+;
+
+// simplex, qname, template - simplex, qname
+: duTransformer
+   over2 >r
+   duNode   // simplex, qname, template
+
+   "?pinit" "T2" rot replace
+    "?level1sid" rpeek @linkedSid0 rot replace
+    "?level2sid" rpeek @linkedSid1 rot replace
+    "?level1" "" rpeek @pointLevel0 10.0 / + rot replace
+    "?level2" "" rpeek @pointLevel1 10.0 / + rot replace
+
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" rpeek @pointSid0 + rot replace
+    "?termid2" "" rpeek @pointSid1 + rot replace
+    "?termid3" "" r> @pointSid2 + rot replace
+
+    // simplex, qname, content
+    duLabNode +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duBus
+   over2 >r
+   duNode   // qname, template
+   "?width" over2 @width  "" swap + rot replace
+   "?height" "" ruleBusHeight + rot replace
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" r> @pointSid0 + rot replace
+
+    duLabNode +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duBreaker
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" rpeek @pointSid0 + rot replace
+    "?termid2" "" r> @pointSid1 + rot replace
+
+    duLabNode +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+
+// simplex, qname, template - simplex, qname
+: duDisconnector
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" rpeek @pointSid0 + rot replace
+    "?termid2" "" r> @pointSid1 + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duFuse
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" rpeek @pointSid0 + rot replace
+    "?termid2" "" r> @pointSid1 + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duTT
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duSurgeArrester
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duCouplingCapacitor
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duCouplingFilter
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duGroundDisconnector
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" r> @pointSid0 + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duCradleSwitch
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?xn" "" rpeek gotGetXn + rot replace
+   "?yn" "" rpeek gotGetYn + rot replace
+    "?termid1" "" rpeek @pointSid0 + rot replace
+    "?termid2" "" r> @pointSid1 + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex -
+: duSimplex
+    dup @qname	// simplex, qname
+    // dup @name sys.
+    dup @utype "VTM_119" = ? [  DeTransformer@ duTransformer ] [ noop ]  
+    dup @utype TMCAT_BUS swap contains ? [  DeBus@ duBus ] [ noop ]  // TMCAT_BUS
+    dup @utype TMCAT_DISCONNECTOR swap contains ? [  DeDisconnector@ duDisconnector ] [ noop ]  
+    dup @utype TMCAT_BREAKER swap contains ? [  DeBreaker@ duBreaker ] [ noop ]  
+    dup @utype TMCAT_GROUND swap contains ? [  DeGroundDisconnector@ duGroundDisconnector ] [ noop ]  
+    dup @utype "VTM_055" = ? [  DeFuse@ duFuse ] [ noop ]  
+    dup @utype "VTM_050" = ? [  DeTN@ duTT ] [ noop ]  
+    dup @utype TMCAT_TT swap contains ? [  DeTT@ duTT ] [ noop ]  
+    dup @utype TMCAT_SURGE_ARRESTER swap contains ? [  DeSurgeArrester@ duSurgeArrester ] [ noop ]  
+    dup @utype "VTM_052" = ? [  DeCouplingCapacitor@ duCouplingCapacitor ] [ noop ]  
+    dup @utype "VTM_077" = ? [  DeCouplingFilter@ duCouplingFilter ] [ noop ]  
+    dup @utype "VTM_292" = ? [  DeCradleSwitch@ duCradleSwitch ] [ noop ]  
+    
+    2drop
+;
+
+// complex - 
+: duConnector
+     >r
+     DeConnector@
+     "?count" "" QCount@ + rot replace
+     "?nvoltage" rpeek @qname @qvoltage toi 10.0 / "" swap + rot replace
+     "?uuid0" CurBus@ @pointSid0 rot replace
+     "?xn" "" rpeek gotGetXn + rot replace
+     "?yn" "" r> gotGetYn CH - + rot replace
+     "?termname" "" 1 + rot replace    
+     QCount@ QConnectorCount! 
+     duShiftCount
+     QNodesText@ swap + QNodesText!
+;
+
+/*
+// vsimplex - 
+: duConnection0
+     >r
+     DeConnection@
+     "?count" "" QCount@ + rot replace
+     "?nvoltage" rpeek @qname @qvoltage toi 10.0 / "" swap + rot replace
+     "?uuid0" "" rpeek @qname @sid rot replace
+     "?xnfrom" ""  + rot replace
+     "?ynfrom" "" r> gotGetYn CH - + rot replace
+     "?termname" "" 1 + rot replace    
+     QCount@ QConnectorCount! 
+     duShiftCount
+     QNodesText@ swap + QNodesText!
+;
+*/
+
+// n - s
+: duGroupElement
+    '???n' "" rot + '	<GroupMember NodeID="???n" />' \n + replace
+;
+
+// ?groupnum" uid="?uuid0">
+
+// complex - 
+: duGroup
+     >r
+     DeGroupBegin@
+     "?count" "" QCount@ + rot replace
+     "?groupnum" "" QGroupCount@ + rot replace
+     "?uuid0" r> @qname @sid rot replace
+      // content
+     GroupLeNums@ [
+         duGroupElement +
+     ] apply
+     DeGroupEnd@ +
+// dup sys.
+     // duLabNode +
+     duShiftCount
+     QNodesText@ swap + QNodesText!
+     1 QGroupCount+
+;
+
+
+// complex -
+: duComplexConnectLe  
+   CurLe\
+   () GroupLeNums!
+   @simplexList // virtual !!! - [ @virtual not ] filter
+   [
+        dup @virtual not ? [
+            duFillSimplex
+            ruleNextLe
+            duSimplex
+        ]
+        [ 
+             drop // - duConnection
+        ]
+
+        noop
+
+   ] apply   
+   noop
+;
+
+// lcomplex_list -
+: duComplexConnect
+    CurCon\
+   [ TMCAT_CT swap @qname @utype  contains ]  filter 
+   // "SIZE=" over size + sys.
+   [
+        // "UTYPE=" over @qname @utype + sys.
+        
+        duFillComplex
+        ruleNextConnect
+
+        // "XN=" over gotGetXn + sys.
+        // "YN=" over gotGetYn + sys.
+        
+        dup duConnector
+        dup duComplexConnectLe
+        // !!!
+        // drop
+        
+        duGroup
+
+   ] apply
+;
+
+// complex_list - complex_list_2
+: duMoveCtTo0
+    () swap [
+        dup @qname @utype  		// list, complex, utype
+        "VTM_078" = ? [  0 over2 ! ]	// list, complex, 0, list - !
+        [  + ] noop
+    ] apply noop
+;
+
+// complex -
+: duComplexRu   
+   CurBus\
+   0 QBusCount!
+   @simplexList [ TMCAT_BUS swap @qname @utype contains ]  filter 
+   [
+        duFillBusSimplex
+        ruleNextBus
+        duSimplex
+
+        // CurRu, CurBus
+        CurBus@ @pointSid0 // dup sys.
+        CurRu@ .findComplexesOverPointSid 
+        // 50 sys.
+        QBusCount@ 0 > ? [ duMoveCtTo0 ] [ noop ] noop
+        // 100 sys.
+        // cons
+        duComplexConnect
+        
+        1 QBusCount+
+   ] apply
+   
+   noop
+;
+
+// complex -
+: duComplex
+   dup @simplexList [
+        duFillSimplex	// simplex
+        ruleNextTrans
+        duSimplex	// -
+   ] apply   
+   // complex
+   @complexList [ TMCAT_RU swap @qname @utype contains ]  filter 
+   [
+        duFillComplex
+        ruleNextRu
+        duComplexRu
+   ] apply
+
+   noop
+;
+
+
+noop

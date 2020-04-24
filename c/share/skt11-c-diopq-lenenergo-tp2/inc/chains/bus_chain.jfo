@@ -1,0 +1,19 @@
+// bus_chain.jfo
+
+?import: inc/chains/plexdirect2.jfo
+?import: inc/xvars.jfo
+
+// sysimport: got
+
+import: inc/chains/chain_clep.jfo
+import: inc/chains/chain_ct.jfo
+import: inc/chains/chain_ctn.jfo
+import: inc/chains/chain_csv.jfo
+import: inc/chains/chain_cdgr.jfo
+import: inc/chains/chain_crz.jfo
+
+gchains GC_CLEP  + GC_CT + GC_CTN + GC_CSV + GC_CDGR + GC_CRZ +
+const: GC
+
+noop
+

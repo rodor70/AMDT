@@ -1,0 +1,84 @@
+// card.jfo
+
+{ 
+   CONNECTOR:VTM_CONNECTOR
+   CONNECTION:VTM_CONNECTION
+   D:${TMCAT_DISCONNECTOR} 
+   G:${TMCAT_GROUND} 
+   TT:${TMCAT_TT} 
+   SA:${TMCAT_SURGE_ARRESTER} 
+   F:VTM_055 
+   L:VTM_ARROW 
+   VZ:VTM_018
+   B:${TMCAT_BREAKER} 
+   R:VTM_107 	
+   VO:${TMCAT_VCHO} 
+   BUS:${TMCAT_BUS}
+   T:VTM_119	
+   CA:VTM_046
+   TN:VTM_050 
+   CF:VTM_077 
+   OD:${TMCAT_SEPARATOR}
+   KZ:VTM_045
+   RS:VTM_292
+}  const: UCardsGroups
+
+{
+   CONNECTOR:1
+   CONNECTION:2
+   D:3
+   G:4
+   TT:5
+    SA:7
+    F:8
+    L:9
+    VZ:10
+    B:11
+    R:12
+    VO:13
+    BUS:16
+    T:17
+    CA:18
+    TN:19
+    CF:20
+    OD:21
+    KZ:22
+    RS:23
+} const: UCardsFilter
+
+{ 
+  0:-1 
+  1:${'BBBBBB' hex2int}
+  2:${'CCCCCC' hex2int} 
+  3:${'AAAAFF' hex2int} 
+  4:${'8888FF' hex2int}  
+  5:${'00AA00' hex2int} 
+  6:${'E6E6FA' hex2int} 
+  7:${'008080' hex2int}  
+  8:${'009090' hex2int}  
+  9:${'DD8080' hex2int}  
+  10:${'FF8080' hex2int}  
+  11:${'0000FF' hex2int}  
+  12:${'FF0000' hex2int} 
+  13:${'FF8080' hex2int} 
+  14:${'FF0000' hex2int} 
+  15:${'000000' hex2int} 
+  16:${'999999' hex2int} 
+  17:${'E5C100' hex2int} 
+  18:${'957042' hex2int} 
+  19:${'DBB9C8' hex2int} 
+  20:${'0000FF' hex2int} 
+  21:${'0000FF' hex2int} 
+  22:${'0000FF' hex2int} 
+  23:${'0000FF' hex2int} 
+} 
+const: UCardsColors
+
+
+noop
+
+
+
+
+
+

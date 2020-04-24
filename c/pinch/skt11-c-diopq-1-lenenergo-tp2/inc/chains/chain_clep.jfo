@@ -1,0 +1,89 @@
+// chain_clep.jfo
+
+
+{ G:${TMCAT_GROUND}  B:${TMCAT_BREAKER} S:${TMCAT_SEPARATOR} VO:${TMCAT_VCHO}
+   D:${TMCAT_DISCONNECTOR}  TT:${TMCAT_TT} A:${TMCAT_SURGE_ARRESTER}
+   L:VTM_ARROW TN:VTM_050 F:VTM_055 CF:VTM_077 VZ:VTM_018 CA:VTM_046
+}  const: CLEPSelector
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =D(0,1)-G(0,3)-B(0,5)-1(0,7)-TT(0,9)-2(0,11)-D(0,13)-G(0,15)-VZ(0,17)-L(0,19) +
+CLEPSelector vchain: 1(0,7)-A(2,9) +
+CLEPSelector vchain: 2(0,11)-F(2,13)-TN(2,15) +
+const: CH_CLEP1
+^dplexDo CH_CLEP1 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =B(0,1)-G(0,3)-1(0,5)-L(0,7) +
+CLEPSelector vchain: 1(0,5)-A(2,7) +
+const: CH_CLEP2
+^dplexDo CH_CLEP2 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =1(0,1)-D(0,3)-B(0,5):0,1-TT(0,7):2,0-D(0,9)-2(0,11)-L(0,13) +
+CLEPSelector hchain: 1(0,1)-G(2,1) +
+CLEPSelector hchain: 2(0,11)-G(2,11) +
+const: CH_CLEP3
+^dplexDo CH_CLEP3 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =D(0,1)-B(0,3):0,1-TT(0,5):2,0-G(0,7)-L(0,9) +
+const: CH_CLEP4
+^dplexDo CH_CLEP4 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =D(0,1)-F(0,3)-B(0,5):0,1-TT(0,7):2,0-G(0,9)-L(0,11) +
+const: CH_CLEP5
+^dplexDo CH_CLEP5 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =B(0,1):0,1-TT(0,3):2,0-1(0,5)-L(0,7) +
+CLEPSelector hchain: 1(0,5)-G(2,5) +
+const: CH_CLEP6
+^dplexDo CH_CLEP6 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =1(0,1)-D(0,3)-2(0,5)-B(0,7):0,1-TT(0,9):2,0-3(0,11)-D(0,13)-4(0,15)-L(0,17) +
+CLEPSelector hchain: 1(0,1)-G(2,1) +
+CLEPSelector hchain: 2(0,5)-G(2,5) +
+CLEPSelector hchain: 3(0,11)-G(2,11) +
+CLEPSelector hchain: 4(0,15)-G(2,15) +
+const: CH_CLEP7
+^dplexDo CH_CLEP7 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =1(0,1)-D(0,3)-2(0,5)-B(0,7):0,1-TT(0,9):2,0-VZ(0,11)-3(0,13)-L(0,15) +
+CLEPSelector hchain: 1(0,1)-G(2,1) +
+CLEPSelector hchain: 2(0,5)-G(2,5) +
+CLEPSelector hchain: 3(0,13)-VO(2,13) +
+const: CH_CLEP8
+^dplexDo CH_CLEP8 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =1(0,1)-D(0,3)-2(0,5)-B(0,7):0,1-TT(0,9):2,0-CA(0,11)-L(0,13) +
+CLEPSelector hchain: 1(0,1)-G(2,1) +
+CLEPSelector hchain: 2(0,5)-G(2,5) +
+const: CH_CLEP9
+^dplexDo CH_CLEP9 !indexWord
+
+chains
+"clep" over !connectType
+CLEPSelector vchain: =CA(0,1)-F(0,3)-L(0,5) +
+const: CH_CLEP10
+^dplexDo CH_CLEP10 !indexWord
+
+gchains CH_CLEP1 + CH_CLEP2 + CH_CLEP3 + CH_CLEP4 + CH_CLEP5 + CH_CLEP6  + CH_CLEP7  + CH_CLEP8  + CH_CLEP9 + CH_CLEP10 +
+const: GC_CLEP
+
+
+noop
+

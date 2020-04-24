@@ -1,0 +1,29 @@
+// dp.jfo
+
+pinchref: skt11-c-diopq-lenenergo-tp2
+
+?import: inc/xvars.jfo
+
+"printXml" true puto
+"printZip" true puto
+
+?import: inc/plex.jfo
+// ?import: inc/diogen.jfo
+?import: inc/adiogen.jfo
+
+// Plexes
+// scope, node - 
+: pqDataProvide
+    2drop
+;
+
+
+// content - content2
+: pqDoPost
+   "?????HL" "ВН" rot replace
+   "?????LL" "НН" rot replace 
+
+    varPrepareCoomonLevelSids
+;
+
+noop

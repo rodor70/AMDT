@@ -1,0 +1,27 @@
+// chain_ctn.jfo
+
+{ G:${TMCAT_GROUND}  B:${TMCAT_BREAKER} S:${TMCAT_SEPARATOR} TN:VTM_050 F:VTM_055 OD:VTM_044 KZ:VTM_045
+   D:${TMCAT_DISCONNECTOR}  TT:${TMCAT_TT} A:${TMCAT_SURGE_ARRESTER}
+   L:VTM_ARROW
+}  const: CTNSelector
+
+chains
+"ctn" over !connectType
+CTNSelector vchain: =1(0,1)-D(0,3)-2(0,5)-3(0,7)-TN(0,9) +
+CTNSelector hchain: 1(0,1)-G(2,1) +
+CTNSelector hchain: 2(0,5)-G(2,5) +
+CTNSelector vchain: 3(0,7)-A(2,9) +
+const: CH_CTN1
+^dplexDo CH_CTN1 !indexWord
+
+chains
+"ctn" over !connectType
+CTNSelector vchain: =D(0,1)-F(0,3)-TN(0,5) +
+const: CH_CTN2
+^dplexDo CH_CTN2 !indexWord
+
+gchains CH_CTN1 + CH_CTN2 + 
+const: GC_CTN
+
+noop
+

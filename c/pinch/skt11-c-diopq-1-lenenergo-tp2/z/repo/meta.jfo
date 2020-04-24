@@ -1,0 +1,83 @@
+// meta.jfo
+
+// SKT Tables
+
+"skt_src_" const: TableSrcPrefix
+
+"qdx_tmtype_new" const: TableRefTmtype
+
+"skt_src_index" const: TableSrcIndex
+
+/*
+"skt_src_tp" const: TableSrcTp
+"skt_src_tp" const: TABLE_U_RECORDS
+*/
+
+"src_tmo_tp_2" const: TableTmdTp
+"src_tmo_tp_2" const: TABLE_TMD_RECORDS
+
+"skt_src_status" const: TableSrcStatus
+"status_v0" const: TableStatusV0
+
+// xvoltage:
+4 const: U_04		// 0
+10 const: U_1		// 1
+30 const: U_3		// 2
+60 const: U_6		// 3
+100 const: U_10		// 4
+150 const: U_15		// 5
+200 const: U_20		// 6
+275 const: U_27_5		// 7
+350 const: U_35		// 8
+1100 const: U_110		// 9
+1500 const: U_150		// 10
+2200 const: U_220		// 11
+3300 const: U_330		// 12
+5000 const: U_500		// 13
+7500 const: U_750		// 14
+10000 const: U_1000	// 15
+
+// xstatus
+0 const: SX_U	// unknown
+2 const: SX_P	// past
+3 const: SX_C	// connected
+5 const: SX_R	// reserv
+7 const: SX_F	// future
+
+( SX_C , SX_R ) const: SX_GOOD
+
+// status_v0
+0 const: SV0_U
+1 const: SV0_OK
+2 const: SV0_PRE
+3 const: SV0_TMCODE_NULL
+5 const: SV0_TMTYPE_U
+7 const: SV0_TMTYPE_UNK
+11 const: SV0_VOLT_U
+13  const: SV0_PCODE_NULL
+17  const: SV0_PCODE_U
+19  const: SV0_PVAL_NULL
+23  const: SV0_IGNORE
+29  const: SV0_FICT
+31  const: SV0_OVER
+37  const: SV0_LOST
+41  const: SV0_ANCHOR
+43  const: SV0_TMO
+47  const: SV0_BADSTRU
+53  const: SV0_LOSTSTRU
+
+101 const: SV1_GEN
+
+// not(mod(xstatus,3) = 0 or mod(xstatus,5) = 0 );  
+// - psql
+: repoSqlStatusIgnore 
+   "not(mod(xstatus," SX_C + ")=0 or mod(xstatus," + SX_R + ")=0)" +
+;
+
+// Vars
+scope Tmtypes!
+scope Xstatuses!
+scope StatusesV0!
+
+
+

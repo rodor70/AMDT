@@ -1,0 +1,144 @@
+// types.jfo
+
+// type 1 - Bus
+'<Node NodeID="?count" TypeID="1" ElementName="?coName" GeometricWidth="?width" GeometricHeight="?height" NominalVoltage="?nvoltage" uid="?sid">
+      <Position X="?xn" Y="?yn" />
+      <GeometricOrigin X="?xn" Y="?yn" />
+      <PSRTerminal name="1" uid="?termid1" />
+    </Node>
+' DeBus!
+
+// type 2 - Label
+'<Node NodeID="?count" TypeID="2" Text="?coName" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="?xnlab" Y="?ynlab" />
+      <GeometricOrigin X="?xnlab" Y="?ynlab" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="?precount" />
+    </Node>
+' DeLabel!
+
+// type 2 - Label eq2
+'<Node NodeID="?count" TypeID="2" Text="?coName" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="?xnlab" Y="?ynlab" />
+      <GeometricOrigin X="?xnlab" Y="?ynlab" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="?precount" />
+    </Node>
+' DeLabelEq2!
+
+
+// type 3 - Transformer
+'<Node NodeID="?count" TypeID="3" ElementName="?coName" init_p="?pinit" uid="?sid">
+      <Position X="?xn" Y="?yn" />
+      <TSTerminal name="1" uid="?termid1" />
+      <TSTerminal name="2" uid="?termid2" />
+      <End voltage="?level1" uid="?level1sid" w.ck="Y" />
+      <End voltage="?level2" uid="?level2sid" w.ck="Yn" />
+    </Node>
+' DeTransformer!
+
+// type 3 - Transformer3
+'<Node NodeID="?count" TypeID="3" ElementName="?coName" init_p="?pinit" uid="?sid">
+      <Position X="?xn" Y="?yn" />
+      <TSTerminal name="1" uid="?termid1" />
+      <TSTerminal name="2" uid="?termid2" />
+      <TSTerminal name="3" uid="?termid3" />
+    </Node>
+' DeTransformer3!
+
+// type 5 - Disconnector
+'<Node NodeID="?count" TypeID="5" ElementName="?coName" Angle="180" NominalVoltage="?nvoltage" uid="?sid" NormalOpen="false">
+      <Position X="?xn" Y="?yn" />
+      <PSRTerminal name="1" uid="?termid1" />
+      <PSRTerminal name="2" uid="?termid2" />
+    </Node>
+' DeDisconnector!
+
+// type 10 - Breaker
+'<Node NodeID="?count" TypeID="10" ElementName="?coName" Angle="180" NominalVoltage="?nvoltage" uid="?sid" NormalOpen="false">
+      <Position X="?xn" Y="?yn" />
+      <PSRTerminal name="1" uid="?termid1" />
+      <PSRTerminal name="2" uid="?termid2" />
+    </Node>
+'   DeBreaker!
+
+// type 11 - 
+'<Node NodeID="?count" TypeID="11" ElementName="?coName" NominalVoltage="?nvoltage" uid="?sid" NormalOpen="true" Sets="6">
+      <Position X="?xn" Y="?yn" />
+      <PSRTerminal name="1" uid="?termid1" />
+    </Node>
+' DeGroundDisconnector!
+
+// type 13
+'<Node NodeID="?count" TypeID="13" NominalVoltage="?nvoltage" uid="?uuid0">
+      <Position X="?xn" Y="?yn" />
+      <PSRTerminal name="?termname" />
+    </Node>
+' DeConnector!
+
+// type 6 - Connection
+'    <Node NodeID="?count" TypeID="6" uid="?sid" voltage="?nvoltage">
+      <OriginPoint X="?xnfrom" Y="?ynfrom" />
+      <DestinationPoint X="?xnto" Y="?ynto" />
+      <Points />
+      <ConnectedOrigin Terminal="?termfrom" ConnectionZone="0" NodeID="?nodenumfrom" />
+      <ConnectedDestination Terminal="?termto" ConnectionZone="0" NodeID="?nodenumto" />
+    </Node>
+' DeConnection!
+
+// type 8 - Group
+'<Node NodeID="?count" TypeID="8" ElementName="?groupnum" uid="?uuid0">
+      <GroupMembers>
+' DeGroupBegin!
+        // <GroupMember NodeID="21" />
+        // <GroupMember NodeID="23" />
+'      </GroupMembers>
+    </Node>
+' DeGroupEnd!
+
+'<Node NodeID="?count" TypeID="9" ElementName="?coName" Angle="90" NominalVoltage="?nvoltage" uid="?sid" NormalOpen="false">
+      <Position X="?xn" Y="?yn" />
+      <PSRTerminal name="1" uid="?termid1" />
+      <PSRTerminal name="2" uid="?termid2" />
+    </Node>
+' DeFuse!
+
+'<Node NodeID="?count" TypeID="15" ElementName="?coName" uid="?sid" voltage="?nvoltage" Sets="7">
+      <Position X="?xn" Y="?yn" />
+      <!-- Familiar NodeID="33" Terminal="?termid1" ConnectionZone="0" / -->
+    </Node>
+' DeTT!
+
+'<Node NodeID="?count" TypeID="16" ElementName="?coName" uid="?sid" voltage="?nvoltage" ignorecc="true" Sets="8">
+      <Position X="?xn" Y="?yn" />
+      <!-- Familiar NodeID="83" Terminal="1" ConnectionZone="0" / -->
+    </Node>
+' DeTN!
+
+'<Node NodeID="?count" TypeID="14" ElementName="?coName" Angle="90" uid="?sid" voltage="?nvoltage" Sets="9">
+      <Position X="?xn" Y="?yn" />
+      <!-- Familiar NodeID="33" Terminal="?termid1" ConnectionZone="0" / -->
+    </Node>
+' DeSurgeArrester!
+
+'<Node NodeID="?count" TypeID="17" ElementName="?coName" Angle="180" uid="?sid" voltage="?nvoltage" >
+      <Position X="?xn" Y="?yn" />
+      <!-- Familiar NodeID="33" Terminal="?termid1" ConnectionZone="0" / -->
+    </Node>
+' DeCouplingCapacitor!
+
+'<Node NodeID="?count" TypeID="18" ElementName="?coName" Angle="180" uid="?sid" voltage="?nvoltage" >
+      <Position X="?xn" Y="?yn" />
+      <!-- Familiar NodeID="33" Terminal="?termid1" ConnectionZone="0" / -->
+    </Node>
+' DeCouplingFilter!
+
+'<Node NodeID="?count" TypeID="19" ElementName="?coName" Angle="180" NominalVoltage="?nvoltage" uid="?sid" NormalOpen="false">
+      <Position X="?xn" Y="?yn" />
+      <PSRTerminal name="1" uid="?termid1" />
+      <PSRTerminal name="2" uid="?termid2" />
+    </Node>
+' DeCradleSwitch!
+
+noop
+

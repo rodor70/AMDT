@@ -1,0 +1,325 @@
+// autil.jfo
+
+?import: inc/arules.jfo
+
+
+// aelement, qname, template - aelement, qname, template
+: duNode
+    over @nomer dup null != ? [ QPrenomer! ] [ drop ]
+    over @coName dup null != ? [ QLastCoName! ] [ drop ]
+    over2 @qname .fillTemplate
+    noop
+;
+
+//  aelement, qname, content - aelement, qname, content, content2
+: duLabNode
+    over2 >r
+    DeLabel@
+    "?nextnomer" "" () RootArena@ .nextNomer + rot replace
+    "?prenomer" "" QPrenomer@ + rot replace
+    "?xnlab" "" rpeek @a ruleXnlab + rot replace    
+    "?ynlab" "" r> @b ruleYnlab + rot replace 
+    "?coName" QLastCoName@ rot replace
+    noop
+;
+
+//  simplex, qname, content - simplex, qname, content, content2
+: duLabNodeEq2
+    over2 >r
+    DeLabelEq2@
+    "?nextnomer" "" () RootArena@ .nextNomer + rot replace
+    "?prenomer" "" QPrenomer@ + rot replace
+    "?xnlab" "" rpeek @a ruleXnlab + rot replace    
+    "?ynlab" "" r> @b ruleYnlab + rot replace 
+    "?coName" QLastCoName@ rot replace
+    noop
+;
+
+// aelement, qname, template - aelement, qname
+: duTransformer
+
+   over2 >r
+   duNode   // aelement, qname, template
+
+   "?pinit" "T2" rot replace
+    "?level1sid" rpeek @plex @linkedSid0 rot replace
+    "?level2sid" rpeek @plex @linkedSid1 rot replace
+    "?level1" "" rpeek @plex @pointLevel0 10.0 / + rot replace
+    "?level2" "" rpeek @plex @pointLevel1 10.0 / + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?termid2" "" rpeek @plex @pointSid1 + rot replace
+    "?termid3" "" r> @plex @pointSid2 + rot replace
+
+    // simplex, qname, content
+    duLabNode +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+
+;
+
+// simplex, qname, template - simplex, qname
+: duBus
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / dup QVoltage! "" swap + rot replace
+    "?termid1" "" r> @plex @pointSid0 + rot replace
+    duLabNode +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duBreaker
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?termid2" "" rpeek @plex @pointSid1 + rot replace
+    "?thisAngle" "" r> @angle 90 - + rot replace
+    duLabNode +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+
+// simplex, qname, template - simplex, qname
+: duDisconnector
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?termid2" "" rpeek @plex @pointSid1 + rot replace
+    "?thisAngle" "" r> @angle 90 - + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duFuse
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+   "?familiarNomer" over2 @familiarNomer "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?termid2" "" rpeek @plex @pointSid1 + rot replace
+    "?thisAngle" "" r> @angle + rot replace
+    
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duTT
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?familiarNomer" over2 @familiarNomer "" swap + rot replace
+    duLabNodeEq2 +
+    r> drop
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duSurgeArrester
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?thisAngle" "" rpeek @angle 90 - + rot replace
+    "?familiarNomer" over2 @familiarNomer "" swap + rot replace
+    duLabNodeEq2 +
+    r> drop
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duCouplingCapacitor
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?thisAngle" "" rpeek @angle 90 - + rot replace
+    duLabNodeEq2 +
+    r> drop
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duCouplingFilter
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?thisAngle" "" rpeek @angle 90 - + rot replace
+    duLabNodeEq2 +
+    r> drop
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duGroundDisconnector
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?thisAngle" "" r> @angle 90 - + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duCradleSwitch
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?termid2" "" rpeek @plex @pointSid1 + rot replace
+    "?thisAngle" "" r> @angle 90 - + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duLoadBreakerT
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?termid2" "" rpeek @plex @pointSid1 + rot replace
+    "?thisAngle" "" r> @angle 90 - + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// simplex, qname, template - simplex, qname
+: duOutLine
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termid1" "" rpeek @plex @pointSid0 + rot replace
+    "?thisAngle" "" r> @angle 90 + + rot replace
+
+    duLabNodeEq2 +
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+// plex - voltage
+: getCheckedConnectionVoltage
+   dup
+  @qnameFrom @qvoltage dup null = ? [
+         drop
+         @qnameTo @qvoltage dup null = ? [ drop 0 ] [ noop ]
+   ]
+   [ nip ]
+
+   noop
+;
+
+
+// aelement, qname, template - aelement, qname
+: duConnection
+
+      over2 >r
+
+      duNode   // qname, template
+
+      rpeek @plex 
+
+      .xfillTemplate
+
+      // "?nvoltage" "" rpeek @plex  getCheckedConnectionVoltage  toi 10.0 / + rot replace
+      "?nvoltage" "" 0 + rot replace
+      r> drop
+      QNodesText@ swap + QNodesText!
+;
+
+
+// simplex, qname, template - simplex, qname
+: duConnector
+   over2 >r
+   duNode   // qname, template
+   "?nvoltage" over2 @qvoltage toi 10.0 / "" swap + rot replace
+    "?termname" "" rpeek @nick + rot replace
+    r> drop   
+    QNodesText@ swap + QNodesText!	// simplex, qname
+;
+
+
+// n - s
+: duGroupElement
+    '???n' "" rot + '	<GroupMember NodeID="???n" />' \n + replace
+;
+
+
+// aelement, qname, template - aelement, qname
+: duGroup
+
+   duNode   // qname, template
+
+    "?groupnum" "" QGroupCount@ + rot replace
+
+      // aelement, qname, template
+     over2 @plex  @nomers [
+         duGroupElement +
+     ] apply
+
+     DeGroupEnd@ +
+     QNodesText@ swap + QNodesText!
+     1 QGroupCount+
+;
+
+
+// aelement -
+: duSimplex
+    dup @qname	// arena, aelement, qname
+    // dup @name sys.
+    dup @utype "VTM_119" = ? [  DeTransformer@ duTransformer ] [ noop ]  
+    dup @utype TMCAT_BUS swap contains ? [  DeBus@ duBus ] [ noop ]  // TMCAT_BUS
+    dup @utype TMCAT_DISCONNECTOR swap contains ? [  DeDisconnector@ duDisconnector ] [ noop ]  
+    dup @utype TMCAT_BREAKER swap contains ? [  DeBreaker@ duBreaker ] [ noop ]  
+    dup @utype TMCAT_GROUND swap contains ? [  DeGroundDisconnector@ duGroundDisconnector ] [ noop ]  
+    dup @utype "VTM_055" = ? [  DeFuse@ duFuse ] [ noop ]  
+    dup @utype "VTM_050" = ? [  DeTN@ duTT ] [ noop ]  
+    dup @utype TMCAT_TT swap contains ? [  DeTT@ duTT ] [ noop ]  
+    dup @utype TMCAT_SURGE_ARRESTER swap contains ? [  DeSurgeArrester@ duSurgeArrester ] [ noop ]  
+    dup @utype "VTM_052" = ? [  DeCouplingCapacitor@ duCouplingCapacitor ] [ noop ]  
+    dup @utype "VTM_077" = ? [  DeCouplingFilter@ duCouplingFilter ] [ noop ]  
+    dup @utype "VTM_292" = ? [  DeCradleSwitch@ duCradleSwitch ] [ noop ]  
+    dup @utype "VTM_046" = ? [  DeLoadBreakerT@ duLoadBreakerT ] [ noop ]  
+    dup @utype "VTM_CONNECTION" = ? [  DeConnection@ duConnection ] [ noop ]  
+    dup @utype "VTM_GROUP" = ? [  DeGroupBegin@ duGroup ] [ noop ]  
+    dup @utype "VTM_CONNECTOR" = ? [  DeConnector@ duConnector ] [ noop ]  
+    dup @utype "VTM_ARROW" = ? [  DeOutLine@ duOutLine ] [ noop ]  
+
+    2drop
+;
+
+
+
+// arena -
+: duArena
+
+   dup RootArena!
+
+   @plexElements [
+        // aelement
+        // dup @qname @name dup sys.
+        // "HEAD" != ? [
+        // dup @qname @name sys.
+        dup @isValid ? [
+            duSimplex
+        ] [ drop  ] noop
+
+   ] apply   
+
+   RootArena@ @root @arenaPlexElements [
+        // dup @qname @name sys.
+         dup null != ? [
+            duSimplex
+        ] [ drop  ] noop
+
+   ] apply
+   
+   noop
+;
+
+
+noop

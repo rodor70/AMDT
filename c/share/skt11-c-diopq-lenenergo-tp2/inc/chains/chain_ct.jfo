@@ -1,0 +1,83 @@
+// chain_ct.jfo
+
+
+{ G:${TMCAT_GROUND}  B:${TMCAT_BREAKER} S:${TMCAT_SEPARATOR} TN:VTM_050 F:VTM_055 OD:VTM_044 KZ:VTM_045
+   D:${TMCAT_DISCONNECTOR}  TT:${TMCAT_TT} A:${TMCAT_SURGE_ARRESTER}
+   L:VTM_ARROW CA:VTM_046
+}  const: CTSelector
+
+chains
+"ct" over !connectType
+CTSelector vchain: =D(0,1)-1(0,3)-B(0,5):0,1-TT(0,7):2,0-2(0,9)= +
+CTSelector hchain: 1(0,3)-G(2,3) +
+CTSelector vchain: 2(0,9)-A(2,11) +
+const: CH_CT1
+^dplexDo CH_CT1 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =1(0,1)-D(0,3)-2(0,5)-OD(0,7)-3(0,9)-4(0,11)= +
+CTSelector hchain: 1(0,1)-G(2,1) +
+CTSelector hchain: 2(0,5)-G(2,5) +
+CTSelector hchain: 3(0,9)-KZ(2,9) +
+CTSelector vchain: 4(0,11)-A(2,13) +
+const: CH_ODKZ1
+^dplexDo CH_ODKZ1 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =B(0,1):0,1-TT(0,3):2,0-1(0,5)-2(0,7)= +
+CTSelector hchain: 1(0,5)-G(2,5) +
+CTSelector vchain: 2(0,7)-A(2,9) +
+const: CH_CT2
+^dplexDo CH_CT2 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =B(0,1):0,1-TT(0,3):2,0-1(0,5)-2(0,7)-3(0,9)=  +
+CTSelector vchain: 1(0,5)-TN(2,7) +
+CTSelector hchain: 2(0,7)-G(2,7) +
+CTSelector vchain: 3(0,9)-A(2,11) +
+const: CH_CT3
+^dplexDo CH_CT3 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =D(0,1)-1(0,3)-B(0,5):0,1-TT(0,7):2,0-2(0,9)-D(0,11)-3(0,13)=  +
+CTSelector hchain: 1(0,3)-G(2,3) +
+CTSelector hchain: 2(0,9)-G(2,9) +
+CTSelector vchain: 3(0,13)-A(2,15) +
+const: CH_CT4
+^dplexDo CH_CT4 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =CA(0,1)-B(0,3):0,1-TT(0,5):2,0-CA(0,7)=  +
+const: CH_CT5
+^dplexDo CH_CT5 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =CA(0,1)-TT(0,3)-CA(0,5)=  +
+const: CH_CT6
+^dplexDo CH_CT6 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =B(0,1)-1(0,3)-F(0,5)=  +
+CTSelector hchain: 1(0,3)-G(2,3) +
+const: CH_CT7
+^dplexDo CH_CT7 !indexWord
+
+chains
+"ct" over !connectType
+CTSelector vchain: =D(0,1)-1(0,3)-F(0,5)=  +
+CTSelector hchain: 1(0,3)-G(2,3) +
+const: CH_CT8
+^dplexDo CH_CT8 !indexWord
+
+gchains CH_CT1 + CH_ODKZ1 + CH_CT2 + CH_CT3 + CH_CT4 + CH_CT5 + CH_CT6 +  CH_CT7 + CH_CT8 +
+const: GC_CT
+
+noop
+

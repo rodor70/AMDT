@@ -1,0 +1,205 @@
+// plexdirect.jfo
+
+// : plexIsVk dup "VTM_023" = swap "VTM_029" = or ;
+: dplexIsVk ( "VTM_023" , "VTM_029" , "VTM_020" ) swap contains ;
+// utype - ?
+: dplexIsDiscon ( "VTM_290" , "VTM_100" , "VTM_289"  ) swap contains ;
+// utype - ?
+: dplexIsOpn ( "VTM_034" , "VTM_172" , "VTM_070" ) swap contains ;
+// utype - ?
+: dplexIsTt ( "VTM_014" , "VTM_279" , "VTM_278" , "VTM_277" ) swap contains ;
+
+// utype - ?
+: dplexIsRaz ( "VTM_292" , "VTM_295" ) swap contains ;
+
+// utype - ?
+: dplexIsVkSec "VTM_028" = ;
+
+// utype - ?
+: dplexIsPred "VTM_055" = ;
+
+// utype - ?
+: dplexIsZn "VTM_027" = ;
+
+// utype - ?
+: dplexIsVcho "VTM_019" = ;
+
+// utype - ?
+: dplexIsVchoz "VTM_018" = ;
+
+// utype - ?
+: dplexIsConSvz "VTM_052" = ;
+
+// utype - ?
+: dplexIsTn "VTM_050" = ;
+
+// utype - ?
+: dplexIsOtd "VTM_044" = ;
+
+// utype - ?
+: dplexIsKz "VTM_045" = ;
+
+// utype - ?
+: dplexIsAmper "VTM_004" = ;
+
+// uname - ?
+: dplexHasSh dup "Ш" contains swap "С" contains or ;
+
+// uname - ?
+: dplexHasShR "ШР" contains ;
+
+// uname - ?
+: dplexHasLR "ЛР" contains ;
+
+// uname - ?
+: dplexHasTR "ТР" contains ;
+
+// uname - ?
+: dplexHasOD "ОД" contains ;
+
+// uname - ?
+: dplexHasV dup " В" contains swap "СВ" contains or ;
+
+// uname - ?
+: dplexHas1S "1С" contains ;
+
+// uname - ?
+: dplexHas2S "2С" contains ;
+
+// uname - ?
+: dplexHasSV "СВ" contains ;
+
+// uname - ?
+: dplexHas1 "1" contains ;
+
+// uname - ?
+: dplexHas2 "2" contains ;
+
+// uname - ?
+: dplexStarts1 "1" starts ;
+
+// uname - ?
+: dplexStarts2 "2" starts ;
+
+// uname - ?
+: dplexStarts3 "3" starts ;
+
+
+// plex - plex
+: dplexInit
+
+     dup @qname			// plex, qname
+
+     dup @coNamex over !chainName
+     0 over !chainDirect
+     dup @utype over !chainUtype
+     1000 swap !chainIndex
+     // 300 sys.
+;
+
+
+// simplexes - candidat
+: dplexVoiceCoNames     
+     () swap [ 
+           @qname @coName dup empty? ? [ drop ] [ + ] noop
+     ] apply
+     3 zsimilar head tail head smax
+     noop
+;
+
+// simplexes - 
+: dplexSetAname
+    dup dplexVoiceCoNames  // simplexes, candidat
+    swap [  
+          dup @qname @coName 
+          dup empty? ? [  drop "" swap  @qname !coNamex ]
+          [
+              over2 
+              reat  xtrim2 
+              "-" reat
+              swap @qname !coNamex 
+          ] noop
+    ] apply
+    // 400 sys.
+    drop
+    noop
+;
+
+
+
+// simplex - simplex
+: dplexSetIndex
+
+    dplexInit
+    // dup @qname @utype sys.
+
+    dup @qname dup @utype dplexIsVk ? [  0 swap !chainDirect ] [ drop ]
+    dup @qname dup @utype dplexIsAmper ? [  0 swap !chainDirect  ] [ drop ]    
+    dup @qname dup @utype dplexIsVkSec ? [  0 swap !chainDirect  ] [ drop ]
+
+    dup @qname dup @utype dplexIsOpn ? [ 0 swap !chainDirect  ] [ drop ]
+    dup @qname dup @utype dplexIsTt ? [  0 swap !chainDirect  ] [ drop ]
+    dup @qname dup @utype dplexIsOtd ? [  0 swap !chainDirect  ] [ drop ]
+    dup @qname dup @utype dplexIsKz ? [  0 swap !chainDirect  ] [ drop ]
+    dup @qname dup @utype dplexIsPred ? [  0 swap !chainDirect  ] [ drop ]
+
+    dup @qname dup dup @utype dplexIsVk swap @coNamex dplexStarts1 and ? [  -1 swap !chainDirect  ] [ drop ]
+    dup @qname dup dup @utype dplexIsVk swap @coNamex dplexStarts2 and ? [  1 swap !chainDirect  ] [ drop ]
+
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexHasSh and ? [  -1 swap !chainDirect  ] [ drop ]
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexHasSh not and ? [  1 swap !chainDirect ] [ drop ]  
+
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexStarts1 and ? [  -1 swap !chainDirect  ] [ drop ]
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexStarts2 and ? [  1 swap !chainDirect  ] [ drop ]
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexStarts3 and ? [  1 swap !chainDirect  ] [ drop ]
+
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexHasV and ? [  0 over !chainDirect
+                    5020 swap !chainIndex ] [ drop ]    
+    dup @qname dup dup @utype dplexIsZn swap @coNamex dplexHasOD and ? [  0 over !chainDirect
+                    5090 swap !chainIndex ] [ drop ]   
+
+    dup @qname dup dup dup @utype dplexIsZn 
+             swap @coNamex dplexHasV and swap @coNamex dplexStarts1 and ? [  0 over !chainDirect 
+                    4990 swap !chainIndex ] [ drop ]  
+    dup @qname dup dup dup @utype dplexIsZn 
+             swap @coNamex dplexHasV and swap @coNamex dplexStarts2 and ? [  0 over !chainDirect 
+                    5020 swap !chainIndex ] [ drop ]  
+
+    dup @qname dup dup dup @utype dplexIsZn 
+             swap @coNamex dplexHasSh and swap @coNamex dplexStarts1 and ? [  0 over !chainDirect 
+                    1990 swap !chainIndex ] [ drop ]  
+    dup @qname dup dup dup @utype dplexIsZn 
+             swap @coNamex dplexHasSh and swap @coNamex dplexStarts2 and ? [  0 over !chainDirect 
+                    2020 swap !chainIndex ] [ drop ]  
+
+    dup @qname dup dup @utype dplexIsDiscon swap @coNamex dplexHasShR and ? [  -1 swap !chainDirect ] [ drop ] 
+    dup @qname dup dup @utype dplexIsDiscon swap @coNamex dplexHasTR and ? [  0 swap !chainDirect ] [ drop ] 
+    dup @qname dup dup @utype dplexIsDiscon swap @coNamex dplexHasLR and ? [  1 swap !chainDirect ] [ drop ] 
+
+    dup @qname dup @utype dplexIsVcho ? [  1 swap !chainDirect ] [ drop ]
+    dup @qname dup @utype dplexIsVchoz ? [  1 swap !chainDirect ] [ drop ]
+    dup @qname dup @utype dplexIsConSvz ? [  1 swap !chainDirect ] [ drop ]
+    dup @qname dup @utype dplexIsTn ? [  1 swap !chainDirect ] [ drop ]
+// 700 sys.
+    dup @qname dup @utype dplexIsRaz ? [  1 swap !chainDirect ] [ drop ]
+    dup @qname dup dup @utype dplexIsRaz swap @coNamex dplexStarts1 and ? [  -1 swap !chainDirect ] [ drop ]   
+    dup @qname dup dup @utype dplexIsRaz swap @coNamex dplexStarts2 and ? [  1 swap !chainDirect ] [ drop ]   
+    dup @qname dup @utype "VTM_ARROW" = ? [  1 over !chainDirect  9999 swap  !chainIndex ] [ drop ]
+;
+
+
+// simplexes - 
+: dplexDo
+
+  dup dplexSetAname
+  // simplexes
+  [ 
+    dplexSetIndex
+  ] apply 
+  // 600 sys.
+  noop
+;
+
+
+noop
+

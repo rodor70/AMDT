@@ -1,0 +1,19 @@
+// chain_ct.jfo
+
+
+{ G:${TMCAT_GROUND}  B:${TMCAT_BREAKER} S:${TMCAT_SEPARATOR} TN:VTM_050 F:VTM_055 OD:VTM_044 KZ:VTM_045
+   D:${TMCAT_DISCONNECTOR}  TT:${TMCAT_TT} A:${TMCAT_SURGE_ARRESTER}
+   L:VTM_ARROW
+}  const: CRZSelector
+
+chains
+"crz" over !connectType
+CRZSelector vchain: =A(0,1) +
+const: CH_CRZ1
+^dplexDo CH_CRZ1 !indexWord
+
+gchains CH_CRZ1 + 
+const: GC_CRZ
+
+noop
+

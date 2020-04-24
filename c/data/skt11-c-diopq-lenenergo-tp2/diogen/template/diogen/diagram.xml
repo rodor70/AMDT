@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Diagram DiogenID="?diogenid" Scale="?scale" Description="?coname" MinScale="0.01" MaxScale="100">
+  <Libraries>
+    <Library Assembly="Monitel.Diogen.Elements.PSRBasic, Version=11.5.11.593, Culture=neutral, PublicKeyToken=null">
+      <ElementTypes>
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Bus" TypeID="1" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Label" TypeID="2" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Transformer" TypeID="3" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Disconnector" TypeID="5" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Connection" TypeID="6" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.EnergyConsumer" TypeID="7" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Bay" TypeID="8" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Fuse" TypeID="9" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Breaker" TypeID="10" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.GroundDisconnector" TypeID="11" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Connector" TypeID="13" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.SurgeArrester" TypeID="14" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CurrentTransformer" TypeID="15" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.PotentialTransformer" TypeID="16" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CouplingCapacitor" TypeID="17" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CouplingFilter " TypeID="18" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CradleSwitch" TypeID="19" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.OutLine" TypeID="20" />		
+      </ElementTypes>
+    </Library>
+    <Library Assembly="Monitel.Diogen.Elements.Indicators, Version=11.5.11.407, Culture=neutral, PublicKeyToken=null">
+      <ElementTypes>
+        <ElementType TypeName="Monitel.Diogen.Elements.Indicators.Indicator" TypeID="4" />
+      </ElementTypes>
+    </Library>
+    <Library Assembly="Monitel.Diogen.Elements.MCN, Version=11.5.11.125, Culture=neutral, PublicKeyToken=null">
+      <ElementTypes>
+        <ElementType TypeName="Monitel.Diogen.Elements.MCN.LoadBreakerT" TypeID="12" />
+      </ElementTypes>
+    </Library>
+  </Libraries>
+  <Extent Width="?Width" Height="?Height" />
+  <BkColor A="255" R="0" G="0" B="0" />
+  <Thumbnail ThumbnailKey="?thumbkey" ThumbnailOutdated="false" />
+  <Grid LineThickness="1" Visible="true" Align="true" RotationStep="90">
+    <LineColor A="70" R="128" G="128" B="128" />
+    <Center X="0" Y="0" />
+    <Step Width="8" Height="8" />
+    <Thresholds />
+  </Grid>
+  <DrawingStyles>
+    <FillStyles />
+    <StrokeStyles>
+      <StrokeStyle Name="RedPen" Description="Аварийный предел индикатора" Origin="DiogenSharedStyles.xml" Shared="true">
+        <Pen>
+          <Pen Brush="#FFFF6464" Thickness="4" LineJoin="Miter" DashStyle="{x:Null}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+        </Pen>
+      </StrokeStyle>
+      <StrokeStyle Name="YellowPen" Description="Предупредительный предел индикатора" Origin="DiogenSharedStyles.xml" Shared="true">
+        <Pen>
+          <Pen Brush="#FFFAD264" Thickness="4" LineJoin="Miter" DashStyle="{x:Null}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+        </Pen>
+      </StrokeStyle>
+    </StrokeStyles>
+    <TextStyles>
+      <TextStyle Name="ActivePowerIndicator" Description="Индикатор активной мощности" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FF55EB55" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="CurrentIndicator" Description="Индикатор тока" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFFFCC99" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="Eq2Label" Description="Электротехническое оборудование" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="14" FontType="Arial" FontShape="Normal" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="EquipmentLabel" Description="Основное электротехническое оборудование" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="RatedS" Description="Номинальная мощность" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="14" FontType="Arial" FontShape="Normal" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="ReactivePowerIndicator" Description="Индикатор реактивной мощности" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFB899FF" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="SubstationTitle" Description="Наименование энергообъектов" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="22" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="VoltageIndicator" Description="Индикатор напряжения" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFFFFF00" />
+        </TextFormat>
+      </TextStyle>
+    </TextStyles>
+  </DrawingStyles>
+  <ElementSets>
+    <ElementSet Name="Наименования" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Активная мощность" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Реактивная мощность" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Напряжение" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Ток" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Частота" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="ЗН и КЗ" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Вспомогательное оборудование (кроме ТН)" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Трансформатор напряжения" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="SCADA" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="УР (ОС)" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Тексты" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="ScaleRange" />
+    </ElementSet>
+    <ElementSet Name="Приборы учёта и точки поставки" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="false" />
+    </ElementSet>
+  </ElementSets>
+  <CustomData>
+    <DiagramPresenter>
+      <ViewCenter X="0" Y="0" />
+    </DiagramPresenter>
+    <GeoSubstrateSettings />
+  </CustomData>
+  <Nodes>
+  </Nodes>
+</Diagram>

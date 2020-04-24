@@ -260,13 +260,6 @@ childs {
 						
 						
 						
-						
-						
-						
-						
-						
-						
-						
 
 				}
 				}
@@ -291,13 +284,6 @@ childs {
 
 				}
 				data {
-						
-						
-						
-						
-						
-						
-						
 						
 						
 						
@@ -752,10 +738,8 @@ childs {
 								body {
 										t : '
 										t : scope("p","?") ! coOperator;
-										t : toupper(list()) ! hereRepNames;
-										t : head(sbreak(xbaseName, " -")) ! zmyUname;
+										t : toupper(list("выкл","ранс")) ! hereRepNames;
 										t : replace(xbaseName,"_"," ")  ! xmyUname;
-										t : replace(xmyUname,"ВЫКЛЮЧАТЕЛЬ","В ")  ! xmyUname;
 										t : replace(xmyUname,"В-","В ")  ! xmyUname;
 										t : replace(xmyUname,"ЗР-","ЗР ")  ! xmyUname;
 										t : replace(xmyUname,"ШР-","ШР ")  ! xmyUname;
@@ -765,21 +749,17 @@ childs {
 										t : replace(xmyUname,"СВ-","СВ ")  ! xmyUname;
 										t : replace(xmyUname,"ОРУ-","ОРУ ")  ! xmyUname;
 										t : replace(xmyUname,"С-","С ")  ! xmyUname;
-										t : replace(xmyUname,"Р-","Р ")  ! xmyUname;
 										t : replace(xmyUname,"TТ-","TТ ")  ! xmyUname;
 										t : replace(xmyUname,"ТР-","ТР ")  ! xmyUname;
 										t : replace(xmyUname,"Ш-","Ш ")  ! xmyUname;
-										t : replace(xmyUname,"кВ"," кВ")  ! xmyUname;
 										t : trim(eats( xmyUname,hereRepNames)) ! xmyUname;
 										t : list(t,xmyUname) ! quePrefix;
-										t : list(t,zmyUname) ! quezPrefix;
 										t : seqfor(coOperator,
 										seq( 
 										   setif(item,"p",quePcoName) ,
 										   setif(item,"c",queConnectName) ,   
 										   setif(item,"v",queQvoltage),
-										   setif(item,"u",quePrefix),
-										   setif(item,"z",quezPrefix)
+										   setif(item,"u",quePrefix)
 										)
 										) ! tmp;
 										t : apply(coMask,coOperator) ! refCoName;
@@ -820,7 +800,7 @@ childs {
 								body {
 										t : '
 										t : scope("p","?") ! coOperator;
-										t : toupper(list("соед", "разр")) ! hereRepNames;
+										t : toupper(list("соед")) ! hereRepNames;
 										t : replace(xbaseName,"_"," ")  ! xmyUname;
 										t : replace(xmyUname,"В-","В ")  ! xmyUname;
 										t : replace(xmyUname,"ЗР-","ЗР ")  ! xmyUname;
@@ -1034,7 +1014,6 @@ childs {
 										t : scope("p","?") ! coOperator;
 										t : toupper(list("земл","зъед","нож","Разрядник, ОПН нейтрали","соед","ыкл","иней","азряд", 
 										    "редох","Система", "шин","ОД-110","обход")) ! hereRepNames;
-										t : head(sbreak(xbaseName, " -")) ! zmyUname;
 										t : replace(xbaseName,"_"," ")  ! xmyUname;
 										t : replace(xmyUname,"В-","В ")  ! xmyUname;
 										t : replace(xmyUname,"ЗР-","ЗР ")  ! xmyUname;
@@ -1054,14 +1033,12 @@ childs {
 										t : replace(xmyUname,"С.","С")  ! xmyUname; 
 										t : trim(eats( xmyUname,hereRepNames)) ! xmyUname;
 										t : list(t,xmyUname) ! quePrefix;
-										t : list(t,zmyUname) ! quezPrefix;
 										t : seqfor(coOperator,
 										seq( 
 										   setif(item,"p",quePcoName) ,
 										   setif(item,"c",queConnectName) ,   
 										   setif(item,"v",queQvoltage),
-										   setif(item,"u",quePrefix),
-										   setif(item,"z",quezPrefix)
+										   setif(item,"u",quePrefix)
 										)
 										) ! tmp;
 										t : apply(coMask,coOperator) ! refCoName;
@@ -1240,25 +1217,6 @@ childs {
 										                    "_", "")
 										                ),
 										         xexpRepSoNames, ""),3
-										    )))))
-										! refSoName;
-										' ! $FSN_CLEP;
-										last version
-										t : '
-										t : scope("p","?") ! coOperator;
-										t : setif(coOperator,"p",quePcoName) ! tmp;
-										t : apply(coMask,coOperator) ! refCoName;
-										' ! $FSG_CLEP;
-										t : '
-										t: smax(head(tail(head(zsimilar(
-										          xtrim2(
-										          replace(
-										                toupper(
-										                    replace(
-										                        myRchilds,
-										                     xexpRepSoNames,"")
-										                ),
-										         "_","")),3
 										    )))))
 										! refSoName;
 										' ! $FSN_CLEP;
@@ -2282,13 +2240,6 @@ childs {
 						
 						
 						
-						
-						
-						
-						
-						
-						
-						
 
 				}
 				}
@@ -2318,7 +2269,7 @@ childs {
 
 				}
 				body {
-						t : toList("054,076,078,081,083,085,087,096,097,103") ! xr;
+						t : toList("054,076,078,081,083,085,087,096,097") ! xr;
 						 
 						t : "?u ?v" ! coMask;
 						t : list() ! coNames;
@@ -2530,7 +2481,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?v ?p" ! coMask;
 						t : list() ! coNames;
@@ -2575,7 +2526,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "?u ?v" ! coMask;
 						t : list() ! coNames;
@@ -2715,7 +2666,7 @@ childs {
 						t : list("В ","В -","В  ф") ! coNames;
 						t : list() ! incNames;
 						t : list() ! expNames;
-						t : $FSG_V ! fsignName;
+						t : $FSG_ZN ! fsignName;
 						 
 						t : $DrawShape_V ! xdrawShape;
 						t : $DrawPoints_V ! xdrawPoints;
@@ -2724,19 +2675,7 @@ childs {
 
 				}
 				info {
-						t : toList("013,079,313,027") ! xr;
-						t : "_/-1/?,_1/-1/?" ! xsimplex;
-						 
-						t : "?u ?v ?p" ! coMask;
-						t : list("В ","В -","В  ф") ! coNames;
-						t : list() ! incNames;
-						t : list() ! expNames;
-						t : $FSG_ZN ! fsignName;
-						 
-						t : $DrawShape_V ! xdrawShape;
-						t : $DrawPoints_V ! xdrawPoints;
-						t : $DrawText_V ! xdrawText;
-						t : $DrawShape_V + $DrawPoints_V + $DrawText_V ! xdrawSimplex;
+						t : "В-?v ?p" ! coMask;
 
 				}
 				}
@@ -2850,7 +2789,7 @@ childs {
 						t : toList("079,290") ! xr;
 						t : "_/-1/?,Z/0/?" ! xsimplex;
 						 
-						t : "ЗР ?u ?v ?c" ! coMask;
+						t : "?u ?v ?c" ! coMask;
 						t : list("ЗР") ! coNames;
 						t : list("зем") ! incNames;
 						t : list() ! expNames;
@@ -3148,15 +3087,14 @@ childs {
 
 				}
 				body {
-						t : toList("076,055") ! xr;
+						t : toList("076") ! xr;
 						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
-						t : "?z ?v ?p" ! coMask;
-						t : list("Р ","Р-","Р -") ! coNames;
+						t : "КА ?p" ! coMask;
+						t : list() ! coNames;
 						t : list() ! incNames;
 						t : list() ! expNames;
-						t : $FSG_V ! fsignName;
-						 
+						t : $FSG_RD ! fsignName;
 						t : $DrawShape_RD ! xdrawShape;
 						t : $DrawPoints_RD ! xdrawPoints;
 						t : $DrawText_RD ! xdrawText;
@@ -3566,8 +3504,8 @@ childs {
 						          "Выкатная","тележка","элемент","Выключатель","линейный","Вык.", "тел.","Встроенный",
 						          "ЗР","КР","ЛР"
 						) ! expRepSoNames;
-						t : $FSG_CLEP ! fsignName;
-						t : $FSN_CLEP ! fsoName; 
+						t : $FSG_ZN ! fsignName;
+						f : $FSN_CLEP ! fsoName; 
 						t : $FSG_CLEP_JFO ! jfoTopo;
 						 
 						t : "290" 	! rd;
@@ -4541,7 +4479,7 @@ childs {
 
 				}
 				body {
-						t : toList("074,076,083,103") ! xr;
+						t : toList("074,076,083") ! xr;
 						 
 						t : "?u ?v" ! coMask;
 						t : list() ! coNames;
@@ -4624,9 +4562,9 @@ childs {
 
 				}
 				body {
-						t : toList("027,054,076,078,081,083,085,087,096,097,098,217,238,258,306,103") ! xr;
+						t : toList("027,054,076,078,081,083,085,087,096,097,098,217,238,258,306") ! xr;
 						 
-						t : "?z ?v" ! coMask;
+						t : "?u ?v" ! coMask;
 						t : list() ! coNames;
 						t : list() ! incNames;
 						t : list() ! expNames;
@@ -6173,13 +6111,6 @@ childs {
 				}
 				body {
 						t : toList("034,046,070,175,290") ! xr;
-						 
-						t : "?u" ! coMask;
-						t : list() ! coNames;
-						t : list() ! incNames;
-						t : list() ! expNames;
-						t : $FSG_SV ! fsignName;
-						t : $FSG_CONNECT_JFO ! jfoTopo;
 
 				}
 				}
@@ -7044,7 +6975,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ-?v ?p" ! coMask;
 						t : list() ! coNames;
@@ -7072,7 +7003,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ-?v ?p" ! coMask;
 						t : list() ! coNames;
@@ -7100,7 +7031,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7128,7 +7059,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "?u ?v ?c" ! coMask;
 						t : list() ! coNames;
@@ -7171,7 +7102,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7199,7 +7130,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7227,7 +7158,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7255,7 +7186,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7283,7 +7214,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7311,7 +7242,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7339,7 +7270,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7367,7 +7298,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -7395,7 +7326,7 @@ childs {
 				}
 				body {
 						t : list() ! xr;
-						t : "_/-1/?,X/0/?" ! xsimplex;
+						t : "_/-1/?,_1/-1/?" ! xsimplex;
 						 
 						t : "ТТ ?p" ! coMask;
 						t : list() ! coNames;
@@ -8358,7 +8289,6 @@ childs {
 						t : '<cim:Substation rdf:about="#_?sid">
 						  <me:PowerSystemResource.Diagrams rdf:about="#_?SLDsid" />
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ChildObjects rdf:resource="#_?SLDsid" />
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -8392,7 +8322,6 @@ childs {
 				body {
 						t : '<cim:VoltageLevel rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8418,7 +8347,6 @@ childs {
 				body {
 						t : '<cim:VoltageLevel rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
 						  <supa:IdentifiedObject.ChildObjects rdf:resource="#_?uname" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -8446,7 +8374,6 @@ childs {
 				body {
 						t : '<cim:VoltageLevel rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8472,7 +8399,6 @@ childs {
 				body {
 						t : '<cim:VoltageLevel rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8498,7 +8424,6 @@ childs {
 				body {
 						t : '<cim:VoltageLevel rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8524,7 +8449,6 @@ childs {
 				body {
 						t : '<cim:VoltageLevel rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8552,7 +8476,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8576,7 +8499,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8600,7 +8522,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8626,7 +8547,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?superSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?superSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						$l  <cim:PowerTransformer.PowerTransformerEnd rdf:about="#_?sid" />$
@@ -8684,7 +8604,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?superSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?superSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <me:PowerTransformer.isStationSupply>false</me:PowerTransformer.isStationSupply>
@@ -8708,7 +8627,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8734,7 +8652,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8759,7 +8676,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8784,7 +8700,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -8808,7 +8723,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
 						  <supa:IdentifiedObject.ChildObjects rdf:resource="#_?uname" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -8835,8 +8749,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8862,7 +8774,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8888,7 +8799,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8914,7 +8824,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8940,7 +8849,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8966,7 +8874,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -8992,7 +8899,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9018,7 +8924,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9044,7 +8949,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9070,7 +8974,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9096,7 +8999,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9122,7 +9024,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9148,7 +9049,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9174,7 +9074,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9200,7 +9099,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9226,7 +9124,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9252,7 +9149,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9278,7 +9174,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9304,7 +9199,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9330,7 +9224,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9356,7 +9249,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9382,7 +9274,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -9410,7 +9301,6 @@ childs {
 						  <me:SurgeArrester.type rdf:resource="me:SurgeArresterKind.resistive" />
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:SurgeArrester>
 						' ! xmlTemplate;
@@ -9431,7 +9321,6 @@ childs {
 						  <me:SurgeArrester.type rdf:resource="me:SurgeArresterKind.resistive" />
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:SurgeArrester>
 						' ! xmlTemplate;
@@ -9452,7 +9341,6 @@ childs {
 						  <me:SurgeArrester.type rdf:resource="me:SurgeArresterKind.resistive" />
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:SurgeArrester>
 						' ! xmlTemplate;
@@ -9473,7 +9361,6 @@ childs {
 						  <me:SurgeArrester.type rdf:resource="me:SurgeArresterKind.resistive" />
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:SurgeArrester>
 						' ! xmlTemplate;
@@ -9494,7 +9381,6 @@ childs {
 						  <me:SurgeArrester.type rdf:resource="me:SurgeArresterKind.resistive" />
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:SurgeArrester>
 						' ! xmlTemplate;
@@ -9514,7 +9400,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9534,7 +9419,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9554,7 +9438,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9574,7 +9457,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9594,7 +9476,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9614,7 +9495,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9634,7 +9514,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9654,7 +9533,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9674,7 +9552,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9694,7 +9571,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9714,7 +9590,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9734,7 +9609,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9754,7 +9628,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9774,7 +9647,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9794,7 +9666,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -9816,7 +9687,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9842,7 +9712,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9868,7 +9737,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9894,7 +9762,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9920,7 +9787,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9946,7 +9812,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9972,7 +9837,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -9998,7 +9862,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10024,7 +9887,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10050,7 +9912,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10076,7 +9937,6 @@ childs {
 						  <cim:PotentialTransformer.type rdf:resource="cim:PotentialTransformerKind.inductive" />
 						  <me:PotentialTransformer.windingsCount>3</me:PotentialTransformer.windingsCount>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:PotentialTransformer>
 						' ! xmlTemplate;
@@ -10098,7 +9958,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10124,7 +9983,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10150,7 +10008,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10176,7 +10033,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10202,7 +10058,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10228,7 +10083,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10254,7 +10108,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10280,7 +10133,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10306,7 +10158,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10332,7 +10183,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10358,7 +10208,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10384,7 +10233,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10410,7 +10258,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10435,7 +10282,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10457,7 +10303,6 @@ childs {
 				body {
 						t : '<cim:Line rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$c  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
 						  <supa:IdentifiedObject.ChildObjects rdf:resource="#_?uname" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -10480,7 +10325,6 @@ childs {
 				body {
 						t : '<cim:Line rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$c  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
 						  <supa:IdentifiedObject.ChildObjects rdf:resource="#_?uname" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -10503,7 +10347,6 @@ childs {
 				body {
 						t : '<cim:Line rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$c  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
 						  <supa:IdentifiedObject.ChildObjects rdf:resource="#_?uname" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -10527,7 +10370,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10557,7 +10399,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10587,7 +10428,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10617,7 +10457,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10647,7 +10486,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10677,7 +10515,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10707,7 +10544,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10737,7 +10573,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10767,7 +10602,6 @@ childs {
 						t : '<cim:ACLineSegment rdf:about="#_?sid">
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />
@@ -10798,7 +10632,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10821,7 +10654,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10844,7 +10676,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10870,7 +10701,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -10893,7 +10723,6 @@ childs {
 				body {
 						t : '<cim:Bay rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$s  <cim:EquipmentContainer.Equipments rdf:resource="#_?sid" />
@@ -10920,7 +10749,6 @@ childs {
 						t : '<cim:CurrentTransformer rdf:about="#_?sid">
 						$p  <cim:AuxiliaryEquipment.Terminal rdf:resource="#_?sid" />$
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:CurrentTransformer>
 						' ! xmlTemplate;
@@ -10939,7 +10767,6 @@ childs {
 				body {
 						t : '<cim:ProcessedAnalogValue rdf:about="#_?sid">
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						  <cim:MeasurementValue.weight>1</cim:MeasurementValue.weight>
 						  <cim:MeasurementValue.MeasurementValueSource rdf:resource="#_10000c71-0000-0000-c000-0000006d746c" />
@@ -10966,7 +10793,6 @@ childs {
 						  <me:Meter.isAMR>false</me:Meter.isAMR>
 						  <me:Meter.isCommercial>true</me:Meter.isCommercial>
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						</cim:Meter>
 						' ! xmlTemplate;
@@ -10987,7 +10813,6 @@ childs {
 						  <cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
 						  <cim:ConductingEquipment.BaseVoltage rdf:resource="#_?voltageSid" />
@@ -11011,7 +10836,6 @@ childs {
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <me:PowerSystemResource.Diagrams rdf:about="#_?SLDsid" />
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ChildObjects rdf:resource="#_?SLDsid" />
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -11047,7 +10871,6 @@ childs {
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <me:PowerSystemResource.Diagrams rdf:about="#_?SLDsid" />
 						  <cim:IdentifiedObject.name>?uname</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$s  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ChildObjects rdf:resource="#_?SLDsid" />
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
@@ -11084,7 +10907,6 @@ childs {
 						  <cim:Equipment.EquipmentContainer rdf:resource="#_?parentSid" />
 						  <cim:PowerSystemResource.PSRType rdf:resource="#_?subcode" />
 						  <cim:IdentifiedObject.name>?coName</cim:IdentifiedObject.name>
-						  <rh:PowerSystemResource.ccsCode>?code</rh:PowerSystemResource.ccsCode>
 						$p  <me:IdentifiedObject.ChildObjects rdf:resource="#_?sid" />$
 						  <me:IdentifiedObject.ParentObject rdf:resource="#_?parentSid" />
 						$p  <cim:ConductingEquipment.Terminals rdf:resource="#_?sid" />$
@@ -11482,15 +11304,12 @@ childs {
 						body {
 								t : "UNO" ! refCoName;
 								undef(myUtype) : 0 ! stop;
-								t : f ! bVoltage;
-								def(qvoltage) : (int(qvoltage)<10) ! bVoltage;
-								def(qvoltage)&not(bVoltage) : seqfor(qvoltage,list(t,item/10)) : list(f,"") ! queQvoltage;
-								def(qvoltage)&bVoltage&not(head(queQvoltage)) : seqfor(qvoltage,list(t,item/10.0))  ! queQvoltage;
+								def(qvoltage) : seqfor(qvoltage,list(t,item/10)) : list(f,"") ! queQvoltage;
 								head(queQvoltage) : rhead(queQvoltage) ! nQvoltage;
 								head(queQvoltage) : if(
 								    'rhead(queQvoltage)=0',
 								    'list(t,"")' ,
-								    'list(t,replace(""+rhead(queQvoltage)+" кВ",".",","))'
+								    'list(t,""+rhead(queQvoltage)+" кВ")'
 								) ! queQvoltage;
 								def(pcoName) : list(t,pcoName) : list(f,"") ! quePcoName;
 								def(psoName) : list(t,psoName) : list(f,"") ! quePsoName;

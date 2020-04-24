@@ -1,0 +1,11 @@
+// words.jfo
+
+?import: util/zprint.jfo
+
+// filter - s
+: z:xtrun
+   "xthread.jfo" swap xtrunpinch "Ok"
+;
+
+noop
+

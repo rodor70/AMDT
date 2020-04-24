@@ -1,0 +1,26 @@
+// chain_cdgr.jfo
+
+
+{ G:${TMCAT_GROUND}  B:${TMCAT_BREAKER} S:${TMCAT_SEPARATOR} TN:VTM_050 F:VTM_055 
+   R:VTM_107 TN:VTM_050
+   D:${TMCAT_DISCONNECTOR}  TT:${TMCAT_TT} A:${TMCAT_SURGE_ARRESTER}
+   L:VTM_ARROW
+}  const: CDGRSelector
+
+
+chains
+"cdgr" over !connectType
+CDGRSelector vchain: =B(0,1)-1(0,3)-R*2(0,7)-3(0,11)-B(0,13)= +
+CDGRSelector hchain: 1(0,3)-G(2,3) +
+CDGRSelector hchain: 2(0,7)-4(2,7)-5(4,7)= +
+CDGRSelector hchain: 3(0,11)-G(2,11) +
+CDGRSelector vchain: 4(2,7)-F(2,9)-TN(2,11) +
+CDGRSelector vchain: 5(4,7)-A(4,9) +
+const: CH_CDGR1
+^dplexDo CH_CDGR1 !indexWord
+
+gchains CH_CDGR1 +
+const: GC_CDGR
+
+noop
+

@@ -1,0 +1,61 @@
+// uquery.jfo
+
+// ds, table, filter - joms
+: uqeSelectTmdis
+     >r >r
+    SrcTmdisClazz swap "select distinct tmcode1,tmcode2 from " r> + 
+    " where indexid in ( select indexid from skt_src_index where xtype = 'TP' and xfilter = '" +
+      r> + "')
+      and (tmcode like 'TP%' or tmcode like 'RP%')" +
+    dboselect
+;
+
+/*
+delete from src_tmo_tp
+where indexid in ( select indexid from skt_src_index where xtype = 'TP' and xfilter = 'prig')
+
+*/
+// ds, filter, table  -
+: uqeDeleteTmoRecordsByFilter
+    "delete from " swap +  
+    " where indexid in ( select indexid from skt_src_index where xtype = 'TP' and xfilter = " + swap quote + ")" +
+    dbexec drop
+;
+
+/*
+select * from skt_src_tp where mod(status_v0, 41) = 0
+and (tmcode like 'TP%' or tmcode like 'RP%')
+and indexid in ( select indexid from skt_src_index where xtype = 'TP' and xfilter = 'prig')
+
+*/
+
+// ds, filter, table - anchors
+: uqeSelectSrcAnchors_Filter
+    "select * from " swap + " where mod(status_v0, 41) = 0" + 
+    " and (tmcode like 'TP%' or tmcode like 'RP%') " +
+    " and indexid in ( select indexid from skt_src_index where xtype = 'TP' and xfilter = " +
+    swap quote  + ")" +
+
+    SrcCommonClazz -rot dboselect 
+;
+
+false WasVinitAll!
+// -
+: vinitTmtypes
+  MeDS@ dup null != ? [ repoFillTmtypes ] [ drop ] noop
+; 
+
+// -
+: vinitXstatuses
+  MeDS@ dup null != ? [ repoFillXstatuses ] [ drop ] noop
+; 
+
+// -
+: vinitStatusesV0
+  MeDS@ dup null != ? [ repoFillStatusesV0 ] [ drop ] noop
+; 
+
+// -
+: vinitAll vinitTmtypes vinitXstatuses vinitStatusesV0 ;
+
+noop

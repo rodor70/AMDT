@@ -1,0 +1,242 @@
+// downtown.jfo
+
+
+?import: z/repo/meta.jfo
+?import: z/repo/query.jfo
+// ?import: project/skt/z/repo/ver.jfo
+
+?import: do/fill.jfo
+// ?import: project/skt/v/do/xtask.jfo
+
+/*
+// -
+: vinitTmtypes
+  MeDS@ dup null != ? [ repoFillTmtypes ] [ drop ] noop
+; 
+
+*/
+
+// jom - jomtmtype
+: zverGetTmtype @tmtypecode dup empty? ? [ noop ] [ "VTM_" "" rot replace Tmtypes@  @?  ] noop ;
+
+1 ncounter PqCounter!
+vinitTmtypes
+
+
+// tmopq - tmopq
+: vfillDefaultPqName "XXXXX"  1 1000 nrand + over !pqname ;
+
+// tmopq, index, xsymbol - tmopq
+: vfillXsymbolPqName
+    dup null != ? [
+          swap + over !pqname
+    ] [ drop "" over2 @tmtypecode + "_" + swap + over !pqname ] noop
+;
+
+// tmopq - tmopq
+: vfillDataXvoltage 
+    dup @xvoltage dup null != ? [ // tmopq, xvoltage
+        't : ' swap + ' ! xvoltage;' + \n +
+         over @pqdata "" ?null \n + swap + over !pqdata
+    ]
+    [   drop  ] noop
+;
+
+// tmopq - tmopq
+: vfillDataBody 
+   dup zverGetTmtype dup null != ? [  // tmopq, tmtype
+        dup @pqdata over2 !pqdata        
+        @pqbody over !pqbody
+        // vfillDataXvoltage
+   ]
+   [ drop ] noop
+;
+
+// tmopq - tmopq
+: vfillBodyXvoltage
+   dup zverGetTmtype dup null != ? [  // tmopq, tmtype
+        dup @xsign toi 0 !=
+        swap @xvoltage null = and
+        
+   ]
+   [ drop ] noop
+;
+
+// !!! 20200129
+// tmopq - tmopq
+: vfillBodySubcode
+   dup zverGetTmtype dup null != ? [  // tmopq, tmtype
+        @subsid 
+        over !pqsubcode
+   ]
+   [ drop ] noop
+;
+
+// tmopq, index - tmopq
+: vfillPqName
+    over zverGetTmtype dup null != ? [     	// tmopq, index, tmtypejom
+         @xsymbol vfillXsymbolPqName
+    ]
+    [  2drop vfillDefaultPqName ]
+    noop
+;
+
+
+// tmojom - tmopq
+: vtoTmoPq
+          zmodelTmo2TmoPq  
+             LocalCount@ toi 0 != ? [
+             dup @pqname "_" + LocalCount@ + over !pqname
+             LocalCount@ over !pqnumber
+         ]
+         [ noop ]
+         noop
+;
+
+// tmo_jom - pq_records
+: vpickTmoSubRecords
+    MeDS@  swap TABLE_TMD_RECORDS  repoSelectSubTmoBlock_Postgres  // [ @xsign 0 > ] filter
+    () swap [ 
+          zmodelTmo2TmoPq  
+          vfillBodySubcode
+          + 
+    ]
+    apply // 30 0 filter
+   noop
+;
+
+// tmo_jom - pq_records
+: vpickTmoPQRecords
+
+    vpickTmoSubRecords	//  pq_records
+
+    [  @pqcode ] filtercat sort mapflat
+
+    dup [
+        dup @pqparentcode "_" + over @tmtypecode + // for PqCounter dup . 
+        PqCounter@ next dup >r
+        vfillPqName
+        r> swap !pqnumber
+    ] apply
+
+
+    dup fillPQJoms
+
+
+    noop
+;
+
+// records - listing
+: vcreatePq
+  // TemplateFile 1 rot joms2spq
+  TemplateFile  0 rot joms2spq
+   "App" over pqroot pqnode2bottom
+   "Forma" over pqroot pqnode2bottom
+    @listing2
+
+;
+
+// anchor - filename
+: vgetOutFile
+    "pq" pinchfstream "/" + 
+     swap @pqcode + ".pq" + 
+;
+
+'t : "Лог_объекта: "+#code+" "+#utype+" "+#sid ! logMsg;
+t : logMsg+rn ! buffer;
+t : logMsg ! ln,err;
+t : int(
+  replace(
+  replace(
+  head(split(#code,"-")),
+  "TP",""),
+   "RP","")
+) ! $ObjectVoltage;
+t : ' pinchfcurget quote2 + ' ! pinchfcur;
+t : sucomplex ! complex;
+t : buildArena(null,complex,"",1,"border") ! $ObjectArena;
+t : buildArena($ObjectArena,"North","north",1,"horflowc") ! $NorthArena;
+t : buildArena($ObjectArena,"South","south",1,"horflowc") ! $SouthArena;
+t : complex ! $ObjectComplex;
+t : set(get(sucomplex,"register"),"superSid",#sid) ! tmp;
+t : qname("Нейтраль","Neutral","Neutral") ! myQname;
+t : list(complex,myQname) ! complex;
+t : 0 ! fence;
+t : buildArena($ObjectArena,"Trans","center",1,"horflowc",getSimplexes(complex)) ! $CenterArena;
+t : postArenaItems($CenterArena) ! tmp;
+t : postArenaItems($NorthArena) ! tmp;
+t : postArenaItems($SouthArena) ! tmp;
+t : postArenaItems($ObjectArena) ! tmp;
+t : alignArena($ObjectArena) ! tmp;
+t : arenaToAbs($ObjectArena,60,60) ! tmp;
+t : buildArenaMetaConnections($ObjectArena) ! tmp;
+t : dropComplex() ! tmp;
+t : dropComplex() ! tmp;' + const: ForPSBody
+
+// ps - ps
+: vfillFullPS
+     true over !mutual
+     dup ForPSBody fillAddPqbody
+;
+
+
+// - tmojoms
+: vapplyRecords
+    injStart
+    MeDS@  
+
+    // repoSelectSrcAnchors  pinchfword filter  // 12 0 filter 
+
+    // ds, filter_filial, filter_res, filter_type, table - anchors
+     
+    // scope
+    pinchfobj
+    dup @xfilter swap dup @res swap @xtmcode
+    TABLE_TMD_RECORDS
+    uqeSelectTmoAnchors_Filter
+    filterItems
+    injBlocks
+        // tmoanchors
+        [     // tmoanchor
+              
+              injBlockInfo
+
+              1 ncounter PqCounter!
+              // PS
+              zmodelTmo2TmoPq  "TP" 
+              over !pqname
+              
+              // dup vfillBodySubcode
+              vfillBodySubcode
+
+              vfillFullPS
+              // -- PS
+              dup vgetOutFile >r
+              () 0 + over + 
+             swap 
+             vpickTmoPQRecords	// records
+             injBlockBegin
+             dup >r .add
+              r> 
+
+              vcreatePq r>  "UTF-8" str2file
+
+             injBlockEnd
+
+        ] apply
+   
+        noop
+;
+
+
+: doMain
+   pinchdo ? [ vapplyRecords injDone ] 
+   [ injFail ]
+;
+
+doMain
+
+noop
+
+
+

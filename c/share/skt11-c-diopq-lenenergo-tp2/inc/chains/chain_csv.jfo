@@ -1,0 +1,52 @@
+// chain_csv.jfo
+
+{ G:${TMCAT_GROUND}  B:${TMCAT_BREAKER} S:${TMCAT_SEPARATOR} TN:VTM_050 F:VTM_055 OD:VTM_044 KZ:VTM_045
+   D:${TMCAT_DISCONNECTOR}  TT:${TMCAT_TT} A:${TMCAT_SURGE_ARRESTER} 
+   L:VTM_ARROW CA:VTM_046 RS:VTM_292
+}  const: CSVSelector
+
+chains
+"csv" over !connectType
+CSVSelector vchain: =1(0,1)-D(0,3)-2(0,5)-B(0,7):0,1-TT(0,9):2,0-3(0,11)-D(0,13)-4(0,15)= +
+CSVSelector hchain: 1(0,1)-G(2,1) +
+CSVSelector hchain: 2(0,5)-G(2,5) +
+CSVSelector hchain: 3(0,11)-G(2,11) +
+CSVSelector hchain: 4(0,15)-G(2,15) +
+const: CH_CSV1
+^dplexDo CH_CSV1 !indexWord
+
+chains
+"csv" over !connectType
+CSVSelector vchain: =B(0,1):0,1-TT(0,3):2,0-1(0,5)-TT(0,7):0,2-B(0,9):1,0= +
+CSVSelector hchain: 1(0,5)-G(2,5) +
+const: CH_CSV2
+^dplexDo CH_CSV2 !indexWord
+
+chains
+"csv" over !connectType
+CSVSelector vchain: =1(0,1)-D(0,3)-D(0,5)-2(0,7)= +
+CSVSelector hchain: 1(0,1)-G(2,1) +
+CSVSelector hchain: 2(0,7)-G(2,7) +
+const: CH_CSV3
+^dplexDo CH_CSV3 !indexWord
+
+chains
+"csv" over !connectType
+CSVSelector vchain: =1(0,1)-RS(0,3)-RS(0,5)-2(0,7)= +
+CSVSelector hchain: 1(0,1)-G(2,1) +
+CSVSelector hchain: 2(0,7)-G(2,7) +
+const: CH_CSV4
+^dplexDo CH_CSV4 !indexWord
+
+chains
+"csv" over !connectType
+CSVSelector vchain: =CA(0,1)-CA(0,3)-CA(0,5)= +
+const: CH_CSV5
+^dplexDo CH_CSV5 !indexWord
+
+gchains CH_CSV1 + CH_CSV2 + CH_CSV3 + CH_CSV4 + CH_CSV5 + 
+const: GC_CSV
+
+
+noop
+

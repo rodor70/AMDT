@@ -1,0 +1,35 @@
+// xmain.jfo
+
+: ###THR noop ;
+
+?import: util/xtask.jfo
+
+
+"TPTMD1" TAG!
+
+pinchshare "/log/" + xtaskSetLogPath
+
+// Export
+
+// -
+: injStart TAG@ xtaskStart ;
+// files - files
+: injBlocks dup size TAG@ xtaskBlocks ;
+// -
+: injBlockBegin dup size TAG@ xtaskNextBlock ;
+// s - s
+: injBlockInfo dup @tmcode1 "-" + over @tmcode2 + info. ;
+// -
+: injBlockEnd TAG@ xtaskEndBlock ;
+// -
+: injFail "Bad filter - " pinchfcurget + info. ;
+// -
+: injDone "done." info. ;
+
+?import: do/downtown.jfo
+
+forget: ###THR
+
+noop
+
+

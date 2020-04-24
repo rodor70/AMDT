@@ -1,0 +1,20 @@
+// got.jfo
+
+// GOT ---
+// plex - got
+: gotGet @qname @got ;
+// plex - xn
+: gotGetXn gotGet @a ;
+// plex - yn
+: gotGetYn gotGet @b ;
+// xn, plex -
+: gotSetXn gotGet !a ;
+// yn, plex -
+: gotSetYn gotGet !b ;
+// plex - width
+: gotGetWidth @qname @width toi ;
+// plex - height
+: gotGetHeight @qname @height toi ;
+
+
+noop

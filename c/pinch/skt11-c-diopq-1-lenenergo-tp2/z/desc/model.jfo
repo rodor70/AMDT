@@ -1,0 +1,364 @@
+// z/model.jfo
+
+*jfo.sktransit.model.SrcTmdis
+{ name:tmcode1 } *field +
+{ name:tmcode2  } *field +
+const: SrcTmdisClazz
+// - jom
+: zmodelSrcTmdis
+   SrcTmdisClazz new 
+;
+
+*jfo.sktransit.model.SrcStatus
+{ name:xstatus } *field +
+{ name:xname  } *field +
+const: SrcStatusClazz
+// - jom
+: zmodelSrcStatus
+   SrcStatusClazz new 
+;
+
+*jfo.sktransit.model.SrcIndex
+{ name:indexid } *field +
+{ name:srcname  } *field +
+{ name:srcpath } *field +
+{ name:pagenum } *field +
+{ name:xdate } *field +
+{ name:xtype  } *field +
+{ name:customer } *field +
+{ name:node } *field +
+{ name:status value:${0} } *field +
+{ name:status_desc } *field +
+{ name:xfilter } *field +
+const: SrcIndexClazz
+
+// - jom
+: zmodelSrcIndex
+   SrcIndexClazz new uuid over !indexid
+;
+
+*jfo.sktransit.model.SrcCommon
+{ name:num } *field +
+{ name:filial  } *field +
+{ name:res } *field +
+{ name:uch } *field +
+{ name:objectname } *field +
+{ name:objectcode  } *field +
+{ name:tmtypecode } *field +
+{ name:tmcode } *field +
+{ name:tmname } *field +
+{ name:paramcode  } *field +
+{ name:paramname } *field +
+{ name:paramvalue } *field +
+{ name:status } *field +
+
+{ name:ulevel  } *field +
+{ name:cls  } *field +
+
+{ name:voltage } *field +
+{ name:tmcode1 } *field +
+{ name:tmcode2 } *field +
+{ name:tmcode3 } *field +
+{ name:tmcode4 } *field +
+{ name:tmcode5 } *field +
+{ name:tmcode6 } *field +
+{ name:tmcode7 } *field +
+{ name:tmcode8 } *field +
+{ name:xid } *field +
+{ name:sid } *field +
+{ name:srcid } *field +
+{ name:indexid } *field +
+{ name:status_v0 value:${0} } *field +
+{ name:desc_v0 } *field +
+{ name:status_v1 value:${0} } *field +
+{ name:desc_v1 } *field +
+{ name:status_c0 value:${0} } *field +
+{ name:desc_c0 } *field +
+{ name:status_c1 value:${0} } *field +
+{ name:desc_c1 } *field +
+{ name:xstatus value:${0} } *field +
+{ name:xparent } *field +
+{ name:xowner } *field +
+{ name:xlevel } *field +
+{ name:xlist label:transient } *field +   // transient
+const: SrcCommonClazz
+
+// - jom
+: zmodelSrcCommon
+   SrcCommonClazz new uuid over !srcid
+;
+
+200_000_000 FenceTmoId!
+10_000 FenceShiftSub!
+0 FenceShiftPs!
+10_000_000 FenceShiftRza!
+20_000_000 FenceShiftKl!
+30_000_000 FenceShiftVl!
+50_000_000 FenceShiftTp!
+
+0 FenceCount!
+
+// - n
+: zmodelTmoPsId FenceTmoId@ FenceShiftPs@ + FenceCount@ + 1 FenceCount+  ;
+// - n
+: zmodelTmoRzaId FenceTmoId@ FenceShiftRza@ + FenceCount@ + 1 FenceCount+  ;
+// - n
+: zmodelTmoKlId FenceTmoId@ FenceShiftKl@ + FenceCount@ + 1 FenceCount+  ;
+// - n
+: zmodelTmoVlId FenceTmoId@ FenceShiftVl@ + FenceCount@ + 1 FenceCount+  ;
+// - n
+: zmodelTmoTpId FenceTmoId@ FenceShiftTp@ + FenceCount@ + 1 FenceCount+  ;
+
+*jfo.sktransit.model.SrcTmo
+{ name:id } *field +		// fence + localshift
+
+{ name:filial  } *field +
+{ name:res } *field +
+
+{ name:tmcode1 } *field +	// +
+{ name:tmcode2 } *field +
+{ name:tmcode3 } *field +
+{ name:tmcode4 } *field +
+{ name:tmcode5 } *field +
+{ name:tmcode6 } *field +
+{ name:tmcode7 } *field +
+{ name:tmcode8 } *field +	// +
+{ name:tmname } *field +	// +  tmnamex
+{ name:tmtype value:${2} } *field +	// ???
+{ name:parentid } *field +
+{ name:qualityindex } *field +
+{ name:equipmentid } *field +
+{ name:equipmenttypeid  } *field +
+{ name:definitionid } *field +
+{ name:templatestatus value:${0} } *field +
+{ name:inventarnumber } *field +
+{ name:location  } *field +
+{ name:connectiontype value:${0} } *field +
+{ name:reserv value:${0} } *field +
+{ name:weight value:${0.0} } *field +
+{ name:failureeffect  } *field +
+{ name:calcclass } *field +
+{ name:qcalcclass } *field +
+{ name:inputvariant value:${1} } *field +
+{ name:tmkind  value:${0} } *field +
+{ name:tmtypeid } *field +	//  our id
+{ name:customer } *field +
+{ name:srcid } *field +   	// srcid
+{ name:srcparentid  } *field +   	// xparent
+{ name:srceqid } *field +
+{ name:tmtypecode } *field +     // from tmtypecode
+{ name:w0 } *field +
+{ name:w1  } *field +
+{ name:w2 } *field +
+{ name:w3 } *field +
+{ name:u4 value:${0} } *field +
+{ name:u10  value:${0} } *field +
+{ name:u30 value:${0} } *field +
+{ name:u60 value:${0} } *field +
+{ name:u100 value:${0} } *field +
+{ name:u150 value:${0}  } *field +
+{ name:u200 value:${0} } *field +
+{ name:u275 value:${0} } *field +
+{ name:u350 value:${0} } *field +
+{ name:u1100  value:${0} } *field +
+{ name:u1500 value:${0} } *field +
+{ name:u2200 value:${0} } *field +
+{ name:u3300 value:${0} } *field +
+{ name:u5000 value:${0} } *field +
+{ name:u7500 value:${0} } *field +
+{ name:u10000 value:${0} } *field +
+{ name:voltage } *field + 		// from voltage
+{ name:status_v0 value:${0} } *field +	// from ...
+{ name:status_v1 value:${1} } *field +
+{ name:xlevel } *field +
+{ name:xvoltage } *field +
+{ name:anchorid } *field +
+{ name:xsign  value:${1}  } *field +
+
+{ name:ulevel  } *field +
+{ name:cls  } *field +
+{ name:indexid } *field +
+
+const: SrcTmoClazz
+
+// - jom
+: zmodelSrcTmo
+   SrcTmoClazz new
+;
+
+// srcjom - tmojom
+: zmodelSrc2Tmo
+    dup zmodelSrcTmo jomfill	// srcjom, tmojom
+    1 over !status_v1    
+    over @xparent over !srcparentid
+    over @voltage toi 10 * over !xvoltage    
+    nip
+;
+
+// skt11-c-diopq-1-lenenergo-tp2
+
+"t : " pinchget @share + " ! pinchref;" + \n +
+"t : pqDataProvide|inc/dp.jfo ! jfodp;" \n + +
+"t : 1 ! style;" +
+const: PQRootMeta
+
+*jfo.sktransit.model.SrcTmoPq
+{ name:id label:id } *field +		// fence + localshift
+{ name:tmcode1 } *field +	// +
+{ name:tmcode2 } *field +
+{ name:tmcode3 } *field +
+{ name:tmcode4 } *field +
+{ name:tmcode5 } *field +
+{ name:tmcode6 } *field +
+{ name:tmcode7 } *field +
+{ name:tmcode8 } *field +	// +
+{ name:tmname } *field +	// +  tmnamex
+{ name:tmtype value:${2} } *field +	// ???
+{ name:parentid } *field +
+{ name:qualityindex } *field +
+{ name:equipmentid } *field +
+{ name:equipmenttypeid  } *field +
+{ name:definitionid } *field +
+{ name:templatestatus value:${0} } *field +
+{ name:inventarnumber } *field +
+{ name:location  } *field +
+{ name:connectiontype value:${0} } *field +
+{ name:reserv value:${0} } *field +
+{ name:weight value:${0.0} } *field +
+{ name:failureeffect  } *field +
+{ name:calcclass } *field +
+{ name:qcalcclass } *field +
+{ name:inputvariant value:${1} } *field +
+{ name:tmkind  value:${0} } *field +
+{ name:tmtypeid } *field +	//  our id
+{ name:customer } *field +
+{ name:srcid label:sid } *field +   	// srcid
+{ name:srcparentid  label:parentsid } *field +   	// xparent
+{ name:srceqid } *field +
+{ name:tmtypecode label:utype } *field +     // from tmtypecode
+{ name:voltage } *field + 		// from voltage
+{ name:status_v0 value:${0} } *field +	// from ...
+{ name:status_v1 value:${1} } *field +
+{ name:xlevel } *field +
+{ name:xvoltage } *field +
+{ name:anchorid } *field +
+{ name:xsign  value:${1}  } *field +
+{ name:ulevel  } *field +
+{ name:cls  label:symdata } *field +
+{ name:indexid } *field +
+
+{ name:rootcode  value:TMD  label:rootcode } *field +
+{ name:rootmeta  value:${PQRootMeta}  label:rootmeta } *field +
+{ name:pqname label:name } *field +
+{ name:pquname label:uname } *field +
+{ name:pqcode label:code } *field +
+{ name:pqsubcode label:subcode value:${"x"} } *field +
+{ name:pqvcode value:${1} label:vcode } *field +
+{ name:pqtype  label:type value:${90}  } *field +
+{ name:pqnumber  label:number value:${0}  } *field +
+{ name:qvoltage label:symdata } *field +
+{ name:pqparentcode } *field +
+{ name:pqdata  } *field +
+{ name:pqbody label:symbody } *field +
+{ name:inverse  label:inverse } *field +
+{ name:simplex  label:symdata } *field +
+{ name:ignore  label:ignore } *field +
+{ name:mutual  label:mutual } *field +
+const: SrcTmoPqClazz
+
+// - jom
+: zmodelSrcTmoPq
+   SrcTmoPqClazz new
+;
+
+// tmname - tmname1
+: zmodifyTmname
+    "110кВ" "110 кВ" rot replace
+    "35кВ" "35 кВ" rot replace
+    "10кВ" "10 кВ" rot replace
+    "20кВ" "20 кВ" rot replace
+    "150кВ" "150 кВ" rot replace
+    "220кВ" "220 кВ" rot replace
+    "6кВ" "6 кВ" rot replace
+    "15кВ" "15 кВ" rot replace
+    "0,4кВ" "0,4 кВ" rot replace
+    "Вф" "В ф" rot replace
+    "Рф" "Р ф" rot replace
+    "ЗР1с." "ЗР 1с. " rot replace
+    "ЗР2с." "ЗР 2с. " rot replace
+    "ЗР3с." "ЗР 3с. " rot replace
+    "ЗР4с." "ЗР 4с. " rot replace
+;
+
+
+// tmo, tmopq - tmo, tmopq
+: zmodelTmoSetPquname over @tmname dup empty? not ? [ 	// tmo,tmopq,tmname
+    zmodifyTmname
+    xtrim2 
+ over2 @tmtypecode dup  "VTM_212" != swap "VTM_213" != and ? [
+    "/" "-" rot replace 
+   ]
+   [ noop ]
+
+    '"' "" rot replace 
+    "!" "-" rot replace 
+    ":" "#" rot replace 
+    ";" "," rot replace 
+    "T" "Т" rot replace 
+    "A" "А" rot replace     
+    "C" "С" rot replace     
+    "O" "О" rot replace  
+    "K" "К" rot replace  
+    "H" "Н" rot replace  
+    "X" "Х" rot replace  
+    "P" "Р" rot replace 
+    "B" "В" rot replace 
+    "E" "Е" rot replace        
+    "M" "М" rot replace  
+    "a" "а" rot replace 
+    "c" "с" rot replace 
+    "e" "е" rot replace 
+    "o" "о" rot replace 
+    "p" "р" rot replace 
+    "x" "х" rot replace 
+    "-Опора" "-" " Опора" +  rot replace 
+    "-" " Опора" + " - Опора" rot replace 
+    "  - Опора" " - Опора" rot replace 
+    over !pquname ] [ drop ] 
+;
+// tmo, tmopq - tmo, tmopq
+: zmodelTmoSetPqname over @tmtypecode dup empty? not ? [ over !pqname ] [ drop ] ;
+// tmo - codelist
+: zmodelTmoGetCodeList "tmcode" 1 8 .. * tuple null-  ;
+// tmo, tmopq, codelist - tmo, tmopq, codelist 
+: zmodelTmoSetPqcode dup "-" list2str over2 !pqcode ;
+// tmo, tmopq, codelist - tmo, tmopq
+: zmodelTmoSetPqparentcode last- drop "-" list2str over !pqparentcode ;
+
+// tmo - tmpq
+: zmodelTmo2TmoPq
+
+    dup zmodelSrcTmoPq jomfill	   // tmo, tmopq
+
+    dup @xsign 1 != ? [ true over !ignore ] [ noop ]
+
+    dup @tmtypecode "VTM_013" = ? [  0 over !pqvcode ] [ noop ] 
+    dup @tmtypecode "VTM_038" = ? [  0 over !pqvcode ] [ noop ] 
+    dup @tmtypecode "VTM_004" = ? [  0 over !pqvcode ] [ noop ]    
+    dup @tmtypecode "VTM_051" = ? [  0 over !pqvcode ] [ noop ]    
+     
+    zmodelTmoSetPquname
+
+    zmodelTmoSetPqname
+
+    over zmodelTmoGetCodeList  zmodelTmoSetPqcode	// tmo, tmopq, codelist
+
+    zmodelTmoSetPqparentcode    
+
+    nip
+;
+
+
+noop
+
+

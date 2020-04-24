@@ -1,0 +1,59 @@
+// ws.jfo
+
+$class com.tomaslutas.jpho.phorga.common.PhorgaNode const: PhorgaNodeClass
+
+*jfo.sktransit.clazz.Node
+{ name:xcode } *field +
+{ name:uname } *field +
+{ name:name } *field +
+{ name:endpoint } *field +
+{ name:url } *field +
+{ name:port } *field +
+{ name:serviceUrl } *field +
+{ name:login } *field +
+{ name:password } *field +
+{ name:role } *field +
+{ name:phonode } *field +
+const: NodeClazz
+
+// - jom
+: zmodelNode
+   NodeClazz  new 
+;
+
+scope Nodes!
+
+// scope - metanode 
+: metaNode zmodelNode
+     dup >r
+     jomfill 
+    dup phonode jomfill over !phonode
+    dup @xcode Nodes@ ! 
+    r>
+;
+
+{
+    xcode:skt11-c-tmd-1-lenenergo-tp
+    uname:skt11-c-tmd-1-lenenergo-tp
+    name:JphoWebService
+    endpoint:JphoWebService
+    url:"http://127.0.0.1"
+    port:${9930}
+    serviceUrl:"http://www.tomaslutas.com/jpho/ws"
+    login:skt11
+    password:9i8u7y6
+    role:${0}
+} metaNode const: nodeMe
+
+nodeMe @phonode const: Me
+
+// - 
+: wsStart nodeMe @phonode
+   mestore 
+   /. ws sys. 
+;
+
+
+noop
+
+

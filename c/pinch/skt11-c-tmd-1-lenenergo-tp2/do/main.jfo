@@ -1,0 +1,22 @@
+// main.jfo
+
+
+// -
+: injStart noop ;
+//  objects -
+: injBlocks noop ;
+// -
+: injBlockBegin noop ;
+// pair - pair
+: injBlockInfo dup @tmcode sys. ;
+// -
+: injBlockEnd noop ;
+// -
+: injFail "Bad filter - " pinchfcurget + dup sys. info. ;
+// -
+: injDone "done." dup sys. info. ;
+
+?import: do/downtown.jfo
+
+
+noop

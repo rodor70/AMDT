@@ -1,0 +1,23 @@
+// zprint.jfo
+
+// - s
+: zprintMemory memory 
+      "total: " over @total 1_000 / + ", " +
+      "max: " + over @max 1_000 / + ", " +
+      "free: " + over @free 1_000 / + 
+       nip
+;
+
+// xtask - s
+: zprintXtask @infoString ;
+// - s
+: zprintXtasks "xtask:" \n + xtasks [ zprintXtask + \n + ]  apply ;
+// - s
+: zprintXetasks "xetask:" \n +  xetasks [ zprintXtask + \n + ]  apply ;
+// - s
+: zprintXwtasks "xwtask:" \n +  xwtasks [ zprintXtask + \n + ]  apply ;
+
+: zprintOla "Ola, soy " pinchget @name + ;
+
+
+noop

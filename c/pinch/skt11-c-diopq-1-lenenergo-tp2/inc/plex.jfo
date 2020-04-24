@@ -1,0 +1,213 @@
+// plex.jfo
+
+// utype - ?
+// : plexIsVk dup "VTM_023" = swap "VTM_029" = or ;
+: plexIsVk ( "VTM_023" , "VTM_029" , "VTM_020" ) swap contains ;
+// utype - ?
+: plexIsDiscon ( "VTM_290" , "VTM_100" , "VTM_289"  ) swap contains ;
+// utype - ?
+: plexIsOpn ( "VTM_034" , "VTM_172" , "VTM_070" ) swap contains ;
+// utype - ?
+: plexIsTt ( "VTM_014" , "VTM_279" , "VTM_278" , "VTM_277" ) swap contains ;
+
+// utype - ?
+: plexIsRaz ( "VTM_292" , "VTM_295" ) swap contains ;
+
+// utype - ?
+: plexIsVkSec "VTM_028" = ;
+
+// utype - ?
+: plexIsPred "VTM_055" = ;
+
+// utype - ?
+: plexIsZn "VTM_027" = ;
+
+// utype - ?
+: plexIsVcho "VTM_019" = ;
+
+// utype - ?
+: plexIsVchoz "VTM_018" = ;
+
+// utype - ?
+: plexIsConSvz "VTM_052" = ;
+
+// utype - ?
+: plexIsTn "VTM_050" = ;
+
+// utype - ?
+: plexIsOtd "VTM_044" = ;
+
+// utype - ?
+: plexIsKz "VTM_045" = ;
+
+// utype - ?
+: plexIsAmper "VTM_004" = ;
+
+// uname - ?
+: plexHasSh dup "Ш" contains swap "С" contains or ;
+
+// uname - ?
+: plexHasShR "ШР" contains ;
+
+// uname - ?
+: plexHasLR "ЛР" contains ;
+
+// uname - ?
+: plexHasTR "ТР" contains ;
+
+// uname - ?
+: plexHasOD "ОД" contains ;
+
+// uname - ?
+: plexHasV dup " В" contains swap "СВ" contains or ;
+
+// uname - ?
+: plexStarts1 "1" starts ;
+
+// uname - ?
+: plexStarts2 "2" starts ;
+
+// simplexes - candidat
+: plexVoiceCoNames     
+     () swap [ @qname @coName + ] apply
+     3 zsimilar head tail head smax
+     noop
+;
+
+// simplexes - 
+: plexSetAname
+    dup plexVoiceCoNames  // simplexes, candidat
+    swap [  
+          dup @qname @coName over2 
+          reat  xtrim2 
+          "-" reat
+          swap @qname !coNamex 
+    ] apply
+    drop
+    noop
+;
+
+
+// simplexes - psimplexes
+: plexPrepare
+
+  noop
+;
+
+// simplex - simplex
+: plexSetIndex
+    dup @qname @utype plexIsVk ? [  5000 over !index ] [ noop ]
+    dup @qname @utype plexIsAmper ? [  5005 over !index ] [ noop ]    
+    dup @qname @utype plexIsVkSec ? [  5000 over !index ] [ noop ]
+    dup @qname @utype plexIsDiscon ? [  2000 over !index ] [ noop ]
+    dup @qname @utype plexIsOpn ? [  8995 over !index ] [ noop ]
+    dup @qname @utype plexIsTt ? [  5010 over !index ] [ noop ]
+    dup @qname @utype plexIsOtd ? [  6000 over !index ] [ noop ]
+    dup @qname @utype plexIsKz ? [  6500 over !index ] [ noop ]
+    dup @qname @utype plexIsPred ? [  7000 over !index ] [ noop ]
+    dup @qname dup @utype plexIsZn swap @coNamex plexHasSh and ? [  1010 over !index ] [ noop ]
+    dup @qname dup @utype plexIsZn swap @coNamex plexHasSh not and ? [  8950 over !index ] [ noop ]  
+    dup @qname dup @utype plexIsZn swap @coNamex plexHasV and ? [  5020 over !index ] [ noop ]    
+    dup @qname dup @utype plexIsZn swap @coNamex plexHasOD and ? [  5090 over !index ] [ noop ]   
+
+    dup @qname dup dup @utype plexIsZn 
+             swap @coNamex plexHasV and swap @coNamex plexStarts1 and ? [  4990 over !index ] [ noop ]  
+    dup @qname dup dup @utype plexIsZn 
+             swap @coNamex plexHasV and swap @coNamex plexStarts2 and ? [  5020 over !index ] [ noop ]  
+
+    dup @qname dup @utype plexIsDiscon swap @coNamex plexHasShR and ? [  1020 over !index ] [ noop ] 
+    dup @qname dup @utype plexIsDiscon swap @coNamex plexHasTR and ? [  1030 over !index ] [ noop ] 
+    dup @qname dup @utype plexIsDiscon swap @coNamex plexHasLR and ? [  7500 over !index ] [ noop ] 
+
+    dup @qname @utype plexIsVcho ? [  8950 over !index ] [ noop ]
+    dup @qname @utype plexIsVchoz ? [  8960 over !index ] [ noop ]
+    dup @qname @utype plexIsConSvz ? [  8970 over !index ] [ noop ]
+    dup @qname @utype plexIsTn ? [  8980 over !index ] [ noop ]
+
+    dup @qname @utype plexIsRaz ? [  8940 over !index ] [ noop ]
+    dup @qname dup @utype plexIsRaz swap @coNamex plexStarts1 and ? [  1020 over !index ] [ noop ]   
+    dup @qname dup @utype plexIsRaz swap @coNamex plexStarts2 and ? [  8940 over !index ] [ noop ]   
+;
+
+invariant PlexInv!
+
+// plexIsVkSec "VTM_028" 
+
+// psimplexes - 
+: plexDoInvariant
+   invariant PlexInv!
+   [
+      1 "a+" PlexInv@ invperform drop
+      dup @qname @utype plexIsVk ? [  1 "vk+" PlexInv@ invperform drop ]  [  noop ] noop
+      dup @qname @utype plexIsVkSec ? [  1 "vksec+" PlexInv@ invperform drop ]  [  noop ] noop
+      dup @qname @utype plexIsZn ? [ 1 "zn+" PlexInv@ invperform drop ]  [  noop ] noop
+      dup @qname @utype plexIsDiscon ? [ 1 "discon+" PlexInv@ invperform drop ]  [  noop ] noop
+      dup @qname @utype plexIsPred ? [ 1 "pred+" PlexInv@ invperform drop ]  [  noop ] noop
+      dup @qname @utype plexIsTt ? [ 1 "tt+" PlexInv@ invperform drop ]  [  noop ] noop
+      dup @qname @utype plexIsRaz ? [ 1 "disconsec+" PlexInv@ invperform drop ]  [  noop ] noop
+      drop
+   ] apply
+   noop
+;
+
+// plexIsDiscon
+// psimplexes - q
+
+// simplexes - 
+: plexCheck_dis_zn_vksec
+
+   0 LocZn!
+   0 LocDiscon!
+
+  "disconsec" PlexInv@ invperform 2 =
+   "zn" PlexInv@ invperform 2 = and 
+   "vksec" PlexInv@ invperform 1 = and
+   ? [
+      noop
+      [ 
+          dup @qname @utype plexIsVkSec ? [  4040 over !index ] [ noop ]
+          dup @qname @utype plexIsRaz  LocDiscon@ 1 = and ? [  4060 over !index ] [ noop ]
+          dup @qname @utype plexIsRaz  LocDiscon@ 0 = and ? [  4020 over !index 1  LocDiscon+ ] [ noop ]
+          dup @qname @utype plexIsZn  LocZn@ 1 = and ? [  4080 over !index ] [ noop ]
+          dup @qname @utype plexIsZn  LocZn@ 0 = and ? [  4001 over !index 1  LocZn+ ] [ noop ]
+          drop
+      ] apply
+   ]
+   [ drop ]
+   noop
+
+;
+
+: plexDo
+  // "===" sys.
+  dup plexDoInvariant 
+
+
+//   "All="  "a" PlexInv@ invperform + sys.
+
+/*
+  "VK="  "vk" PlexInv@ invperform + sys.
+  "VKsec="  "vksec" PlexInv@ invperform + sys.
+"Pred="  "pred" PlexInv@ invperform + sys.
+  "ZN="  "zn" PlexInv@ invperform + sys.
+  "Discon="  "discon" PlexInv@ invperform + sys.
+  "TT="  "tt" PlexInv@ invperform + sys.
+  "Disconsec="  "disconsec" PlexInv@ invperform + sys.
+*/
+
+/*
+  "disconsec" PlexInv@ invperform 2 =
+   "zn" PlexInv@ invperform 2 = and 
+   "vksec" PlexInv@ invperform 1 = and
+   ? [ "======================URA" sys. ] [ noop ] 
+*/
+
+  dup plexSetAname
+  // simplexes
+  () over [ plexSetIndex
+    @name + ] apply "," list2str
+   // simplexes, str
+  swap plexCheck_dis_zn_vksec
+  noop
+;
+

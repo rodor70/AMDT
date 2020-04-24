@@ -1,0 +1,1247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Diagram DiogenID="{719C8CD5-965C-4BD9-9120-E95B0CD177A1}" Scale="0.8" Description="ТП-2503 Ф. 362-08,23,24" MinScale="0.01" MaxScale="100">
+  <Libraries>
+    <Library Assembly="Monitel.Diogen.Elements.PSRBasic, Version=11.5.11.593, Culture=neutral, PublicKeyToken=null">
+      <ElementTypes>
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Bus" TypeID="1" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Label" TypeID="2" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Transformer" TypeID="3" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Disconnector" TypeID="5" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Connection" TypeID="6" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.EnergyConsumer" TypeID="7" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Bay" TypeID="8" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Fuse" TypeID="9" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Breaker" TypeID="10" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.GroundDisconnector" TypeID="11" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.Connector" TypeID="13" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.SurgeArrester" TypeID="14" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CurrentTransformer" TypeID="15" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.PotentialTransformer" TypeID="16" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CouplingCapacitor" TypeID="17" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CouplingFilter " TypeID="18" />
+        <ElementType TypeName="Monitel.Diogen.Elements.PSRBasic.CradleSwitch" TypeID="19" />
+		
+      </ElementTypes>
+    </Library>
+    <Library Assembly="Monitel.Diogen.Elements.Indicators, Version=11.5.11.407, Culture=neutral, PublicKeyToken=null">
+      <ElementTypes>
+        <ElementType TypeName="Monitel.Diogen.Elements.Indicators.Indicator" TypeID="4" />
+      </ElementTypes>
+    </Library>
+    <Library Assembly="Monitel.Diogen.Elements.MCN, Version=11.5.11.125, Culture=neutral, PublicKeyToken=null">
+      <ElementTypes>
+        <ElementType TypeName="Monitel.Diogen.Elements.MCN.LoadBreakerT" TypeID="12" />
+      </ElementTypes>
+    </Library>
+  </Libraries>
+  <Extent Width="2050" Height="900" />
+  <BkColor A="255" R="0" G="0" B="0" />
+  <Thumbnail ThumbnailKey="hfdb724bbb1184b39b6d893eaf0839f8c" ThumbnailOutdated="false" />
+  <Grid LineThickness="1" Visible="true" Align="true" RotationStep="90">
+    <LineColor A="70" R="128" G="128" B="128" />
+    <Center X="0" Y="0" />
+    <Step Width="8" Height="8" />
+    <Thresholds />
+  </Grid>
+  <DrawingStyles>
+    <FillStyles />
+    <StrokeStyles>
+      <StrokeStyle Name="RedPen" Description="Аварийный предел индикатора" Origin="DiogenSharedStyles.xml" Shared="true">
+        <Pen>
+          <Pen Brush="#FFFF6464" Thickness="4" LineJoin="Miter" DashStyle="{x:Null}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+        </Pen>
+      </StrokeStyle>
+      <StrokeStyle Name="YellowPen" Description="Предупредительный предел индикатора" Origin="DiogenSharedStyles.xml" Shared="true">
+        <Pen>
+          <Pen Brush="#FFFAD264" Thickness="4" LineJoin="Miter" DashStyle="{x:Null}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+        </Pen>
+      </StrokeStyle>
+    </StrokeStyles>
+    <TextStyles>
+      <TextStyle Name="ActivePowerIndicator" Description="Индикатор активной мощности" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FF55EB55" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="CurrentIndicator" Description="Индикатор тока" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFFFCC99" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="Eq2Label" Description="Электротехническое оборудование" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="14" FontType="Arial" FontShape="Normal" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="EquipmentLabel" Description="Основное электротехническое оборудование" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="RatedS" Description="Номинальная мощность" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="14" FontType="Arial" FontShape="Normal" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="ReactivePowerIndicator" Description="Индикатор реактивной мощности" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFB899FF" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="SubstationTitle" Description="Наименование энергообъектов" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="22" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFF3F3EA" />
+        </TextFormat>
+      </TextStyle>
+      <TextStyle Name="VoltageIndicator" Description="Индикатор напряжения" Origin="DiogenSharedStyles.xml" Shared="true">
+        <TextFormat FontSize="16" FontType="Arial" FontShape="Bold" LineSpacing="1.15" TabSize="2" Trimming="None">
+          <Brush Color="#FFFFFF00" />
+        </TextFormat>
+      </TextStyle>
+    </TextStyles>
+  </DrawingStyles>
+  <ElementSets>
+    <ElementSet Name="Наименования" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Активная мощность" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Реактивная мощность" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Напряжение" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Ток" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Частота" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="ЗН и КЗ" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Вспомогательное оборудование (кроме ТН)" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Трансформатор напряжения" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="SCADA" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="УР (ОС)" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="true" />
+    </ElementSet>
+    <ElementSet Name="Тексты" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="ScaleRange" />
+    </ElementSet>
+    <ElementSet Name="Приборы учёта и точки поставки" Description="" IsSelectable="true">
+      <VisibilityTrigger TriggerKind="Direct" Visible="false" />
+    </ElementSet>
+  </ElementSets>
+  <CustomData>
+    <DiagramPresenter>
+      <ViewCenter X="0" Y="0" />
+    </DiagramPresenter>
+    <GeoSubstrateSettings />
+  </CustomData>
+  <Nodes>
+  <Node NodeID="1" TypeID="1" ElementName="1С 10 кВ" GeometricWidth="400" GeometricHeight="50" NominalVoltage="10.0" uid="8b831a0e-8408-4fb6-9e54-d3efdf5efc89">
+      <Position X="525" Y="75" />
+      <GeometricOrigin X="525" Y="75" />
+      <PSRTerminal name="1" uid="5844fcb4-0f8f-4a37-848e-9f5bf7a767bc" />
+    </Node>
+<Node NodeID="127" TypeID="2" Text="1С 10 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="535" Y="85" />
+      <GeometricOrigin X="535" Y="85" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="1" />
+    </Node>
+    <Node NodeID="14" TypeID="6" uid="30f0d468-9ddd-49ae-a50a-524affe09026" voltage="10.0">
+      <OriginPoint X="575" Y="175" />
+      <DestinationPoint X="50" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="1" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="2" />
+    </Node>
+    <Node NodeID="15" TypeID="6" uid="04189498-426b-4efd-b4d6-0b87e957dd9e" voltage="10.0">
+      <OriginPoint X="675" Y="175" />
+      <DestinationPoint X="150" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="1" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="6" />
+    </Node>
+    <Node NodeID="16" TypeID="6" uid="44965313-d2f8-4b71-9bcc-2615d022a541" voltage="10.0">
+      <OriginPoint X="775" Y="175" />
+      <DestinationPoint X="250" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="1" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="10" />
+    </Node>
+<Node NodeID="2" TypeID="10" ElementName="ВН 10 кВ ф.362-08" Angle="0" NominalVoltage="10.0" uid="be6e1074-5210-47c6-a332-8bbdae1fab2d" NormalOpen="false">
+      <Position X="575" Y="175" />
+      <PSRTerminal name="1" uid="57367324-4aa6-44f3-92be-aebc8e39150b" />
+      <PSRTerminal name="2" uid="ebe46cce-7c3e-489c-839d-d2b1bb0b9884" />
+    </Node>
+<Node NodeID="128" TypeID="2" Text="ВН 10 кВ ф.362-08" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="585" Y="185" />
+      <GeometricOrigin X="585" Y="185" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="2" />
+    </Node>
+    <Node NodeID="4" TypeID="6" uid="008c32d4-dd64-42d0-8bf8-c625c3a22b23" voltage="10.0">
+      <OriginPoint X="575" Y="225" />
+      <DestinationPoint X="575" Y="225" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="2" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="3" />
+    </Node>
+<Node NodeID="3" TypeID="11" ElementName="ЗР  10 кВ ф.362-08" NominalVoltage="10.0" uid="fee1161a-a174-4b05-8915-7ef5cb3b6862" NormalOpen="true" Sets="6">
+      <Position X="575" Y="275" />
+      <PSRTerminal name="1" uid="2902ea86-37c9-4d3b-9941-5f74499ffeec" />
+    </Node>
+<Node NodeID="129" TypeID="2" Text="ЗР  10 кВ ф.362-08" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="585" Y="285" />
+      <GeometricOrigin X="585" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="3" />
+    </Node>
+<Node NodeID="5" TypeID="8" ElementName="1" uid="0a343d02-215a-4685-b53a-755ff376f9d2">
+      <GroupMembers>
+	<GroupMember NodeID="2" />
+	<GroupMember NodeID="4" />
+	<GroupMember NodeID="3" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="6" TypeID="10" ElementName="ВН 10 кВ КЛ2503-2644" Angle="0" NominalVoltage="10.0" uid="327d00f6-2c08-4166-abe9-f794d2c3ac68" NormalOpen="false">
+      <Position X="675" Y="175" />
+      <PSRTerminal name="1" uid="b3082834-b257-4d78-aa0e-814674616d6a" />
+      <PSRTerminal name="2" uid="1b1becca-9fbc-494d-9670-1f78f3ae1247" />
+    </Node>
+<Node NodeID="130" TypeID="2" Text="ВН 10 кВ КЛ2503-2644" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="685" Y="185" />
+      <GeometricOrigin X="685" Y="185" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="6" />
+    </Node>
+    <Node NodeID="8" TypeID="6" uid="7293a3c9-662e-411e-a2e9-866440f76040" voltage="10.0">
+      <OriginPoint X="675" Y="225" />
+      <DestinationPoint X="675" Y="225" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="6" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="7" />
+    </Node>
+<Node NodeID="7" TypeID="11" ElementName="ЗР  10 кВ КЛ2503-2644" NominalVoltage="10.0" uid="b1dd2f1f-68d8-4827-80af-644f78925cdb" NormalOpen="true" Sets="6">
+      <Position X="675" Y="275" />
+      <PSRTerminal name="1" uid="616fc789-8435-4811-a000-3071cc55ec09" />
+    </Node>
+<Node NodeID="131" TypeID="2" Text="ЗР  10 кВ КЛ2503-2644" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="685" Y="285" />
+      <GeometricOrigin X="685" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="7" />
+    </Node>
+<Node NodeID="9" TypeID="8" ElementName="2" uid="ed7b7fde-4cda-4624-8996-c61dbdee7bd6">
+      <GroupMembers>
+	<GroupMember NodeID="6" />
+	<GroupMember NodeID="8" />
+	<GroupMember NodeID="7" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="10" TypeID="10" ElementName="ВН 10 кВ Т-1" Angle="0" NominalVoltage="10.0" uid="cd625a5d-3d21-4d5e-97c8-4ee82e9402be" NormalOpen="false">
+      <Position X="775" Y="175" />
+      <PSRTerminal name="1" uid="f4890e41-48ec-4769-9242-99a0b37b1afb" />
+      <PSRTerminal name="2" uid="e187fc57-38d0-4995-87e4-ba5b07610621" />
+    </Node>
+<Node NodeID="132" TypeID="2" Text="ВН 10 кВ Т-1" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="785" Y="185" />
+      <GeometricOrigin X="785" Y="185" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="10" />
+    </Node>
+    <Node NodeID="12" TypeID="6" uid="ac191d8d-8cc7-4458-a37e-ab08b9e54efc" voltage="10.0">
+      <OriginPoint X="775" Y="225" />
+      <DestinationPoint X="775" Y="225" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="10" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="11" />
+    </Node>
+<Node NodeID="11" TypeID="9" ElementName="ПК 10 кВ Т-1" Angle="90" NominalVoltage="10.0" uid="7eaf3d0b-2147-48e2-a8d2-47c2515b591a" NormalOpen="false">
+      <Position X="775" Y="275" />
+      <PSRTerminal name="1" uid="95240856-ae6d-4487-b0cb-96b568f668d6" />
+      <PSRTerminal name="2" uid="168aad07-fd51-473b-a84f-0c3708295116" />
+    </Node>
+<Node NodeID="133" TypeID="2" Text="ПК 10 кВ Т-1" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="785" Y="285" />
+      <GeometricOrigin X="785" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="11" />
+    </Node>
+<Node NodeID="13" TypeID="8" ElementName="3" uid="ac8fb080-2794-4f3c-bcd3-d32a97c87200">
+      <GroupMembers>
+	<GroupMember NodeID="10" />
+	<GroupMember NodeID="12" />
+	<GroupMember NodeID="11" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="17" TypeID="1" ElementName="2С 10 кВ" GeometricWidth="400" GeometricHeight="50" NominalVoltage="10.0" uid="5591087a-b5f6-495b-8e2f-74964e197c5a">
+      <Position X="975" Y="75" />
+      <GeometricOrigin X="975" Y="75" />
+      <PSRTerminal name="1" uid="bbdc13de-ff17-4d3a-9685-e57d8aae9b1e" />
+    </Node>
+<Node NodeID="134" TypeID="2" Text="2С 10 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="985" Y="85" />
+      <GeometricOrigin X="985" Y="85" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="17" />
+    </Node>
+    <Node NodeID="30" TypeID="6" uid="4a09ddb1-ede2-43cc-b3cb-efedcb006f8c" voltage="10.0">
+      <OriginPoint X="1025" Y="175" />
+      <DestinationPoint X="50" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="17" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="18" />
+    </Node>
+    <Node NodeID="31" TypeID="6" uid="0519efba-2623-495a-975d-23e1464bea31" voltage="10.0">
+      <OriginPoint X="1125" Y="175" />
+      <DestinationPoint X="150" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="17" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="22" />
+    </Node>
+    <Node NodeID="32" TypeID="6" uid="265a763c-0d68-4e1e-8572-03adb9777c54" voltage="10.0">
+      <OriginPoint X="1225" Y="175" />
+      <DestinationPoint X="250" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="17" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="26" />
+    </Node>
+<Node NodeID="18" TypeID="10" ElementName="ВН 10 кВ ф.362-23" Angle="0" NominalVoltage="10.0" uid="53d31150-79b6-4773-9a8f-3760b2149233" NormalOpen="false">
+      <Position X="1025" Y="175" />
+      <PSRTerminal name="1" uid="0e5a4ba1-d77d-4f94-a2cf-e2581c485fa1" />
+      <PSRTerminal name="2" uid="acae7881-b3dd-449d-971e-06e04ac68486" />
+    </Node>
+<Node NodeID="135" TypeID="2" Text="ВН 10 кВ ф.362-23" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1035" Y="185" />
+      <GeometricOrigin X="1035" Y="185" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="18" />
+    </Node>
+    <Node NodeID="20" TypeID="6" uid="e54e40f0-855b-4648-980a-b4f07ba4f65b" voltage="10.0">
+      <OriginPoint X="1025" Y="225" />
+      <DestinationPoint X="1025" Y="225" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="18" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="19" />
+    </Node>
+<Node NodeID="19" TypeID="11" ElementName="ЗР  10 кВ ф.362-23" NominalVoltage="10.0" uid="e27b0fde-99c0-4e94-98f9-328e8f0e5dc8" NormalOpen="true" Sets="6">
+      <Position X="1025" Y="275" />
+      <PSRTerminal name="1" uid="445a3532-59e3-4a7f-ac54-81cb885bf2a8" />
+    </Node>
+<Node NodeID="136" TypeID="2" Text="ЗР  10 кВ ф.362-23" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1035" Y="285" />
+      <GeometricOrigin X="1035" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="19" />
+    </Node>
+<Node NodeID="21" TypeID="8" ElementName="4" uid="527dfc4d-06ec-487d-b9f3-c49364686223">
+      <GroupMembers>
+	<GroupMember NodeID="18" />
+	<GroupMember NodeID="20" />
+	<GroupMember NodeID="19" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="22" TypeID="10" ElementName="ВН 10 кВ КЛ2503-2509" Angle="0" NominalVoltage="10.0" uid="fb76bd1b-90f0-4586-be6c-1390421960f0" NormalOpen="false">
+      <Position X="1125" Y="175" />
+      <PSRTerminal name="1" uid="c2fd110f-17a8-4592-8273-86c5d87d5ff6" />
+      <PSRTerminal name="2" uid="b4bfea2d-3c11-4f93-af58-cf5ad2a41e97" />
+    </Node>
+<Node NodeID="137" TypeID="2" Text="ВН 10 кВ КЛ2503-2509" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1135" Y="185" />
+      <GeometricOrigin X="1135" Y="185" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="22" />
+    </Node>
+    <Node NodeID="24" TypeID="6" uid="ffb8fb85-fba0-42bb-9c61-bdbb15e0e714" voltage="10.0">
+      <OriginPoint X="1125" Y="225" />
+      <DestinationPoint X="1125" Y="225" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="22" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="23" />
+    </Node>
+<Node NodeID="23" TypeID="11" ElementName="ЗР  10 кВ КЛ2503-9" NominalVoltage="10.0" uid="a44c73e2-3aab-4c28-b7c2-c7a849089762" NormalOpen="true" Sets="6">
+      <Position X="1125" Y="275" />
+      <PSRTerminal name="1" uid="fa7c95af-e864-4888-8567-996310a908cc" />
+    </Node>
+<Node NodeID="138" TypeID="2" Text="ЗР  10 кВ КЛ2503-9" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1135" Y="285" />
+      <GeometricOrigin X="1135" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="23" />
+    </Node>
+<Node NodeID="25" TypeID="8" ElementName="5" uid="a6df260b-18d7-44c4-a3f5-fa03ba30d86a">
+      <GroupMembers>
+	<GroupMember NodeID="22" />
+	<GroupMember NodeID="24" />
+	<GroupMember NodeID="23" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="26" TypeID="10" ElementName="ВН 10 кВ Т-2" Angle="0" NominalVoltage="10.0" uid="a3c562e8-9ee4-48c5-9b90-59c60564c762" NormalOpen="false">
+      <Position X="1225" Y="175" />
+      <PSRTerminal name="1" uid="8717d28d-39d7-46c1-baef-9c2a141dbd76" />
+      <PSRTerminal name="2" uid="9345b8b1-cb9f-479a-b791-966d8fb1433f" />
+    </Node>
+<Node NodeID="139" TypeID="2" Text="ВН 10 кВ Т-2" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1235" Y="185" />
+      <GeometricOrigin X="1235" Y="185" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="26" />
+    </Node>
+    <Node NodeID="28" TypeID="6" uid="7a59d83a-6e35-4f20-a590-eee0d75e4d2a" voltage="10.0">
+      <OriginPoint X="1225" Y="225" />
+      <DestinationPoint X="1225" Y="225" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="26" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="27" />
+    </Node>
+<Node NodeID="27" TypeID="9" ElementName="ПК 10 кВ Т-2" Angle="90" NominalVoltage="10.0" uid="f4530db6-8375-457f-a3f1-cf9984bc84dd" NormalOpen="false">
+      <Position X="1225" Y="275" />
+      <PSRTerminal name="1" uid="9fb72704-4b92-4970-8ce5-53db97757884" />
+      <PSRTerminal name="2" uid="4e130924-5bb5-43bd-bd5b-88ea90e679c4" />
+    </Node>
+<Node NodeID="140" TypeID="2" Text="ПК 10 кВ Т-2" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1235" Y="285" />
+      <GeometricOrigin X="1235" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="27" />
+    </Node>
+<Node NodeID="29" TypeID="8" ElementName="6" uid="7206742c-69c6-4db4-b40c-d5ebeb7a9a67">
+      <GroupMembers>
+	<GroupMember NodeID="26" />
+	<GroupMember NodeID="28" />
+	<GroupMember NodeID="27" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="33" TypeID="19" ElementName="РВ 10 кВ ЯЧ.1 СВ 1" Angle="0" NominalVoltage="10.0" uid="fb83be61-a46d-4231-8e6f-5d412dc7c782" NormalOpen="false">
+      <Position X="1425" Y="75" />
+      <PSRTerminal name="1" uid="94931054-6547-4590-a9c2-62e962096022" />
+      <PSRTerminal name="2" uid="28abb13e-1a6f-44e4-af69-acb48d343f22" />
+    </Node>
+<Node NodeID="141" TypeID="2" Text="РВ 10 кВ ЯЧ.1 СВ 1" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1435" Y="85" />
+      <GeometricOrigin X="1435" Y="85" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="33" />
+    </Node>
+    <Node NodeID="37" TypeID="6" uid="2656302d-9332-4760-9a4b-aea4d372c049" voltage="10.0">
+      <OriginPoint X="1425" Y="125" />
+      <DestinationPoint X="1425" Y="125" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="33" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="34" />
+    </Node>
+<Node NodeID="34" TypeID="19" ElementName="РВ 10 кВ ЯЧ.1 СВ 1" Angle="0" NominalVoltage="10.0" uid="062aaa69-fbf0-4aa3-9bd9-8db3e826edc8" NormalOpen="false">
+      <Position X="1425" Y="175" />
+      <PSRTerminal name="1" uid="a8d76053-b42f-47ee-b87f-200674f2a270" />
+      <PSRTerminal name="2" uid="44a26214-131a-4b91-b2b5-284bf177658e" />
+    </Node>
+<Node NodeID="142" TypeID="2" Text="РВ 10 кВ ЯЧ.1 СВ 1" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1435" Y="185" />
+      <GeometricOrigin X="1435" Y="185" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="34" />
+    </Node>
+<Node NodeID="35" TypeID="11" ElementName="ЗР  10 кВ ЯЧ.1 СВ 1" NominalVoltage="10.0" uid="ac5ea947-69e6-4be7-856e-d78727f1f368" NormalOpen="true" Sets="6">
+      <Position X="1425" Y="225" />
+      <PSRTerminal name="1" uid="9d4a6ab3-a63d-4a7e-be66-04e821dacbf7" />
+    </Node>
+<Node NodeID="143" TypeID="2" Text="ЗР  10 кВ ЯЧ.1 СВ 1" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1435" Y="235" />
+      <GeometricOrigin X="1435" Y="235" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="35" />
+    </Node>
+<Node NodeID="36" TypeID="11" ElementName="ЗР  10 кВ ЯЧ.1 СВ 1" NominalVoltage="10.0" uid="cbfc5397-3511-4661-bb53-d320e41969ce" NormalOpen="true" Sets="6">
+      <Position X="1425" Y="275" />
+      <PSRTerminal name="1" uid="e77b6344-fbbc-4888-ac7a-442813fd2d88" />
+    </Node>
+<Node NodeID="144" TypeID="2" Text="ЗР  10 кВ ЯЧ.1 СВ 1" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1435" Y="285" />
+      <GeometricOrigin X="1435" Y="285" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="36" />
+    </Node>
+<Node NodeID="38" TypeID="8" ElementName="7" uid="f2174420-3e75-497b-a23f-2612aa4962b5">
+      <GroupMembers>
+	<GroupMember NodeID="33" />
+	<GroupMember NodeID="37" />
+	<GroupMember NodeID="34" />
+	<GroupMember NodeID="35" />
+	<GroupMember NodeID="36" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="39" TypeID="1" ElementName="1С 0,4 кВ" GeometricWidth="700" GeometricHeight="50" NominalVoltage="0.4" uid="35fbe475-5cb6-4351-8dbe-304dd84df966">
+      <Position X="175" Y="525" />
+      <GeometricOrigin X="175" Y="525" />
+      <PSRTerminal name="1" uid="f7e45a0d-829c-46d7-a0eb-47e181503c14" />
+    </Node>
+<Node NodeID="145" TypeID="2" Text="1С 0,4 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="185" Y="535" />
+      <GeometricOrigin X="185" Y="535" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="39" />
+    </Node>
+    <Node NodeID="64" TypeID="6" uid="5177e132-2d2a-4e3b-89bb-368e94e780e2" voltage="0.4">
+      <OriginPoint X="225" Y="625" />
+      <DestinationPoint X="50" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="40" />
+    </Node>
+    <Node NodeID="65" TypeID="6" uid="ce64a297-ebd5-4916-9c1e-87a9fb893a4d" voltage="0.4">
+      <OriginPoint X="325" Y="625" />
+      <DestinationPoint X="150" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="42" />
+    </Node>
+    <Node NodeID="66" TypeID="6" uid="6675ab51-f8a0-45d8-936a-d103d564c66d" voltage="0.4">
+      <OriginPoint X="425" Y="625" />
+      <DestinationPoint X="250" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="46" />
+    </Node>
+    <Node NodeID="67" TypeID="6" uid="6c0b1175-b0df-465c-94cd-ef07d7a75c6a" voltage="0.4">
+      <OriginPoint X="525" Y="625" />
+      <DestinationPoint X="350" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="50" />
+    </Node>
+    <Node NodeID="68" TypeID="6" uid="2cb934bd-8ded-44e1-bdb1-af87eee9606c" voltage="0.4">
+      <OriginPoint X="625" Y="625" />
+      <DestinationPoint X="450" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="54" />
+    </Node>
+    <Node NodeID="69" TypeID="6" uid="d47d1e8f-308d-4e64-8ff4-30cc117d6157" voltage="0.4">
+      <OriginPoint X="725" Y="625" />
+      <DestinationPoint X="550" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="58" />
+    </Node>
+<Node NodeID="40" TypeID="10" ElementName="АВ 0,4 кВ Л1" Angle="0" NominalVoltage="0.4" uid="c3f6e895-d40b-45b6-bd50-e78eaab0f721" NormalOpen="false">
+      <Position X="225" Y="625" />
+      <PSRTerminal name="1" uid="32ec82b3-bbd8-4f73-94ac-f59bfa7f52df" />
+      <PSRTerminal name="2" uid="8601605b-b9c8-47a4-bb62-f36dc33b848e" />
+    </Node>
+<Node NodeID="146" TypeID="2" Text="АВ 0,4 кВ Л1" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="235" Y="635" />
+      <GeometricOrigin X="235" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="40" />
+    </Node>
+<Node NodeID="41" TypeID="8" ElementName="8" uid="8930533d-009b-4092-873b-99e385f01545">
+      <GroupMembers>
+	<GroupMember NodeID="40" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="42" TypeID="10" ElementName="Р 0,4 кВ резерв" Angle="0" NominalVoltage="0.4" uid="bd733e59-7ce7-4baa-b3c4-66ecad392c59" NormalOpen="false">
+      <Position X="325" Y="625" />
+      <PSRTerminal name="1" uid="61a274c9-cb1b-4994-a443-f01fcb834f94" />
+      <PSRTerminal name="2" uid="811a1da5-bb9c-4337-8f86-5a33eb127b30" />
+    </Node>
+<Node NodeID="147" TypeID="2" Text="Р 0,4 кВ резерв" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="335" Y="635" />
+      <GeometricOrigin X="335" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="42" />
+    </Node>
+    <Node NodeID="44" TypeID="6" uid="52b06058-7031-4ae9-a3e2-d58a5351317a" voltage="0.4">
+      <OriginPoint X="325" Y="675" />
+      <DestinationPoint X="325" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="42" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="43" />
+    </Node>
+<Node NodeID="43" TypeID="9" ElementName="ПН 0,4 кВ резерв" Angle="90" NominalVoltage="0.4" uid="40f8bf53-230a-42c5-be9a-207a6e0ea5ce" NormalOpen="false">
+      <Position X="325" Y="725" />
+      <PSRTerminal name="1" uid="7d6ddf7a-8d9b-4520-9a26-e33438bc5f61" />
+      <PSRTerminal name="2" uid="6f60349d-27bc-4b09-aaef-859a48a974c5" />
+    </Node>
+<Node NodeID="148" TypeID="2" Text="ПН 0,4 кВ резерв" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="335" Y="735" />
+      <GeometricOrigin X="335" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="43" />
+    </Node>
+<Node NodeID="45" TypeID="8" ElementName="9" uid="d58004a9-0fa8-43e8-b9e6-9a427e008682">
+      <GroupMembers>
+	<GroupMember NodeID="42" />
+	<GroupMember NodeID="44" />
+	<GroupMember NodeID="43" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="46" TypeID="10" ElementName="Р 0,4 кВ Л5" Angle="0" NominalVoltage="0.4" uid="0ec3d8d0-b5d5-4815-9313-1faf7739ffe6" NormalOpen="false">
+      <Position X="425" Y="625" />
+      <PSRTerminal name="1" uid="94878185-94cd-413e-bb5b-4912dfa968e1" />
+      <PSRTerminal name="2" uid="5087a8d8-dd52-4138-9b44-412420fb51d5" />
+    </Node>
+<Node NodeID="149" TypeID="2" Text="Р 0,4 кВ Л5" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="435" Y="635" />
+      <GeometricOrigin X="435" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="46" />
+    </Node>
+    <Node NodeID="48" TypeID="6" uid="960e3e5a-f5b5-43f3-ad70-cbac1990dc78" voltage="0.4">
+      <OriginPoint X="425" Y="675" />
+      <DestinationPoint X="425" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="46" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="47" />
+    </Node>
+<Node NodeID="47" TypeID="9" ElementName="ПН 0,4 кВ Л5" Angle="90" NominalVoltage="0.4" uid="05be50d7-1769-4cde-8bc2-91e3174a8e8f" NormalOpen="false">
+      <Position X="425" Y="725" />
+      <PSRTerminal name="1" uid="a9439b49-4f36-4b10-a376-b0018ef9caaa" />
+      <PSRTerminal name="2" uid="a93a2f07-b697-4667-8c2a-10f2b4323bf4" />
+    </Node>
+<Node NodeID="150" TypeID="2" Text="ПН 0,4 кВ Л5" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="435" Y="735" />
+      <GeometricOrigin X="435" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="47" />
+    </Node>
+<Node NodeID="49" TypeID="8" ElementName="10" uid="aab94549-d95e-4e1e-b2a3-e87f7c274d15">
+      <GroupMembers>
+	<GroupMember NodeID="46" />
+	<GroupMember NodeID="48" />
+	<GroupMember NodeID="47" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="50" TypeID="10" ElementName="Р 0,4 кВ резерв" Angle="0" NominalVoltage="0.4" uid="9bee8a6d-5226-4a62-a8ea-de6b52fd91da" NormalOpen="false">
+      <Position X="525" Y="625" />
+      <PSRTerminal name="1" uid="5d56785c-9c38-433b-90ca-bc8273375b8b" />
+      <PSRTerminal name="2" uid="4f4d351c-0b1a-4757-b81b-2243733c71f8" />
+    </Node>
+<Node NodeID="151" TypeID="2" Text="Р 0,4 кВ резерв" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="535" Y="635" />
+      <GeometricOrigin X="535" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="50" />
+    </Node>
+    <Node NodeID="52" TypeID="6" uid="cbeffe73-71a9-40dd-b983-435c8fb59e32" voltage="0.4">
+      <OriginPoint X="525" Y="675" />
+      <DestinationPoint X="525" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="50" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="51" />
+    </Node>
+<Node NodeID="51" TypeID="9" ElementName="ПН 0,4 кВ резерв" Angle="90" NominalVoltage="0.4" uid="dc47c1ab-b11f-493b-9b29-26cb19788264" NormalOpen="false">
+      <Position X="525" Y="725" />
+      <PSRTerminal name="1" uid="1fb57d76-9211-4f2a-a8b3-dd71d498f3b8" />
+      <PSRTerminal name="2" uid="32c1a86a-3cae-4d13-8a08-84035fca8b87" />
+    </Node>
+<Node NodeID="152" TypeID="2" Text="ПН 0,4 кВ резерв" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="535" Y="735" />
+      <GeometricOrigin X="535" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="51" />
+    </Node>
+<Node NodeID="53" TypeID="8" ElementName="11" uid="5c74e6da-58e9-4268-a0d4-3c65233dfdf7">
+      <GroupMembers>
+	<GroupMember NodeID="50" />
+	<GroupMember NodeID="52" />
+	<GroupMember NodeID="51" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="54" TypeID="10" ElementName="Р 0,4 кВ Л9" Angle="0" NominalVoltage="0.4" uid="7ba236db-1fd6-447d-b3bc-84207e6ce2d8" NormalOpen="false">
+      <Position X="625" Y="625" />
+      <PSRTerminal name="1" uid="99df71e6-01d8-4547-98cf-e0e7f8f84fc7" />
+      <PSRTerminal name="2" uid="abe237af-bda6-4075-8339-1ac6003a904d" />
+    </Node>
+<Node NodeID="153" TypeID="2" Text="Р 0,4 кВ Л9" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="635" Y="635" />
+      <GeometricOrigin X="635" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="54" />
+    </Node>
+    <Node NodeID="56" TypeID="6" uid="1da3d826-238e-4328-ada7-8bb18a35f41c" voltage="0.4">
+      <OriginPoint X="625" Y="675" />
+      <DestinationPoint X="625" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="54" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="55" />
+    </Node>
+<Node NodeID="55" TypeID="9" ElementName="ПН 0,4 кВ Л9" Angle="90" NominalVoltage="0.4" uid="a85007a7-146e-4a03-800d-ca4b85d56a74" NormalOpen="false">
+      <Position X="625" Y="725" />
+      <PSRTerminal name="1" uid="28ce2915-2359-426c-897c-6755f26bbe50" />
+      <PSRTerminal name="2" uid="8ab40a42-519f-4214-b694-8182402a595e" />
+    </Node>
+<Node NodeID="154" TypeID="2" Text="ПН 0,4 кВ Л9" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="635" Y="735" />
+      <GeometricOrigin X="635" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="55" />
+    </Node>
+<Node NodeID="57" TypeID="8" ElementName="12" uid="727003dd-509b-4d9a-b9ca-2c53dd09e370">
+      <GroupMembers>
+	<GroupMember NodeID="54" />
+	<GroupMember NodeID="56" />
+	<GroupMember NodeID="55" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="58" TypeID="10" ElementName="АВ 0,4 кВ Т-1" Angle="0" NominalVoltage="0.4" uid="7c540d0b-0cac-4af1-85b1-5e10e5631fce" NormalOpen="false">
+      <Position X="725" Y="625" />
+      <PSRTerminal name="1" uid="5c75caec-d755-460d-b341-b4d8cdbd5878" />
+      <PSRTerminal name="2" uid="111c3750-cf96-49f0-a663-43b0e3114fea" />
+    </Node>
+<Node NodeID="155" TypeID="2" Text="АВ 0,4 кВ Т-1" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="735" Y="635" />
+      <GeometricOrigin X="735" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="58" />
+    </Node>
+    <Node NodeID="61" TypeID="6" uid="3a95cfbf-13f4-4fd6-ae41-33a6454fa2ce" voltage="0.4">
+      <OriginPoint X="725" Y="675" />
+      <DestinationPoint X="725" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="58" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="59" />
+    </Node>
+<Node NodeID="59" TypeID="10" ElementName="Р 0,4 кВ Т-1" Angle="0" NominalVoltage="0.4" uid="95993f0a-2bc1-45f1-9391-5fc32920d111" NormalOpen="false">
+      <Position X="725" Y="725" />
+      <PSRTerminal name="1" uid="23ea144f-3314-4624-ad38-310cb97d3666" />
+      <PSRTerminal name="2" uid="74f8d640-5f6e-4e20-a133-9ca0d1384e8f" />
+    </Node>
+<Node NodeID="156" TypeID="2" Text="Р 0,4 кВ Т-1" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="735" Y="735" />
+      <GeometricOrigin X="735" Y="735" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="59" />
+    </Node>
+    <Node NodeID="62" TypeID="6" uid="75dc7ea5-9d8a-43be-b47f-a7b75246bb17" voltage="0.4">
+      <OriginPoint X="725" Y="775" />
+      <DestinationPoint X="725" Y="775" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="59" />
+      <ConnectedDestination Terminal="0" ConnectionZone="0" NodeID="60" />
+    </Node>
+<Node NodeID="60" TypeID="15" ElementName="ТТ 0,4 кВ Т-1" uid="976d8c18-cdd7-46a8-accb-d2b0a6a40c21" voltage="0.4" Sets="7">
+      <Position X="725" Y="825" />
+      <!-- Familiar NodeID="33" Terminal="?termid1" ConnectionZone="0" / -->
+    </Node>
+<Node NodeID="157" TypeID="2" Text="ТТ 0,4 кВ Т-1" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="735" Y="835" />
+      <GeometricOrigin X="735" Y="835" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="60" />
+    </Node>
+<Node NodeID="63" TypeID="8" ElementName="13" uid="6741db89-74af-4f8a-bba6-4f9f19a555bc">
+      <GroupMembers>
+	<GroupMember NodeID="58" />
+	<GroupMember NodeID="61" />
+	<GroupMember NodeID="59" />
+	<GroupMember NodeID="62" />
+	<GroupMember NodeID="60" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="70" TypeID="1" ElementName="2С 0,4 кВ" GeometricWidth="900" GeometricHeight="50" NominalVoltage="0.4" uid="bbd04032-ab57-40cd-be38-48e99279d94f">
+      <Position X="925" Y="525" />
+      <GeometricOrigin X="925" Y="525" />
+      <PSRTerminal name="1" uid="c61f9c16-e62a-4ea8-b67c-02230f395d1c" />
+    </Node>
+<Node NodeID="158" TypeID="2" Text="2С 0,4 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="935" Y="535" />
+      <GeometricOrigin X="935" Y="535" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="70" />
+    </Node>
+    <Node NodeID="103" TypeID="6" uid="50e7bd3f-46f3-46d0-86ce-2b0970b5c0be" voltage="0.4">
+      <OriginPoint X="975" Y="625" />
+      <DestinationPoint X="50" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="71" />
+    </Node>
+    <Node NodeID="104" TypeID="6" uid="069b5749-4345-4103-b1d3-990720b81bb5" voltage="0.4">
+      <OriginPoint X="1075" Y="625" />
+      <DestinationPoint X="150" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="73" />
+    </Node>
+    <Node NodeID="105" TypeID="6" uid="02246044-1ad5-490e-a3c3-70158da00a75" voltage="0.4">
+      <OriginPoint X="1175" Y="625" />
+      <DestinationPoint X="250" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="77" />
+    </Node>
+    <Node NodeID="106" TypeID="6" uid="c5efbd04-4615-4ab9-9eb5-e1c0d85ace6f" voltage="0.4">
+      <OriginPoint X="1275" Y="625" />
+      <DestinationPoint X="350" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="81" />
+    </Node>
+    <Node NodeID="107" TypeID="6" uid="c7d9b0dc-8a6d-4f94-8b6b-5be3e1290bfc" voltage="0.4">
+      <OriginPoint X="1375" Y="625" />
+      <DestinationPoint X="450" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="85" />
+    </Node>
+    <Node NodeID="108" TypeID="6" uid="4276823e-8c8e-449b-ab22-742aa25ee92d" voltage="0.4">
+      <OriginPoint X="1475" Y="625" />
+      <DestinationPoint X="550" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="89" />
+    </Node>
+    <Node NodeID="109" TypeID="6" uid="f8f18a30-0da6-4d16-bc6e-e45f778b4a35" voltage="0.4">
+      <OriginPoint X="1575" Y="625" />
+      <DestinationPoint X="650" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="93" />
+    </Node>
+    <Node NodeID="110" TypeID="6" uid="e43252de-81a0-405d-ae85-3db07fc23592" voltage="0.4">
+      <OriginPoint X="1675" Y="625" />
+      <DestinationPoint X="750" Y="50" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="70" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="97" />
+    </Node>
+<Node NodeID="71" TypeID="10" ElementName="АВ 0,4 кВ Л2" Angle="0" NominalVoltage="0.4" uid="c2bdd8c7-e8cf-4397-8817-bcc7c023b0dc" NormalOpen="false">
+      <Position X="975" Y="625" />
+      <PSRTerminal name="1" uid="8ca39741-1ebc-4f8c-9c4c-77c2303ec774" />
+      <PSRTerminal name="2" uid="f8e5493b-68a0-40fa-9ded-7d45ff7df18e" />
+    </Node>
+<Node NodeID="159" TypeID="2" Text="АВ 0,4 кВ Л2" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="985" Y="635" />
+      <GeometricOrigin X="985" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="71" />
+    </Node>
+<Node NodeID="72" TypeID="8" ElementName="14" uid="d41fab65-8ea3-4df8-b94e-554701cf27fa">
+      <GroupMembers>
+	<GroupMember NodeID="71" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="73" TypeID="10" ElementName="Р 0,4 кВ резерв" Angle="0" NominalVoltage="0.4" uid="c1c67a3c-6c24-408c-88bd-4a45c8aca40e" NormalOpen="false">
+      <Position X="1075" Y="625" />
+      <PSRTerminal name="1" uid="78ea1628-f549-423b-9af8-017c28c63f73" />
+      <PSRTerminal name="2" uid="5e394a63-2bba-4810-bae5-1543dc9e3a20" />
+    </Node>
+<Node NodeID="160" TypeID="2" Text="Р 0,4 кВ резерв" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1085" Y="635" />
+      <GeometricOrigin X="1085" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="73" />
+    </Node>
+    <Node NodeID="75" TypeID="6" uid="ea343449-f3bb-4e33-9391-84d419fba3ad" voltage="0.4">
+      <OriginPoint X="1075" Y="675" />
+      <DestinationPoint X="1075" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="73" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="74" />
+    </Node>
+<Node NodeID="74" TypeID="9" ElementName="ПН 0,4 кВ резерв" Angle="90" NominalVoltage="0.4" uid="fb060b0a-f52b-4fb5-b072-c225b045241d" NormalOpen="false">
+      <Position X="1075" Y="725" />
+      <PSRTerminal name="1" uid="94e4fcb5-9d96-40f3-b863-e9a30901793a" />
+      <PSRTerminal name="2" uid="dcb9311c-15a3-4fa1-84f0-42222f40d1e0" />
+    </Node>
+<Node NodeID="161" TypeID="2" Text="ПН 0,4 кВ резерв" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1085" Y="735" />
+      <GeometricOrigin X="1085" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="74" />
+    </Node>
+<Node NodeID="76" TypeID="8" ElementName="15" uid="3e30b9a3-0d93-4b19-a1ea-30866273821c">
+      <GroupMembers>
+	<GroupMember NodeID="73" />
+	<GroupMember NodeID="75" />
+	<GroupMember NodeID="74" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="77" TypeID="10" ElementName="Р 0,4 кВ резерв" Angle="0" NominalVoltage="0.4" uid="276f6389-7c97-4e9e-8e73-83b5d3a112cd" NormalOpen="false">
+      <Position X="1175" Y="625" />
+      <PSRTerminal name="1" uid="98dc5f36-978e-411b-aee0-932d0c5f49e8" />
+      <PSRTerminal name="2" uid="cc27bde1-9dfe-4951-aa48-03f22f8bfdc7" />
+    </Node>
+<Node NodeID="162" TypeID="2" Text="Р 0,4 кВ резерв" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1185" Y="635" />
+      <GeometricOrigin X="1185" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="77" />
+    </Node>
+    <Node NodeID="79" TypeID="6" uid="ffa2cb0e-0aec-4bdc-acdd-b8c8ff87c28f" voltage="0.4">
+      <OriginPoint X="1175" Y="675" />
+      <DestinationPoint X="1175" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="77" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="78" />
+    </Node>
+<Node NodeID="78" TypeID="9" ElementName="ПН 0,4 кВ резерв" Angle="90" NominalVoltage="0.4" uid="2b8a0380-ff03-411e-b8d6-f1da745a0a51" NormalOpen="false">
+      <Position X="1175" Y="725" />
+      <PSRTerminal name="1" uid="2cb33961-d0a5-455f-bd0d-47a307abbdd6" />
+      <PSRTerminal name="2" uid="50300818-ffd3-4849-b98a-d6adb24bdc7e" />
+    </Node>
+<Node NodeID="163" TypeID="2" Text="ПН 0,4 кВ резерв" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1185" Y="735" />
+      <GeometricOrigin X="1185" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="78" />
+    </Node>
+<Node NodeID="80" TypeID="8" ElementName="16" uid="d13ee029-f365-4e25-a88c-7eb0cd58f83c">
+      <GroupMembers>
+	<GroupMember NodeID="77" />
+	<GroupMember NodeID="79" />
+	<GroupMember NodeID="78" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="81" TypeID="10" ElementName="АВ 0,4 кВ резерв" Angle="0" NominalVoltage="0.4" uid="99cca798-af60-4fcb-8101-45d17eee3c6b" NormalOpen="false">
+      <Position X="1275" Y="625" />
+      <PSRTerminal name="1" uid="39c45914-4877-46ea-9654-f582b16345ef" />
+      <PSRTerminal name="2" uid="a0eda1b3-132e-47df-a8b1-775eaf82c1f7" />
+    </Node>
+<Node NodeID="164" TypeID="2" Text="АВ 0,4 кВ резерв" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1285" Y="635" />
+      <GeometricOrigin X="1285" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="81" />
+    </Node>
+    <Node NodeID="83" TypeID="6" uid="976a640f-b2b4-416c-adc7-46aca55be60e" voltage="0.4">
+      <OriginPoint X="1275" Y="675" />
+      <DestinationPoint X="1275" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="81" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="82" />
+    </Node>
+<Node NodeID="82" TypeID="9" ElementName="ПН 0,4 кВ резерв" Angle="90" NominalVoltage="0.4" uid="56e371e5-bd98-4c31-abbc-f432815a7d14" NormalOpen="false">
+      <Position X="1275" Y="725" />
+      <PSRTerminal name="1" uid="95a06e4f-5d95-4d74-88a9-327cd3ca8900" />
+      <PSRTerminal name="2" uid="0d71aecb-4f91-46a7-93ab-4678a06ef50a" />
+    </Node>
+<Node NodeID="165" TypeID="2" Text="ПН 0,4 кВ резерв" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1285" Y="735" />
+      <GeometricOrigin X="1285" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="82" />
+    </Node>
+<Node NodeID="84" TypeID="8" ElementName="17" uid="003b3dad-2714-463a-851a-a0b4958f0625">
+      <GroupMembers>
+	<GroupMember NodeID="81" />
+	<GroupMember NodeID="83" />
+	<GroupMember NodeID="82" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="85" TypeID="10" ElementName="Р 0,4 кВ Л10" Angle="0" NominalVoltage="0.4" uid="f95bbeec-1364-4201-b185-1308874feba9" NormalOpen="false">
+      <Position X="1375" Y="625" />
+      <PSRTerminal name="1" uid="612253c8-bab4-4105-93e1-dc53eb79fc45" />
+      <PSRTerminal name="2" uid="d564b662-aa26-4266-b1dc-334e6d9fe2f1" />
+    </Node>
+<Node NodeID="166" TypeID="2" Text="Р 0,4 кВ Л10" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1385" Y="635" />
+      <GeometricOrigin X="1385" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="85" />
+    </Node>
+    <Node NodeID="87" TypeID="6" uid="6ca5e5f9-29df-43e1-9311-160132d82254" voltage="0.4">
+      <OriginPoint X="1375" Y="675" />
+      <DestinationPoint X="1375" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="85" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="86" />
+    </Node>
+<Node NodeID="86" TypeID="9" ElementName="ПН 0,4 кВ Л10" Angle="90" NominalVoltage="0.4" uid="7b3b56f1-f33f-444f-bdea-67232b790d6d" NormalOpen="false">
+      <Position X="1375" Y="725" />
+      <PSRTerminal name="1" uid="6ae58f7a-6f3b-44a2-b42d-443e8d70dbb1" />
+      <PSRTerminal name="2" uid="a28303a9-577b-46ff-8458-2083290eba29" />
+    </Node>
+<Node NodeID="167" TypeID="2" Text="ПН 0,4 кВ Л10" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1385" Y="735" />
+      <GeometricOrigin X="1385" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="86" />
+    </Node>
+<Node NodeID="88" TypeID="8" ElementName="18" uid="8f54af9b-a3b7-430e-876f-38e699f16425">
+      <GroupMembers>
+	<GroupMember NodeID="85" />
+	<GroupMember NodeID="87" />
+	<GroupMember NodeID="86" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="89" TypeID="10" ElementName="Р 0,4 кВ Л12" Angle="0" NominalVoltage="0.4" uid="4a04afed-7044-4296-9736-0619688274f2" NormalOpen="false">
+      <Position X="1475" Y="625" />
+      <PSRTerminal name="1" uid="c19d94bd-d704-49a9-b2d1-11b0630b73a8" />
+      <PSRTerminal name="2" uid="7b05a982-027a-419f-b0e3-8a33c7a776ed" />
+    </Node>
+<Node NodeID="168" TypeID="2" Text="Р 0,4 кВ Л12" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1485" Y="635" />
+      <GeometricOrigin X="1485" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="89" />
+    </Node>
+    <Node NodeID="91" TypeID="6" uid="7f52b258-a659-4c39-85eb-b1229d55f4f2" voltage="0.4">
+      <OriginPoint X="1475" Y="675" />
+      <DestinationPoint X="1475" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="89" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="90" />
+    </Node>
+<Node NodeID="90" TypeID="9" ElementName="ПН 0,4 кВ Л12" Angle="90" NominalVoltage="0.4" uid="d4466a5d-ce3f-487c-9295-57d24c1cef9c" NormalOpen="false">
+      <Position X="1475" Y="725" />
+      <PSRTerminal name="1" uid="34999c83-4b78-4ca2-93c7-4b58223bb6a2" />
+      <PSRTerminal name="2" uid="126ef715-fe94-4f5b-a4f7-241d3e4da4cd" />
+    </Node>
+<Node NodeID="169" TypeID="2" Text="ПН 0,4 кВ Л12" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1485" Y="735" />
+      <GeometricOrigin X="1485" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="90" />
+    </Node>
+<Node NodeID="92" TypeID="8" ElementName="19" uid="e3500f1b-f34d-4f33-8b4b-8951c3b2cf3f">
+      <GroupMembers>
+	<GroupMember NodeID="89" />
+	<GroupMember NodeID="91" />
+	<GroupMember NodeID="90" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="93" TypeID="10" ElementName="Р 0,4 кВ резерв" Angle="0" NominalVoltage="0.4" uid="c444fbdd-dca9-44e8-a0a6-97e532ac33a9" NormalOpen="false">
+      <Position X="1575" Y="625" />
+      <PSRTerminal name="1" uid="cbe8e796-ebab-4ab6-945e-cb411b041478" />
+      <PSRTerminal name="2" uid="5645b796-68bd-4d7b-872e-a54802bf65e5" />
+    </Node>
+<Node NodeID="170" TypeID="2" Text="Р 0,4 кВ резерв" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1585" Y="635" />
+      <GeometricOrigin X="1585" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="93" />
+    </Node>
+    <Node NodeID="95" TypeID="6" uid="b3a4acf0-2369-4a67-883b-2f20610318a4" voltage="0.4">
+      <OriginPoint X="1575" Y="675" />
+      <DestinationPoint X="1575" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="93" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="94" />
+    </Node>
+<Node NodeID="94" TypeID="9" ElementName="ПН 0,4 кВ резерв" Angle="90" NominalVoltage="0.4" uid="1f9fa230-1143-42ca-b6dd-c01c159d6bc8" NormalOpen="false">
+      <Position X="1575" Y="725" />
+      <PSRTerminal name="1" uid="f85fbfa0-4e93-4654-b345-cecef73f2e8e" />
+      <PSRTerminal name="2" uid="25673f86-12bf-4d2d-b8ad-d0127f0543fb" />
+    </Node>
+<Node NodeID="171" TypeID="2" Text="ПН 0,4 кВ резерв" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1585" Y="735" />
+      <GeometricOrigin X="1585" Y="735" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="94" />
+    </Node>
+<Node NodeID="96" TypeID="8" ElementName="20" uid="b2103be3-0ed0-4094-ba18-dfe3f87c6c93">
+      <GroupMembers>
+	<GroupMember NodeID="93" />
+	<GroupMember NodeID="95" />
+	<GroupMember NodeID="94" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="97" TypeID="10" ElementName="АВ 0,4 кВ Т-2" Angle="0" NominalVoltage="0.4" uid="2a6583ba-eb85-4607-9b12-5b20f6523ebb" NormalOpen="false">
+      <Position X="1675" Y="625" />
+      <PSRTerminal name="1" uid="3270065e-22bc-4b02-8914-63c3df0e8866" />
+      <PSRTerminal name="2" uid="90c25e4c-1ab0-403a-aa99-0d5705fa553f" />
+    </Node>
+<Node NodeID="172" TypeID="2" Text="АВ 0,4 кВ Т-2" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1685" Y="635" />
+      <GeometricOrigin X="1685" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="97" />
+    </Node>
+    <Node NodeID="100" TypeID="6" uid="b8a8e3b8-b617-4489-b418-f371385cdd18" voltage="0.4">
+      <OriginPoint X="1675" Y="675" />
+      <DestinationPoint X="1675" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="97" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="98" />
+    </Node>
+<Node NodeID="98" TypeID="10" ElementName="Р 0,4 кВ Т-2" Angle="0" NominalVoltage="0.4" uid="38e65cd5-9c1c-44e3-b39c-ee955cd4d899" NormalOpen="false">
+      <Position X="1675" Y="725" />
+      <PSRTerminal name="1" uid="75943d6c-a8c1-4329-aa93-b56216eaf1d9" />
+      <PSRTerminal name="2" uid="0043ac9a-bb31-448f-b8e1-611743868c0e" />
+    </Node>
+<Node NodeID="173" TypeID="2" Text="Р 0,4 кВ Т-2" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1685" Y="735" />
+      <GeometricOrigin X="1685" Y="735" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="98" />
+    </Node>
+    <Node NodeID="101" TypeID="6" uid="56f2b0dd-3832-4470-a220-1aa7394ee583" voltage="0.4">
+      <OriginPoint X="1675" Y="775" />
+      <DestinationPoint X="1675" Y="775" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="98" />
+      <ConnectedDestination Terminal="0" ConnectionZone="0" NodeID="99" />
+    </Node>
+<Node NodeID="99" TypeID="15" ElementName="ТТ 0,4 кВ Т-2" uid="d74d65ac-8657-4e7f-b044-3d3d2f764cbf" voltage="0.4" Sets="7">
+      <Position X="1675" Y="825" />
+      <!-- Familiar NodeID="33" Terminal="?termid1" ConnectionZone="0" / -->
+    </Node>
+<Node NodeID="174" TypeID="2" Text="ТТ 0,4 кВ Т-2" DX="18.8896484375" DY="14" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel" Sets="0 11">
+      <Position X="1685" Y="835" />
+      <GeometricOrigin X="1685" Y="835" />
+      <TextFormat TextStyle="Eq2Label" />
+      <Familiar NodeID="99" />
+    </Node>
+<Node NodeID="102" TypeID="8" ElementName="21" uid="8627de5f-f6f2-4286-83f6-656e329acb88">
+      <GroupMembers>
+	<GroupMember NodeID="97" />
+	<GroupMember NodeID="100" />
+	<GroupMember NodeID="98" />
+	<GroupMember NodeID="101" />
+	<GroupMember NodeID="99" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="111" TypeID="10" ElementName="Р 0,4 кВ СВ1 0,4 кВ" Angle="0" NominalVoltage="0.4" uid="d12526f5-2666-43b9-8c57-5325308c8852" NormalOpen="false">
+      <Position X="1875" Y="525" />
+      <PSRTerminal name="1" uid="89be05ec-88a1-4aa4-847b-71c240c5ff4b" />
+      <PSRTerminal name="2" uid="9094b36c-efa8-46f8-b6b6-00ea55d9b2f3" />
+    </Node>
+<Node NodeID="175" TypeID="2" Text="Р 0,4 кВ СВ1 0,4 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1885" Y="535" />
+      <GeometricOrigin X="1885" Y="535" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="111" />
+    </Node>
+    <Node NodeID="114" TypeID="6" uid="70d8ff27-943a-4c4f-b6df-b31c77d87f37" voltage="0.4">
+      <OriginPoint X="1875" Y="575" />
+      <DestinationPoint X="1875" Y="575" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="111" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="112" />
+    </Node>
+<Node NodeID="112" TypeID="10" ElementName="АВ 0,4 кВ СВ1 0,4 кВ" Angle="0" NominalVoltage="0.4" uid="5518f238-f505-434e-bd3a-a8f9a559abee" NormalOpen="false">
+      <Position X="1875" Y="625" />
+      <PSRTerminal name="1" uid="a49da065-1572-461d-8b3c-fc4bf829d8c1" />
+      <PSRTerminal name="2" uid="69a8172e-0de5-45c1-b55b-76622956c2f6" />
+    </Node>
+<Node NodeID="176" TypeID="2" Text="АВ 0,4 кВ СВ1 0,4 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1885" Y="635" />
+      <GeometricOrigin X="1885" Y="635" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="112" />
+    </Node>
+    <Node NodeID="115" TypeID="6" uid="972e4aff-d2b5-47ec-ab3b-ebe836ed58f9" voltage="0.4">
+      <OriginPoint X="1875" Y="675" />
+      <DestinationPoint X="1875" Y="675" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="112" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="113" />
+    </Node>
+<Node NodeID="113" TypeID="10" ElementName="Р 0,4 кВ СВ1 0,4 кВ" Angle="0" NominalVoltage="0.4" uid="16c567fb-69f2-43e4-a23a-fdde39499094" NormalOpen="false">
+      <Position X="1875" Y="725" />
+      <PSRTerminal name="1" uid="484f1d36-5c3a-4fd5-b7f1-2fc922a8edeb" />
+      <PSRTerminal name="2" uid="8125b631-2130-45d2-a165-76bc8faea754" />
+    </Node>
+<Node NodeID="177" TypeID="2" Text="Р 0,4 кВ СВ1 0,4 кВ" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1885" Y="735" />
+      <GeometricOrigin X="1885" Y="735" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="113" />
+    </Node>
+<Node NodeID="116" TypeID="8" ElementName="22" uid="57dfb0a4-0f50-4eca-9265-fce95a417dd4">
+      <GroupMembers>
+	<GroupMember NodeID="111" />
+	<GroupMember NodeID="114" />
+	<GroupMember NodeID="112" />
+	<GroupMember NodeID="115" />
+	<GroupMember NodeID="113" />
+      </GroupMembers>
+    </Node>
+<Node NodeID="117" TypeID="3" ElementName="Т-1" init_p="T2" uid="c8196d7a-a044-418a-8260-881af4fbe7bd">
+      <Position X="925" Y="425" />
+      <TSTerminal name="1" uid="bcff820b-44a5-45d9-9ff1-b60cec99abac" />
+      <TSTerminal name="2" uid="b657458f-f946-442b-803c-f345a32c0f0e" />
+      <End voltage="10.0" uid="5564bbd4-4eff-491e-b316-459f341b9b48" w.ck="Y" />
+      <End voltage="0.4" uid="36f8d534-a420-47a7-855b-e9e19fee69db" w.ck="Yn" />
+    </Node>
+<Node NodeID="178" TypeID="2" Text="Т-1" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="935" Y="435" />
+      <GeometricOrigin X="935" Y="435" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="117" />
+    </Node>
+<Node NodeID="118" TypeID="3" ElementName="Т-2" init_p="T2" uid="ea119af2-8f8a-415a-99cb-7c30fc8d1f43">
+      <Position X="1025" Y="425" />
+      <TSTerminal name="1" uid="80bdaaf3-7df9-43d1-98a7-f52f01377e4c" />
+      <TSTerminal name="2" uid="40cb58b6-8cf6-45f8-8a47-b6c6b1efd954" />
+      <End voltage="10.0" uid="5bfe4870-caaa-41fc-929a-29247a075b03" w.ck="Y" />
+      <End voltage="0.4" uid="7d13804c-0c31-4bc6-9bde-4f0988e80b8c" w.ck="Yn" />
+    </Node>
+<Node NodeID="179" TypeID="2" Text="Т-2" DX="10.7734375" DY="18" Rendering="Glyph" ViewPointPosition="TopLeft" pattern="EquipmentLabel">
+      <Position X="1035" Y="435" />
+      <GeometricOrigin X="1035" Y="435" />
+      <TextFormat TextStyle="EquipmentLabel" />
+      <Familiar NodeID="118" />
+    </Node>
+    <Node NodeID="119" TypeID="6" uid="7c1e91a1-ee5f-4196-b9dd-0cc6ad709bc0" voltage="10.0">
+      <OriginPoint X="775" Y="275" />
+      <DestinationPoint X="925" Y="425" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="11" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="117" />
+    </Node>
+    <Node NodeID="120" TypeID="6" uid="949acfc0-84b8-4d15-ad19-a653320be76f" voltage="10.0">
+      <OriginPoint X="1225" Y="275" />
+      <DestinationPoint X="1025" Y="425" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="27" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="118" />
+    </Node>
+    <Node NodeID="121" TypeID="6" uid="299fe082-aa78-4ee4-b3b5-fb13a1b130f8" voltage="10.0">
+      <OriginPoint X="525" Y="75" />
+      <DestinationPoint X="1425" Y="75" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="1" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="33" />
+    </Node>
+    <Node NodeID="122" TypeID="6" uid="f25bea81-e3d8-4f3e-900d-33e3bf436e8b" voltage="10.0">
+      <OriginPoint X="1425" Y="275" />
+      <DestinationPoint X="975" Y="75" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="36" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="17" />
+    </Node>
+    <Node NodeID="123" TypeID="6" uid="75dc7ea5-9d8a-43be-b47f-a7b75246bb17" voltage="0.4">
+      <OriginPoint X="725" Y="825" />
+      <DestinationPoint X="925" Y="425" />
+      <Points />
+      <ConnectedOrigin Terminal="0" ConnectionZone="0" NodeID="60" />
+      <ConnectedDestination Terminal="2" ConnectionZone="0" NodeID="117" />
+    </Node>
+    <Node NodeID="124" TypeID="6" uid="56f2b0dd-3832-4470-a220-1aa7394ee583" voltage="0.4">
+      <OriginPoint X="1675" Y="825" />
+      <DestinationPoint X="1025" Y="425" />
+      <Points />
+      <ConnectedOrigin Terminal="0" ConnectionZone="0" NodeID="99" />
+      <ConnectedDestination Terminal="2" ConnectionZone="0" NodeID="118" />
+    </Node>
+    <Node NodeID="125" TypeID="6" uid="5959ee1a-7cbf-4c83-bf22-978f6511cb5e" voltage="0.4">
+      <OriginPoint X="175" Y="525" />
+      <DestinationPoint X="1875" Y="525" />
+      <Points />
+      <ConnectedOrigin Terminal="1" ConnectionZone="0" NodeID="39" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="111" />
+    </Node>
+    <Node NodeID="126" TypeID="6" uid="a3127d1f-405f-42d8-a7dc-4909cb0d245d" voltage="0.4">
+      <OriginPoint X="1875" Y="725" />
+      <DestinationPoint X="925" Y="525" />
+      <Points />
+      <ConnectedOrigin Terminal="2" ConnectionZone="0" NodeID="113" />
+      <ConnectedDestination Terminal="1" ConnectionZone="0" NodeID="70" />
+    </Node>
+
+</Nodes>
+</Diagram>

@@ -1,0 +1,45 @@
+// filter.jfo
+
+/*
+Красносельский РЭС
+Всеволожский РЭС
+Петродворцовый РЭС
+Пушкинский РЭС
+*/
+
+{ xfilter:privse res:"Всеволожский РЭС" xres:vsevol xtmcode:TP stream:tp } const: FilterPrigVsevolTP
+
+{ xfilter:privse res:"Всеволожский РЭС" xres:vsevol xtmcode:RP stream:rp } const: FilterPrigVsevolRP
+
+
+FilterPrigVsevolTP "privse_vsevol_tp" pinchfput
+
+FilterPrigVsevolRP "privse_vsevol_rp" pinchfput
+
+// TP010-0000272
+// TP010-0000788
+
+: filterNumRecords noop ;  // 10 0 filter ;
+
+// jom - ?
+: filterItems_TP010_272_788 
+
+    dup @tmcode1 "TP010" = 
+    swap @tmcode2 dup "0000272" = swap "0000788" = or and 
+
+/*
+    dup @tmcode1 "TP006" = 
+    swap @tmcode2 "0004499" = and 
+
+    dup @tmcode1 "TP010" = 
+    swap @tmcode2 "0011928" = and 
+*/
+
+;
+
+// joms - joms2
+: filterItems ^filterItems_TP010_272_788 filter ;
+// : filterItems noop ;
+
+
+noop

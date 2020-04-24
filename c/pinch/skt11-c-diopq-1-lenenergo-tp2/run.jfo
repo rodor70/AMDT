@@ -1,0 +1,20 @@
+// run.jfo
+
+false IRemote!
+
+pinch: skt11-c-diopq-1-lenenergo-tp2
+
+// Get filter from user
+"Filter" choos pinchfcurset
+
+
+
+?import: init.jfo
+
+?import: do/main.jfo
+
+pinchdone
+
+
+noop
+

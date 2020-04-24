@@ -1,0 +1,8 @@
+// ds.jfo
+
+"jdbc:postgresql://192.168.1.23:5432/skt0"
+"org.postgresql.Driver"
+"skt"
+"sktpwol" dbsrc MeDS!
+
+MeDS@ .
